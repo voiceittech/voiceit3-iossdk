@@ -7,11 +7,11 @@
 //
 
 @import UIKit;
-#import "com.voiceit-techAppDelegate.h"
+#import "VoiceItAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([com.voiceit-techAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([VoiceItAppDelegate class]));
     }
 }

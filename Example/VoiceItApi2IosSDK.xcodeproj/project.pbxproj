@@ -13,8 +13,8 @@
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
-		6003F59E195388D20070C39A /* com.voiceit-techAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* com.voiceit-techAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* com.voiceit-techViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* com.voiceit-techViewController.m */; };
+		6003F59E195388D20070C39A /* VoiceItAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* VoiceItAppDelegate.m */; };
+		6003F5A7195388D20070C39A /* VoiceItViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* VoiceItViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -38,8 +38,8 @@
 
 /* Begin PBXFileReference section */
 		0BA2C94DEEA0FDAF8E5A81E4 /* Pods_VoiceItApi2IosSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoiceItApi2IosSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		39388264B1597DFC0CCDB71E /* VoiceItApi2IosSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = VoiceItApi2IosSDK.podspec; path = ../VoiceItApi2IosSDK.podspec; sourceTree = "<group>"; };
-		49AA541CEE76F944758932B5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		39388264B1597DFC0CCDB71E /* VoiceItApi2IosSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = VoiceItApi2IosSDK.podspec; path = ../VoiceItApi2IosSDK.podspec; sourceTree = "<group>"; };
+		49AA541CEE76F944758932B5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4AC2B55FC3282ABBD8ACB10E /* Pods-VoiceItApi2IosSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceItApi2IosSDK_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceItApi2IosSDK_Tests/Pods-VoiceItApi2IosSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* VoiceItApi2IosSDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceItApi2IosSDK_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -49,10 +49,10 @@
 		6003F597195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F599195388D20070C39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6003F59B195388D20070C39A /* VoiceItApi2IosSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VoiceItApi2IosSDK-Prefix.pch"; sourceTree = "<group>"; };
-		6003F59C195388D20070C39A /* com.voiceit-techAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "com.voiceit-techAppDelegate.h"; sourceTree = "<group>"; };
-		6003F59D195388D20070C39A /* com.voiceit-techAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "com.voiceit-techAppDelegate.m"; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* com.voiceit-techViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "com.voiceit-techViewController.h"; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* com.voiceit-techViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "com.voiceit-techViewController.m"; sourceTree = "<group>"; };
+		6003F59C195388D20070C39A /* VoiceItAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceItAppDelegate.h; sourceTree = "<group>"; };
+		6003F59D195388D20070C39A /* VoiceItAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceItAppDelegate.m; sourceTree = "<group>"; };
+		6003F5A5195388D20070C39A /* VoiceItViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceItViewController.h; sourceTree = "<group>"; };
+		6003F5A6195388D20070C39A /* VoiceItViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceItViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* VoiceItApi2IosSDK_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoiceItApi2IosSDK_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -61,7 +61,7 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		854AE9EBAE4291439F1B6F9B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		854AE9EBAE4291439F1B6F9B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		92B33784FFD044BA67AA9771 /* Pods-VoiceItApi2IosSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceItApi2IosSDK_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceItApi2IosSDK_Tests/Pods-VoiceItApi2IosSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		AD65E7E7B06EB13B7065995D /* Pods_VoiceItApi2IosSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoiceItApi2IosSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,11 +132,11 @@
 		6003F593195388D20070C39A /* Example for VoiceItApi2IosSDK */ = {
 			isa = PBXGroup;
 			children = (
-				6003F59C195388D20070C39A /* com.voiceit-techAppDelegate.h */,
-				6003F59D195388D20070C39A /* com.voiceit-techAppDelegate.m */,
+				6003F59C195388D20070C39A /* VoiceItAppDelegate.h */,
+				6003F59D195388D20070C39A /* VoiceItAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* com.voiceit-techViewController.h */,
-				6003F5A6195388D20070C39A /* com.voiceit-techViewController.m */,
+				6003F5A5195388D20070C39A /* VoiceItViewController.h */,
+				6003F5A6195388D20070C39A /* VoiceItViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -250,6 +250,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = armaanbindra;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = VS9YK7ML83;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -394,8 +397,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F59E195388D20070C39A /* com.voiceit-techAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* com.voiceit-techViewController.m in Sources */,
+				6003F59E195388D20070C39A /* VoiceItAppDelegate.m in Sources */,
+				6003F5A7195388D20070C39A /* VoiceItViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,6 +527,7 @@
 			baseConfigurationReference = FAC46DA00FEA0C639E41311E /* Pods-VoiceItApi2IosSDK_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VS9YK7ML83;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VoiceItApi2IosSDK/VoiceItApi2IosSDK-Prefix.pch";
 				INFOPLIST_FILE = "VoiceItApi2IosSDK/VoiceItApi2IosSDK-Info.plist";
@@ -539,6 +543,7 @@
 			baseConfigurationReference = C644F06EB6C08DB4E94A2DB5 /* Pods-VoiceItApi2IosSDK_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VS9YK7ML83;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VoiceItApi2IosSDK/VoiceItApi2IosSDK-Prefix.pch";
 				INFOPLIST_FILE = "VoiceItApi2IosSDK/VoiceItApi2IosSDK-Info.plist";

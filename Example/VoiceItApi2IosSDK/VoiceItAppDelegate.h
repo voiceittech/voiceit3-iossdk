@@ -1,5 +1,5 @@
 //
-//  com.voiceit-techAppDelegate.h
+//  VoiceItAppDelegate.h
 //  VoiceItApi2IosSDK
 //
 //  Created by armaanbindra on 03/23/2017.
@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-@interface com.voiceit-techAppDelegate : UIResponder <UIApplicationDelegate>
+@interface VoiceItAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

@@ -1,14 +1,14 @@
 //
-//  com.voiceit-techAppDelegate.m
+//  VoiceItAppDelegate.m
 //  VoiceItApi2IosSDK
 //
 //  Created by armaanbindra on 03/23/2017.
 //  Copyright (c) 2017 armaanbindra. All rights reserved.
 //
 
-#import "com.voiceit-techAppDelegate.h"
+#import "VoiceItAppDelegate.h"
 
-@implementation com.voiceit-techAppDelegate
+@implementation VoiceItAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

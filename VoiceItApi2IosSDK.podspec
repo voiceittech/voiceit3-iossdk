@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'VoiceItApi2IosSDK'
-s.version          = '0.1.0'
+s.version          = '0.0.1'
 s.summary          = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt'
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,7 @@ s.source_files = 'VoiceItApi2IosSDK/Classes/**/*'
 #   'VoiceItApi2IosSDK' => ['VoiceItApi2IosSDK/Assets/*.png']
 # }
 
-# s.public_header_files = 'Pod/Classes/**/*.h'
-# s.frameworks = 'UIKit', 'MapKit'
+#s.public_header_files = 'Pod/Classes/**/*.h'
+s.frameworks = 'UIKit', 'AVFoundation'
 # s.dependency 'AFNetworking', '~> 2.3'
 end

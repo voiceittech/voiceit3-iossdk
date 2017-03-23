@@ -10,6 +10,13 @@
 #endif
 #endif
 
+#import "CameraViewController.h"
+#import "LLSimpleCamera+Helper.h"
+#import "LLSimpleCamera.h"
+#import "UIImage+FixOrientation.h"
+#import "ViewUtils.h"
+#import "VoiceItApi2IosSDK.h"
+#import "VoiceItAPITwo.h"
 
 FOUNDATION_EXPORT double VoiceItApi2IosSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char VoiceItApi2IosSDKVersionString[];
