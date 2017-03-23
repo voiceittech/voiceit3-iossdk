@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'VoiceItApi2IosSDK'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of VoiceItApi2IosSDK.'
+s.name             = 'VoiceItApi2IosSDK'
+s.version          = '0.1.0'
+s.summary          = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,26 +17,21 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+s.description      = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt. Please visit https://voiceit.tech to learn more and sign up for an account.'
+s.homepage         = 'https://github.com/voiceittech/VoiceItApi2IosSDK'
+s.license          = { :type => 'MIT', :file => 'LICENSE' }
+s.author           = { 'armaanbindra' => 'armaan.bindra@voiceit-tech.com' }
+s.source           = { :git => 'https://github.com/armaanbindra/VoiceItApi2IosSDK.git', :tag => s.version.to_s }
 
-  s.homepage         = 'https://github.com/armaanbindra/VoiceItApi2IosSDK'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'armaanbindra' => 'armaan.bindra@voiceit-tech.com' }
-  s.source           = { :git => 'https://github.com/armaanbindra/VoiceItApi2IosSDK.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+s.ios.deployment_target = '8.0'
 
-  s.ios.deployment_target = '8.0'
+s.source_files = 'VoiceItApi2IosSDK/Classes/**/*'
 
-  s.source_files = 'VoiceItApi2IosSDK/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'VoiceItApi2IosSDK' => ['VoiceItApi2IosSDK/Assets/*.png']
-  # }
+# s.resource_bundles = {
+#   'VoiceItApi2IosSDK' => ['VoiceItApi2IosSDK/Assets/*.png']
+# }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+# s.public_header_files = 'Pod/Classes/**/*.h'
+# s.frameworks = 'UIKit', 'MapKit'
+# s.dependency 'AFNetworking', '~> 2.3'
 end

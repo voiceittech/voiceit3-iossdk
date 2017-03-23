@@ -1,0 +1,16 @@
+PODS:
+  - VoiceItApi2IosSDK (0.1.0)
+
+DEPENDENCIES:
+  - VoiceItApi2IosSDK (from `../`)
+
+EXTERNAL SOURCES:
+  VoiceItApi2IosSDK:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  VoiceItApi2IosSDK: 08e1e04e9d1d34d62ffc96091e6225efbc7a909c
+
+PODFILE CHECKSUM: 711f19dda3cfd0870bbebf1d42f7cf742e098837
+
+COCOAPODS: 1.2.0.beta.1
