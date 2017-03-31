@@ -11,6 +11,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+Get a Developer Account at [VoiceIt](https://siv.voiceprintportal.com) and activate API 2.0
 ## Installation
 
 VoiceItApi2IosSDK is available through [CocoaPods](http://cocoapods.org). To install
