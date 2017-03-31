@@ -4,10 +4,6 @@
 [![License](https://img.shields.io/cocoapods/l/VoiceItApi2IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceItApi2IosSDK)
 [![Platform](https://img.shields.io/cocoapods/p/VoiceItApi2IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceItApi2IosSDK)
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
 ## Requirements
 
 Get a Developer Account at [VoiceIt](https://siv.voiceprintportal.com) and activate API 2.0
@@ -19,6 +15,9 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod "VoiceItApi2IosSDK"
 ```
+## Documentation
+
+Coming Soon!!
 
 ## Author
 
