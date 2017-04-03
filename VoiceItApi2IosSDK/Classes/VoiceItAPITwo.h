@@ -58,15 +58,15 @@ typedef enum { enrollment, verification, identification } RecordingType;
 
 #pragma mark - Enrollment API Calls
 - (void)getAllEnrollmentsForUser:(NSString *)userId callback:(void (^)(NSString *))callback;
-- (void)deleteEnrollmentsForUser:(NSString *)userId enrollmentId:(NSString *)enrollmentId callback:(void (^)(NSString *))callback;
-- (void)createAudioEnrollment:(NSString *)userId contentLanguage:(NSString*)contentLanguage callback:(void (^)(NSString *))callback recordingFinished:(void (^)(void))recordingFinished;
-- (void)createVideoEnrollment:(NSString *)userId contentLanguage:(NSString*)contentLanguage callback:(void (^)(NSString *))callback recordingFinished:(void (^)(void))recordingFinished;
+- (void)deleteEnrollmentForUser:(NSString *)userId enrollmentId:(NSString *)enrollmentId callback:(void (^)(NSString *))callback;
+- (void)createAudioEnrollment:(NSString *)userId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
+- (void)createVideoEnrollment:(NSString *)userId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
 #pragma mark - Verification API Calls
-- (void)audioVerification:(NSString *)userId contentLanguage:(NSString*)contentLanguage callback:(void (^)(NSString *))callback recordingFinished:(void (^)(void))recordingFinished;
-- (void)videoVerification:(NSString *)userId contentLanguage:(NSString*)contentLanguage callback:(void (^)(NSString *))callback recordingFinished:(void (^)(void))recordingFinished;
+- (void)audioVerification:(NSString *)userId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
+- (void)videoVerification:(NSString *)userId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
 
 #pragma mark - Identification API Calls
-- (void)audioIdentification:(NSString *)groupId contentLanguage:(NSString*)contentLanguage callback:(void (^)(NSString *))callback recordingFinished:(void (^)(void))recordingFinished;
-- (void)videoIdentification:(NSString *)groupId contentLanguage:(NSString*)contentLanguage callback:(void (^)(NSString *))callback recordingFinished:(void (^)(void))recordingFinished;
+- (void)audioIdentification:(NSString *)groupId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
+- (void)videoIdentification:(NSString *)groupId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
 
 @end

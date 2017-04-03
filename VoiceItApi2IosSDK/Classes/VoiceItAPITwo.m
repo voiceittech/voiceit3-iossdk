@@ -421,7 +421,7 @@ NSString * const host = @"https://api.voiceit.io/";
     [task resume];
 }
 
-- (void)deleteEnrollmentsForUser:(NSString *)userId enrollmentId:(NSString *)enrollmentId callback:(void (^)(NSString *))callback{
+- (void)deleteEnrollmentForUser:(NSString *)userId enrollmentId:(NSString *)enrollmentId callback:(void (^)(NSString *))callback{
     
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
         @throw [NSException exceptionWithName:@"Cannot Delete Enrollments for User"
@@ -452,8 +452,8 @@ NSString * const host = @"https://api.voiceit.io/";
 
 - (void)createAudioEnrollment:(NSString *)userId
               contentLanguage:(NSString*)contentLanguage
-              callback:(void (^)(NSString *))callback
  recordingFinished:(void (^)(void))recordingFinished
+              callback:(void (^)(NSString *))callback
 {
     
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
@@ -507,8 +507,8 @@ NSString * const host = @"https://api.voiceit.io/";
 
 - (void)createVideoEnrollment:(NSString *)userId
               contentLanguage:(NSString*)contentLanguage
-                     callback:(void (^)(NSString *))callback
  recordingFinished:(void (^)(void))recordingFinished
+                     callback:(void (^)(NSString *))callback
 {
     
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
@@ -587,8 +587,9 @@ NSString * const host = @"https://api.voiceit.io/";
 #pragma mark - Verification API Calls
 
 - (void)audioVerification:(NSString *)userId
-          contentLanguage:(NSString*)contentLanguage callback:(void (^)(NSString *))callback
+          contentLanguage:(NSString*)contentLanguage
  recordingFinished:(void (^)(void))recordingFinished
+                 callback:(void (^)(NSString *))callback
 {
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
         @throw [NSException exceptionWithName:@"Cannot Call Audio Verification"
@@ -638,8 +639,9 @@ NSString * const host = @"https://api.voiceit.io/";
 }
 
 - (void)videoVerification:(NSString *)userId
-          contentLanguage:(NSString*)contentLanguage callback:(void (^)(NSString *))callback
+          contentLanguage:(NSString*)contentLanguage
  recordingFinished:(void (^)(void))recordingFinished
+                 callback:(void (^)(NSString *))callback
 {
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
         @throw [NSException exceptionWithName:@"Cannot Call Video Verification"
@@ -713,8 +715,9 @@ NSString * const host = @"https://api.voiceit.io/";
 
 #pragma mark - Identification API Calls
 - (void)audioIdentification:(NSString *)groupId
-            contentLanguage:(NSString*)contentLanguage callback:(void (^)(NSString *))callback
- recordingFinished:(void (^)(void))recordingFinished
+            contentLanguage:(NSString*)contentLanguage
+          recordingFinished:(void (^)(void))recordingFinished
+                   callback:(void (^)(NSString *))callback
     {
         
         if([groupId isEqualToString:@""] || ![[self getFirst:groupId numChars:4] isEqualToString:@"grp_"]){
@@ -764,8 +767,9 @@ NSString * const host = @"https://api.voiceit.io/";
 }
 
 - (void)videoIdentification:(NSString *)groupId
-            contentLanguage:(NSString*)contentLanguage callback:(void (^)(NSString *))callback
+            contentLanguage:(NSString*)contentLanguage
  recordingFinished:(void (^)(void))recordingFinished
+                   callback:(void (^)(NSString *))callback
     {
     
         if([groupId isEqualToString:@""] || ![[self getFirst:groupId numChars:4] isEqualToString:@"grp_"]){

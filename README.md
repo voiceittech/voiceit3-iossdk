@@ -30,9 +30,7 @@ A library that gives you access to the VoiceIt's New VoiceIt API 2.0 featuring V
       * [Get All Enrollments for User](#get-all-enrollments-for-user)
       * [Delete Enrollment for User](#delete-enrollment-for-user)
       * [Create Audio Enrollment](#create-audio-enrollment)
-      * [Create Audio Enrollment by URL](#create-audio-enrollment-by-url)
       * [Create Video Enrollment](#create-video-enrollment)
-      * [Create Video Enrollment by URL](#create-video-enrollment-by-url)
   * [Verification API Calls](#verification-api-calls)
       * [Audio Verification](#audio-verification)
       * [Audio Verification by URL](#audio-verification-by-url)
@@ -78,7 +76,7 @@ Also add the following permission keys to your <b>info.plist</b> file like shown
 
 #### *Swift*
 
-First import VoiceItApi2IosSDK into your Swift file then initialize a reference to the SDK inside a ViewController passing in a reference to the ViewController as the first argument
+First import *VoiceItApi2IosSDK* into your Swift file then initialize a reference to the SDK inside a ViewController passing in a reference to the ViewController as the first argument
 
 ```swift
 import VoiceItApi2IosSDK
@@ -95,7 +93,7 @@ class ViewController: UIViewController {
 ```
 #### *Objective-C*
 
-First import VoiceItAPITwo.h into your Objective-C file, then initialize a reference to the SDK inside a ViewController passing in a reference to the ViewController as the first argument
+First import *VoiceItAPITwo.h* into your Objective-C file, then initialize a reference to the SDK inside a ViewController passing in a reference to the ViewController as the first argument
 
 ```objc
 #import "ViewController.h"
@@ -109,6 +107,7 @@ First import VoiceItAPITwo.h into your Objective-C file, then initialize a refer
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    /* Reference to ViewController and API Credentials */
     _myVoiceIt = [[VoiceItAPITwo alloc] init:self apiKey:@"API_KEY_HERE" apiToken:@"API_TOKEN_HERE"];
 }
 ```
@@ -127,8 +126,8 @@ myVoiceIt?.getAllUsers({
 ```
 ##### *Objective-C*
 ```objc
-[_myVoiceIt getAllUsers:^(NSString * jsonResult){
-    NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt getAllUsers:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
@@ -144,8 +143,8 @@ myVoiceIt?.createUser({
 ```
 ##### *Objective-C*
 ```objc
-[_myVoiceIt createUser:^(NSString * jsonResult){
-    NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt createUser:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
@@ -161,8 +160,8 @@ myVoiceIt?.getUser("USER_ID_HERE", callback: {
 ```
 ##### *Objective-C*
 ```objc
-[_myVoiceIt getUser:@"USER_ID_HERE" callback:^(NSString * jsonResult){
-    NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt getUser:@"USER_ID_HERE" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
@@ -178,8 +177,8 @@ myVoiceIt?.getGroupsForUser("USER_ID_HERE", callback: {
 ```
 ##### *Objective-C*
 ```objc
-[_myVoiceIt getGroupsForUser:@"USER_ID_HERE" callback:^(NSString * jsonResult){
-    NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt getGroupsForUser:@"USER_ID_HERE" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
@@ -195,8 +194,8 @@ myVoiceIt?.deleteUser("USER_ID_HERE", callback: {
 ```
 ##### *Objective-C*
 ```objc
-[_myVoiceIt deleteUser:@"USER_ID_HERE" callback:^(NSString * jsonResult){
-    NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt deleteUser:@"USER_ID_HERE" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
@@ -214,14 +213,14 @@ myVoiceIt?.getAllGroups({
 ```
 ##### *Objective-C*
 ```objc
-[_myVoiceIt getAllGroups:^(NSString * jsonResult){
-    NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt getAllGroups:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
 #### Create Group
 
-Get all the groups associated with the apiKey
+Create a new group with the given description
 ##### *Swift*
 ```swift
 myVoiceIt?.createGroup("A Sample Group Description", callback: {
@@ -230,8 +229,8 @@ myVoiceIt?.createGroup("A Sample Group Description", callback: {
 ```
 ##### *Objective-C*
 ```objc
-[_myVoiceIt createGroup:@"A Sample Group Description" callback:^(NSString * jsonResult){
-    NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt createGroup:@"A Sample Group Description" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
@@ -247,8 +246,8 @@ myVoiceIt?.getGroup("GROUP_ID_HERE", callback: {
 ```
 ##### *Objective-C*
 ```objc
-[_myVoiceIt getGroup:@"GROUP_ID_HERE" callback:^(NSString * jsonResult){
-    NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt getGroup:@"GROUP_ID_HERE" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
@@ -264,8 +263,8 @@ myVoiceIt?.deleteUser("USER_ID_HERE", callback: {
 ```
 ##### *Objective-C*
 ```objc
-[_myVoiceIt deleteUser:@"USER_ID_HERE" callback:^(NSString * jsonResult){
-    NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt deleteUser:@"USER_ID_HERE" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
@@ -282,8 +281,8 @@ myVoiceIt?.groupExists("GROUP_ID_HERE", callback: {
 
 ##### *Objective-C*
 ```objc
-[_myVoiceIt groupExists:@"GROUP_ID_HERE" callback:^(NSString * jsonResult){
-    NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt groupExists:@"GROUP_ID_HERE" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
@@ -300,8 +299,8 @@ myVoiceIt?.addUser(toGroup: "GROUP_ID_HERE", userId: "USER_ID_HERE", callback: {
 
 ##### *Objective-C*
 ```objc
-[_myVoiceIt addUserToGroup:@"GROUP_ID_HERE" userId:@"USER_ID_HERE" callback:^(NSString * jsonResult){
-            NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt addUserToGroup:@"GROUP_ID_HERE" userId:@"USER_ID_HERE" callback:^(NSString * jsonResponse){
+            NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
@@ -318,12 +317,181 @@ myVoiceIt?.removeUser(fromGroup: "GROUP_ID_HERE", userId: "USER_ID_HERE", callba
 
 ##### *Objective-C*
 ```objc
-[_myVoiceIt removeUserFromGroup:@"GROUP_ID_HERE" userId:@"USER_ID_HERE" callback:^(NSString * jsonResult){
-    NSLog(@"JSONResponse: %@", jsonResult);
+[_myVoiceIt removeUserFromGroup:@"GROUP_ID_HERE" userId:@"USER_ID_HERE" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
 
-Rest of the Documentation Coming Soon!!
+### Enrollment API Calls
+
+#### Get All Enrollments for User
+
+Gets all enrollment for user with given userId(begins with 'usr_')
+##### *Swift*
+```swift
+myVoiceIt?.getAllEnrollments(forUser: "USER_ID_HERE", callback: {
+    jsonResponse in
+    print("JSON RESPONSE: \(jsonResponse!)")
+})
+```
+
+##### *Objective-C*
+```objc
+[_myVoiceIt getAllEnrollmentsForUser:@"USER_ID_HERE" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
+}];
+```
+
+#### Delete Enrollment for User
+
+Delete enrollment for user with given userId(begins with 'usr_') and enrollmentId(integer)
+##### *Swift*
+```swift
+myVoiceIt?.deleteEnrollment(forUser: "USER_ID_HERE", enrollmentId: "ENROLLMENT_ID_HERE", callback: {
+    jsonResponse in
+})
+```
+
+##### *Objective-C*
+```objc
+[_myVoiceIt deleteEnrollmentForUser:@"USER_ID_HERE" enrollmentId:@"ENROLLMENT_ID_HERE" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
+}];
+```
+
+#### Create Audio Enrollment
+
+Create audio enrollment for user with given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: Immediately upon calling this method it records the user saying their VoicePrint phrase for 5 seconds calling the recordingFinished callback first, then it sends the recording to be added as an enrollment and returns the result in the callback
+##### *Swift*
+```swift
+myVoiceIt?.createAudioEnrollment("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", recordingFinished: {
+    print("Audio Enrollment Recording Finished, now waiting for API Call to respond")
+},
+callback: {
+    jsonResponse in
+    print("JSON RESPONSE: \(jsonResponse!)")
+})
+```
+
+##### *Objective-C*
+```objc
+myVoiceIt?.createAudioEnrollment("USER_ID_HERE", contentLanguage: "en-US", recordingFinished: {
+    print("Audio Enrollment Recording Finished, now waiting for API Call to respond")
+}, callback: {
+    jsonResponse in
+    print("JSON RESPONSE: \(jsonResponse!)")
+})
+```
+
+#### Create Video Enrollment
+
+Create video enrollment for user with given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: Immediately upon calling this method it displays the camera and starts recording a video of the user saying their VoicePrint phrase for 5 seconds calling the recordingFinished callback first, then it sends the recording to be added as an enrollment and returns the result in the callback
+##### *Swift*
+```swift
+myVoiceIt?.createVideoEnrollment("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", recordingFinished: {
+    print("Video Enrollment Recording Finished, now waiting for API Call to respond")
+}, callback: {
+    jsonResponse in
+    print("JSON RESPONSE: \(jsonResponse!)")
+})
+```
+
+##### *Objective-C*
+```objc
+[_myVoiceIt createVideoEnrollment:@"USER_ID_HERE" contentLanguage: @"CONTENT_LANGUAGE_HERE" recordingFinished:^(void){
+    NSLog(@"Video Enrollment Recording Finished, now waiting for API Call to respond");
+} callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
+} ];
+```
+
+#### Audio Verification
+
+Verify user with the given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: Immediately upon calling this method it records the user saying their VoicePrint phrase for 5 seconds calling the recordingFinished callback first, then it sends the recording to be verified and returns the resulting confidence in the callback
+##### *Swift*
+```swift
+myVoiceIt?.audioVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", recordingFinished: {
+    print("Audio Verification Recording Finished, now waiting for API Call to respond")
+}, callback: {
+    jsonResponse in
+    print("JSON RESPONSE: \(jsonResponse!)")
+})
+```
+
+##### *Objective-C*
+```objc
+[_myVoiceIt audioVerification:@"USER_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" recordingFinished:^(void){
+    NSLog(@"Audio Verification Recording Finished, now waiting for API Call to respond");
+} callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
+} ];
+```
+
+#### Video Verification
+
+Verify user with given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: Immediately upon calling this method it displays the camera and starts recording a video of the user saying their VoicePrint phrase for 5 seconds calling the recordingFinished callback first, then it sends the recording to be added as an enrollment and returns the result in the callback
+##### *Swift*
+```swift
+myVoiceIt?.videoVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", recordingFinished: {
+    print("Video Verification Recording Finished, now waiting for API Call to respond")
+}, callback: {
+    jsonResponse in
+    print("JSON RESPONSE: \(jsonResponse!)")
+})
+```
+
+##### *Objective-C*
+```objc
+[_myVoiceIt videoVerification:@"USER_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" recordingFinished:^(void){
+    NSLog(@"Video Verification Recording Finished, now waiting for API Call to respond");
+} callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
+} ];
+```
+
+#### Audio Identification
+
+Identify user inside group with the given groupId(begins with 'grp_') and contentLanguage('en-US','es-ES' etc.). Note: Immediately upon calling this method it records the user saying their VoicePrint phrase for 5 seconds calling the recordingFinished callback first, then it sends the recording to be identified and returns the found userId and confidence in the callback
+##### *Swift*
+```swift
+myVoiceIt?.audioIdentification("GROUP_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", recordingFinished: {
+    print("Audio Identification Recording Finished, now waiting for API Call to respond")
+}, callback: {
+    jsonResponse in
+    print("JSON RESPONSE: \(jsonResponse!)")
+})
+```
+
+##### *Objective-C*
+```objc
+[_myVoiceIt audioIdentification:@"GROUP_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" recordingFinished:^(void){
+    NSLog(@"Audio Identification Recording Finished, now waiting for API Call to respond");
+} callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
+} ];
+```
+
+#### Video Identification
+
+Identify user inside group with the given groupId(begins with 'grp_') and contentLanguage('en-US','es-ES' etc.). Note: Immediately upon calling this method it displays the camera and starts recording a video of the user saying their VoicePrint phrase for 5 seconds calling the recordingFinished callback first, , then it sends the recording to be identified and returns the found userId and voice and face confidence in the callback
+##### *Swift*
+```swift
+myVoiceIt?.videoIdentification("GROUP_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", recordingFinished: {
+    print("Video Identification Recording Finished, now waiting for API Call to respond")
+}, callback: {
+    jsonResponse in
+    print("JSON RESPONSE: \(jsonResponse!)")
+})
+```
+
+##### *Objective-C*
+```objc
+[_myVoiceIt videoIdentification:@"GROUP_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" recordingFinished:^(void){
+    NSLog(@"Video Identification Recording Finished, now waiting for API Call to respond");
+} callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
+} ];
+```
 
 ## Author
 
