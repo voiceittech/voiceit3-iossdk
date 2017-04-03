@@ -11,8 +11,6 @@
 #import "CameraViewController.h"
 @import MobileCoreServices;
 
-
-
 @interface VoiceItAPITwo : NSObject <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 typedef enum { enrollment, verification, identification } RecordingType;
 // Properties
