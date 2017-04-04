@@ -33,14 +33,10 @@ A library that gives you access to the VoiceIt's New VoiceIt API 2.0 featuring V
       * [Create Video Enrollment](#create-video-enrollment)
   * [Verification API Calls](#verification-api-calls)
       * [Audio Verification](#audio-verification)
-      * [Audio Verification by URL](#audio-verification-by-url)
       * [Video Verification](#video-verification)
-      * [Video Verification by URL](#video-verification-by-url)
   * [Identification API Calls](#identification-api-calls)
       * [Audio Identification](#audio-identification)
-      * [Audio Identification by URL](#audio-identification-by-url)
       * [Video Identification](#video-identification)
-      * [Video Identification by URL](#video-identification-by-url)
 
 ## Getting Started
 
