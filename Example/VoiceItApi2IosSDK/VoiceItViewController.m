@@ -8,8 +8,6 @@
 
 #import "VoiceItViewController.h"
 #import "VoiceItAPITwo.h"
-
-
 @interface VoiceItViewController ()
 @end
 
@@ -18,6 +16,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 }
 
 - (void)didReceiveMemoryWarning

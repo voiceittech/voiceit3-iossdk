@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  TestingVoiceItAPI2iOSSDKCode
+
+  Created by Armaan Bindra on 10/3/17.
+  Copyright © 2017 VoiceIt Technologies LLC. All rights reserved.
+*/
+"LOOK_INTO_CAM" = "Please look into the camera";
+"GET_ENROLLED" = "There you are, let's get you enrolled";
+"GET_VERIFIED" = "There you are, let's get you verified";
+"VERIFY" = "Say\n\"%@\"";
+"ENROLL_0"= "Say \"%@\" into the iPhone";
+"ENROLL_1"= "Say \"%@\" again";
+"ENROLL_2"= "Say \"%@\" one more time";
+"WAITING"= "Please wait ⏰";
+"FNFD" = "Sorry, I couldn't quite see your face.\nPlease try again.";
+"DDNE" = "Sorry, something went wrong.\nPlease try again.";
+"FAIL" = "Failed.\nPlease try again.";
+"IFWD"  = "Sorry, something went wrong.\nPlease try again.";
+"SRNR"= "Sorry, I couldn't quite hear you.\nPlease speak louder.";
+"TVER"= "Sorry, no enrollments detected.\nPlease enroll before verifying.";
+"NEHSD" = "Sorry, I couldn't quite catch that.\nPlease speak slower.";
+"STTF" = "Sorry, I couldn't understand you.\nPlease make sure you are saying \”%@\”";
+"RWPU" = "Please do not use recordings. Try that again.";
+"FTMF"= "Make sure only your face is visible.\nPlease try again.";
+"PNTE"= "Sorry, something went wrong.\nPlease try again.";
+"GERR"= "Sorry, something went wrong.\nPlease try again.";
+"DONE" = "Voice + Face verification is ready to use";
+"SUCCESS" = "You have been successfully verified";
+"TOO_MANY_ATTEMPTS" = "Sorry 😟, you failed too many times!! Try again later.";
