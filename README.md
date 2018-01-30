@@ -312,14 +312,14 @@ myVoiceIt?.removeUser(fromGroup: "GROUP_ID_HERE", userId: "USER_ID_HERE", callba
 Delete group with given groupId(begins with 'grp_'), note: this call does not delete any users, but simply deletes the group and disassociates the users from the group
 ##### *Swift*
 ```swift
-myVoiceIt?.deleteUser("USER_ID_HERE", callback: {
+myVoiceIt?.deleteGroup("GROUP_ID_HERE", callback: {
     jsonResponse in
     print("JSON RESPONSE: \(jsonResponse!)")
 })
 ```
 ##### *Objective-C*
 ```objc
-[_myVoiceIt deleteUser:@"USER_ID_HERE" callback:^(NSString * jsonResponse){
+[_myVoiceIt deleteGroup:@"GROUP_ID_HERE" callback:^(NSString * jsonResponse){
     NSLog(@"JSONResponse: %@", jsonResponse);
 }];
 ```
