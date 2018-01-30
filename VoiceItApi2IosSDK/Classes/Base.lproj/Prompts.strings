@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  TestingVoiceItAPI2iOSSDKCode
-
-  Created by Armaan Bindra on 10/3/17.
-  Copyright © 2017 VoiceIt Technologies LLC. All rights reserved.
-*/
+/*
+ Localizable.strings
+ TestingVoiceItAPI2iOSSDKCode
+ 
+ Created by Armaan Bindra on 10/3/17.
+ Copyright © 2017 VoiceIt Technologies LLC. All rights reserved.
+ */
 "LOOK_INTO_CAM" = "Please look into the camera";
 "GET_ENROLLED" = "There you are, let's get you enrolled";
 "GET_VERIFIED" = "There you are, let's get you verified";
@@ -20,6 +20,9 @@
 "SRNR"= "Sorry, I couldn't quite hear you.\nPlease speak louder.";
 "TVER"= "Sorry, no enrollments detected.\nPlease enroll before verifying.";
 "NEHSD" = "Sorry, I couldn't quite catch that.\nPlease speak slower.";
+"STTF" = "Sorry, I couldn't understand you.\nPlease make sure you are saying \”%@\”";
+"SSTQ" = "Sorry, I couldn't quite hear you.\nPlease speak louder.";
+"SSTL" = "Oh! Its getting a little too loud in here.\nLet's try this again, speaking at a normal volume";
 "STTF" = "Sorry, I couldn't understand you.\nPlease make sure you are saying \”%@\”";
 "RWPU" = "Please do not use recordings. Try that again.";
 "FTMF"= "Make sure only your face is visible.\nPlease try again.";

@@ -9,7 +9,6 @@
 #import "VoiceItAPITwo.h"
 #import "Styles.h"
 NSString * const host = @"https://api.voiceit.io/";
-//NSString * const host = @"https://staging-api.voiceit.io/";
 @implementation VoiceItAPITwo
 
 #pragma mark - Constructor
@@ -25,7 +24,7 @@ NSString * const host = @"https://api.voiceit.io/";
     self.uniqueId = @"";
     self.boundary = [self generateBoundaryString];
     self.masterViewController = masterViewController;
-    #pragma mark - Save Styles Passed to Styles Class
+#pragma mark - Save Styles Passed to Styles Class
     [Styles set:styles];
     return self;
 }
@@ -486,7 +485,7 @@ NSString * const host = @"https://api.voiceit.io/";
     [task resume];
 }
 
-- (void)createAudioEnrollment:(NSString *)userId
+- (void)createVoiceEnrollment:(NSString *)userId
               contentLanguage:(NSString*)contentLanguage
             recordingFinished:(void (^)(void))recordingFinished
                      callback:(void (^)(NSString *))callback
@@ -502,7 +501,7 @@ NSString * const host = @"https://api.voiceit.io/";
     _uniqueId = userId;
     _contentLanguage = contentLanguage;
     _recType = enrollment;
-    _audioEnrollmentCompleted = callback;
+    _voiceEnrollmentCompleted = callback;
     _recordingCompleted = recordingFinished;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self recordAudio];
@@ -510,7 +509,7 @@ NSString * const host = @"https://api.voiceit.io/";
     
 }
 
-- (void)createAudioEnrollment
+- (void)createVoiceEnrollment
 {
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", _boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
@@ -532,8 +531,8 @@ NSString * const host = @"https://api.voiceit.io/";
         NSString *result =
         [[NSString alloc] initWithData:data
                               encoding:NSUTF8StringEncoding];
-        if(self.audioEnrollmentCompleted){
-            self.audioEnrollmentCompleted(result);
+        if(self.voiceEnrollmentCompleted){
+            self.voiceEnrollmentCompleted(result);
         }
         
     }];
@@ -650,7 +649,7 @@ NSString * const host = @"https://api.voiceit.io/";
 
 #pragma mark - Verification API Calls
 
-- (void)audioVerification:(NSString *)userId
+- (void)voiceVerification:(NSString *)userId
           contentLanguage:(NSString*)contentLanguage
         recordingFinished:(void (^)(void))recordingFinished
                  callback:(void (^)(NSString *))callback
@@ -665,14 +664,14 @@ NSString * const host = @"https://api.voiceit.io/";
     _uniqueId = userId;
     _contentLanguage = contentLanguage;
     _recType = verification;
-    _audioVerificationCompleted = callback;
+    _voiceVerificationCompleted = callback;
     _recordingCompleted = recordingFinished;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self recordAudio];
     });
 }
 
--(void)audioVerification{
+-(void)voiceVerification{
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", _boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"verification"]]];
@@ -694,8 +693,8 @@ NSString * const host = @"https://api.voiceit.io/";
         [[NSString alloc] initWithData:data
                               encoding:NSUTF8StringEncoding];
         
-        if(self.audioVerificationCompleted){
-            self.audioVerificationCompleted(result);
+        if(self.voiceVerificationCompleted){
+            self.voiceVerificationCompleted(result);
         }
     }];
     
@@ -804,7 +803,7 @@ NSString * const host = @"https://api.voiceit.io/";
 }
 
 #pragma mark - Identification API Calls
-- (void)audioIdentification:(NSString *)groupId
+- (void)voiceIdentification:(NSString *)groupId
             contentLanguage:(NSString*)contentLanguage
           recordingFinished:(void (^)(void))recordingFinished
                    callback:(void (^)(NSString *))callback
@@ -820,24 +819,23 @@ NSString * const host = @"https://api.voiceit.io/";
     _uniqueId = groupId;
     _contentLanguage = contentLanguage;
     _recType = identification;
-    _audioIdentificationCompleted = callback;
+    _voiceIdentificationCompleted = callback;
     _recordingCompleted = recordingFinished;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self recordAudio];
     });
 }
 
-- (void)audioIdentification{
+- (void)voiceIdentification{
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", _boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"identification"]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
     
-    NSDictionary *params = @{@"contentLanguage" : _contentLanguage, @"groupId": _uniqueId};
+    NSDictionary *params = @{@"contentLanguage" : _contentLanguage, @"groupId": _uniqueId, @"doBlinkDetection" : @NO };
     NSMutableData *body = [NSMutableData data];
     
     [self addParamsToBody:body parameters:params];
@@ -848,87 +846,9 @@ NSString * const host = @"https://api.voiceit.io/";
         NSString *result =
         [[NSString alloc] initWithData:data
                               encoding:NSUTF8StringEncoding];
-        if(self.audioIdentificationCompleted){
-            self.audioIdentificationCompleted(result);
+        if(self.voiceIdentificationCompleted){
+            self.voiceIdentificationCompleted(result);
         }
-    }];
-    
-    [task resume];
-}
-
-- (void)videoIdentification:(NSString *)groupId
-            contentLanguage:(NSString*)contentLanguage
-          recordingFinished:(void (^)(void))recordingFinished
-                   callback:(void (^)(NSString *))callback
-{
-    
-    if([groupId isEqualToString:@""] || ![[self getFirst:groupId numChars:4] isEqualToString:@"grp_"]){
-        @throw [NSException exceptionWithName:@"Cannot Call Video Identification"
-                                       reason:@"Invalid groupId passed"
-                                     userInfo:nil];
-        return;
-    }
-    
-    _uniqueId = groupId;
-    _contentLanguage = contentLanguage;
-    _recType = identification;
-    _videoIdentificationCompleted = callback;
-    _recordingCompleted = recordingFinished;
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //        CameraViewController * vc = [[CameraViewController alloc] init:^(NSString * filePath){
-        //
-        //            if(self.recordingCompleted){
-        //                self.recordingCompleted();
-        //            }
-        //
-        //            NSString *fileName = @"RecordedFile"; // Changed it So It Keeps Replacing File
-        //            _recordingFilePath = [NSTemporaryDirectory()
-        //                                  stringByAppendingPathComponent:[NSString
-        //                                                                  stringWithFormat:@"%@.wav", fileName]];
-        //            if ([[NSFileManager defaultManager] fileExistsAtPath:_recordingFilePath])
-        //            {
-        //                [[NSFileManager defaultManager] removeItemAtPath:_recordingFilePath
-        //                                                           error:nil];
-        //            }
-        //            _photoData = [self imageFromVideo:filePath atTime:1.2];
-        //            [self getAudioFromVideo:filePath dstPath:_recordingFilePath callback:^(NSString * dstPath){
-        //                [self videoIdentification];
-        //            }];
-        //
-        //        }];
-        
-        //        [self.masterViewController presentViewController:vc animated:true completion:^{
-        //        }];
-    });
-}
-
-- (void)videoIdentification{
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", _boundary];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
-                                    initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"identification/video"]]];
-    NSURLSession *session = [NSURLSession sharedSession];
-    [request setHTTPMethod:@"POST"];
-    
-    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
-    [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
-    NSDictionary *params = @{@"contentLanguage" : _contentLanguage, @"groupId": _uniqueId};
-    NSMutableData *body = [NSMutableData data];
-    
-    [self addParamsToBody:body parameters:params];
-    [self addFileToBody:body filePath:_recordingFilePath fieldName:@"audio"];
-    [self addImageToBody:body imageData:_photoData fieldName:@"photo"];
-    [self endBody:body];
-    
-    NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSString *result =
-        [[NSString alloc] initWithData:data
-                              encoding:NSUTF8StringEncoding];
-        if(self.videoIdentificationCompleted){
-            self.videoIdentificationCompleted(result);
-        }
-        
     }];
     
     [task resume];
@@ -1144,13 +1064,13 @@ NSString * const host = @"https://api.voiceit.io/";
     
     switch (_recType) {
         case enrollment:
-            [self createAudioEnrollment];
+            [self createVoiceEnrollment];
             break;
         case verification:
-            [self audioVerification];
+            [self voiceVerification];
             break;
         case identification:
-            [self audioIdentification];
+            [self voiceIdentification];
             break;
         default:
             break;

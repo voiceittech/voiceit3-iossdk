@@ -45,6 +45,7 @@
 @property BOOL lookingIntoCam;
 @property BOOL enrollmentStarted;
 @property BOOL isRecording;
+@property BOOL continueRunning;
 //@property BOOL takePhoto;
 
 #pragma mark -  Counters to keep track of stuff
@@ -58,4 +59,3 @@
 @property (strong, nonatomic)  VoiceItAPITwo * myVoiceIt;
 @property (strong, nonatomic)  MainNavigationController * myNavController;
 @end
-

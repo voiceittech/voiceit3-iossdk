@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="whP-gf-Uak">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="whP-gf-Uak">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,16 +23,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRg-oG-HjD">
-                                <rect key="frame" x="190" y="353" width="34" height="30"/>
-                                <state key="normal" title="Start"/>
+                                <rect key="frame" x="151.66666666666666" y="353" width="110.99999999999997" height="30"/>
+                                <state key="normal" title="Start Enrollment"/>
                                 <connections>
-                                    <action selector="startClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="a3y-dC-BHL"/>
+                                    <action selector="startEnrollmentClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="CJZ-mh-yzi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hsW-Co-a3P">
+                                <rect key="frame" x="151" y="391" width="111" height="30"/>
+                                <state key="normal" title="Verify"/>
+                                <connections>
+                                    <action selector="verifyClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="kBQ-43-7MC"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="hsW-Co-a3P" firstAttribute="top" secondItem="dRg-oG-HjD" secondAttribute="bottom" constant="8" id="JMb-fp-NJ2"/>
                             <constraint firstItem="dRg-oG-HjD" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="Lxe-ro-ZgA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hsW-Co-a3P" secondAttribute="trailing" constant="132" id="QHK-I4-8AF"/>
+                            <constraint firstItem="hsW-Co-a3P" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="131" id="TCA-22-CEc"/>
                             <constraint firstItem="dRg-oG-HjD" firstAttribute="centerY" secondItem="TpU-gO-2f1" secondAttribute="centerY" id="Vsh-0U-B7u"/>
                         </constraints>
                     </view>

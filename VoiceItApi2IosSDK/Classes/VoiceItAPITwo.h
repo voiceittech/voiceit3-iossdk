@@ -28,12 +28,11 @@ typedef enum { enrollment, verification, identification } RecordingType;
 @property (nonatomic, strong) NSString *boundary;
 @property (nonatomic, strong) AVAudioRecorder * recorder;
 @property (nonatomic, strong) UIViewController * masterViewController;
-@property (nonatomic, copy) void (^audioEnrollmentCompleted)(NSString * result);
+@property (nonatomic, copy) void (^voiceEnrollmentCompleted)(NSString * result);
 @property (nonatomic, copy) void (^videoEnrollmentCompleted)(NSString * result);
-@property (nonatomic, copy) void (^audioVerificationCompleted)(NSString * result);
+@property (nonatomic, copy) void (^voiceVerificationCompleted)(NSString * result);
 @property (nonatomic, copy) void (^videoVerificationCompleted)(NSString * result);
-@property (nonatomic, copy) void (^audioIdentificationCompleted)(NSString * result);
-@property (nonatomic, copy) void (^videoIdentificationCompleted)(NSString * result);
+@property (nonatomic, copy) void (^voiceIdentificationCompleted)(NSString * result);
 @property (nonatomic, copy) void (^recordingCompleted)(void);
 @property RecordingType recType;
 
@@ -76,14 +75,14 @@ typedef enum { enrollment, verification, identification } RecordingType;
 - (void)getAllEnrollmentsForUser:(NSString *)userId callback:(void (^)(NSString *))callback;
 - (void)deleteEnrollmentForUser:(NSString *)userId enrollmentId:(NSString *)enrollmentId callback:(void (^)(NSString *))callback;
 - (void)deleteAllUserEnrollments: (NSString *)userId callback:(void (^)(NSString *))callback;
-- (void)createAudioEnrollment:(NSString *)userId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
+- (void)createVoiceEnrollment:(NSString *)userId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
 - (void)createVideoEnrollment:(NSString *)userId
               contentLanguage:(NSString*)contentLanguage
                     imageData:(NSData*)imageData
                     audioPath:(NSString*)audioPath
                      callback:(void (^)(NSString *))callback;
 #pragma mark - Verification API Calls
-- (void)audioVerification:(NSString *)userId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
+- (void)voiceVerification:(NSString *)userId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
 - (void)videoVerification:(NSString *)userId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
 - (void)videoVerification:(NSString *)userId
           contentLanguage:(NSString*)contentLanguage
@@ -92,7 +91,6 @@ typedef enum { enrollment, verification, identification } RecordingType;
                  callback:(void (^)(NSString *))callback;
 
 #pragma mark - Identification API Calls
-- (void)audioIdentification:(NSString *)groupId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
-- (void)videoIdentification:(NSString *)groupId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
-
+- (void)voiceIdentification:(NSString *)groupId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
 @end
+

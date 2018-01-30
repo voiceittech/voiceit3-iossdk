@@ -10,4 +10,5 @@
 #import "VoiceItAPITwo.h"
 
 @interface VoiceItViewController : UIViewController
+@property VoiceItAPITwo * myVoiceIt;
 @end

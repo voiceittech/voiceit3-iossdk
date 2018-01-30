@@ -19,10 +19,11 @@ int TIME_TO_WAIT_TILL_FACE_FOUND = 30;
 
 
 - (IBAction)cancelClicked:(id)sender {
+    [self stopSavingToMovieFile];
+    [self setAudioSessionInactive];
     [_captureSession stopRunning];
     _captureSession = nil;
-    [ _audioRecorder stop];
-    [self stopSavingToMovieFile];
+    self.continueRunning = NO;
     [self dismissViewControllerAnimated:YES completion:^{
         [self userVerificationCancelled]();
     }];
@@ -44,6 +45,7 @@ int TIME_TO_WAIT_TILL_FACE_FOUND = 30;
     _verificationStarted  = NO;
     _lookingIntoCamCounter = 0;
     _failCounter = 0;
+    _continueRunning = YES;
     // Do any additional setup after loading the view.
     [_progressView setHidden:YES];
 }
@@ -175,14 +177,17 @@ int TIME_TO_WAIT_TILL_FACE_FOUND = 30;
     });
 }
 
-
 -(void)startDelayedRecording:(NSTimeInterval)delayTime{
     NSLog(@"Starting Delayed RECORDING with delayTime %f ", delayTime);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayTime * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self setMessage:[ResponseManager getMessage:@"VERIFY" variable:_thePhrase]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [self startRecording];
-        });
+        if(self.continueRunning){
+            [self setMessage:[ResponseManager getMessage:@"VERIFY" variable:_thePhrase]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                if(self.continueRunning){
+                    [self startRecording];
+                }
+            });
+        }
     });
 }
 
@@ -335,6 +340,8 @@ int TIME_TO_WAIT_TILL_FACE_FOUND = 30;
         NSTimeInterval faceFoundTime = [faceFoundNumber doubleValue];
         _finalCapturedPhotoData = [Utilities imageFromVideo:outputFileURL atTime:faceFoundTime];
     }
+    
+    // API Call to Face Verircation
 }
 
 -(void)setAudioSessionInactive{
@@ -426,5 +433,4 @@ int TIME_TO_WAIT_TILL_FACE_FOUND = 30;
         [_progressView setHidden:YES];
     });
 }
-
 @end

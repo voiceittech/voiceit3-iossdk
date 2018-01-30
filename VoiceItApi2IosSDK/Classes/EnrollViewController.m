@@ -13,11 +13,13 @@
 // TODO: Figure out where to put this
 int MAX_TIME_TO_WAIT_TILL_FACE_FOUND = 40;
 
+
 -(void)cancelClicked{
+    [self stopSavingToMovieFile];
+    [self setAudioSessionInactive];
     [_captureSession stopRunning];
     _captureSession = nil;
-    [ _audioRecorder stop];
-    [self stopSavingToMovieFile];
+    self.continueRunning = NO;
     [_myVoiceIt deleteAllUserEnrollments:_userToEnrollUserId callback:^(NSString * deleteEnrollmentsJSONResponse){
         [[self navigationController] dismissViewControllerAnimated:YES completion:^{
             [[self myNavController] userEnrollmentsCancelled];
@@ -50,6 +52,7 @@ int MAX_TIME_TO_WAIT_TILL_FACE_FOUND = 40;
     // Initialize Boolean and All
     _lookingIntoCam = NO;
     _enrollmentStarted = NO;
+    _continueRunning  = YES;
     //    _takePhoto = YES;
     _lookingIntoCamCounter = 0;
     _enrollmentDoneCounter = 0;
@@ -173,10 +176,14 @@ int MAX_TIME_TO_WAIT_TILL_FACE_FOUND = 40;
 -(void)startDelayedRecording:(NSTimeInterval)delayTime{
     NSLog(@"Starting Delayed RECORDING with delayTime %f ", delayTime);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayTime * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self makeLabelFlyIn:[ResponseManager getMessage:[[NSString alloc] initWithFormat:@"ENROLL_%d", _enrollmentDoneCounter] variable:_thePhrase]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.8 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [self startRecording];
-        });
+        if(self.continueRunning){
+            [self makeLabelFlyIn:[ResponseManager getMessage:[[NSString alloc] initWithFormat:@"ENROLL_%d", _enrollmentDoneCounter] variable:_thePhrase]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.8 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                if(self.continueRunning){
+                    [self startRecording];
+                }
+            });
+        }
     });
 }
 
@@ -197,10 +204,6 @@ int MAX_TIME_TO_WAIT_TILL_FACE_FOUND = 40;
         NSLog(@"%@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
     }
     err = nil;
-    if (err)
-    {
-        NSLog(@"%@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
-    }
     
     // Unique recording URL
     NSString *fileName = @"OriginalFile"; // Changed it So It Keeps Replacing File
@@ -493,5 +496,4 @@ int MAX_TIME_TO_WAIT_TILL_FACE_FOUND = 40;
 {
     NSLog(@"fail because %@", error.localizedDescription);
 }
-
 @end

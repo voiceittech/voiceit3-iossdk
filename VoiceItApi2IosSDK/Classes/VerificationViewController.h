@@ -42,6 +42,7 @@
 @property BOOL lookingIntoCam;
 @property BOOL verificationStarted;
 @property BOOL isRecording;
+@property BOOL continueRunning;
 //@property BOOL takePhoto;
 
 #pragma mark -  Counters to keep track of stuff
