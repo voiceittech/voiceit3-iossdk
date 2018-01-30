@@ -1,4 +1,4 @@
-<img src="Graphics/API2IosSDKREADMEHeader.png" width="100%" style="width:100%">
+<img src="Graphics/VoiceItHeaderImage.png" width="100%" style="width:100%">
 
 [![Version](https://img.shields.io/cocoapods/v/VoiceItApi2IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceItApi2IosSDK)
 [![License](https://img.shields.io/cocoapods/l/VoiceItApi2IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceItApi2IosSDK)
