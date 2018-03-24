@@ -519,7 +519,7 @@ print("User Verication Failed, faceConfidence is \(faceConfidence)")
 NSLog(@"User Cancelled Verification");
 } userVerificationSuccessful:^(float faceConfidence, NSString * jsonResponse){
 NSLog(@"User Verication Successful faceConfidence : %g", faceConfidence);
-} userVerificationFailed:^(float faceConfidence ,float voiceConfidence, NSString * jsonResponse){
+} userVerificationFailed:^(float faceConfidence, NSString * jsonResponse){
 NSLog(@"User Verication Failed, faceConfidence : %g",faceConfidence);
 }];
 ```
