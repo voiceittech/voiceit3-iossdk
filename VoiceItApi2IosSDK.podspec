@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 s.name             = 'VoiceItApi2IosSDK'
 s.version          = '0.92'
-s.summary          = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt'
+s.summary          = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt. Now also with basic liveness detection challenges'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
