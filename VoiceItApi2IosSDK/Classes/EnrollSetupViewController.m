@@ -18,13 +18,13 @@
 - (IBAction)continueClicked:(id)sender {
     [self checkMicrophonePermission];
     [self checkCameraPermission];
-    NSLog(@"Microphone = %d, Camera = %d", _microphonePermissionGranted, _cameraPermissionGranted);
-    if(_cameraPermissionGranted && _microphonePermissionGranted){
+    NSLog(@"Microphone = %d, Camera = %d", self.microphonePermissionGranted, self.cameraPermissionGranted);
+    if(self.cameraPermissionGranted && self.microphonePermissionGranted){
         [self launchEnrollmentProcess];
     } else {
         [self requestCameraAccess:^{
             [self requestMicAccess:^{
-                if(_cameraPermissionGranted && _microphonePermissionGranted){
+                if(self.cameraPermissionGranted && self.microphonePermissionGranted){
                     [self launchEnrollmentProcess];
                 }
             }];
@@ -44,9 +44,9 @@
 -(void)requestCameraAccess :(void (^)(void))completionBlock {
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted){
         if(granted){
-            _cameraPermissionGranted = YES;
+            self.cameraPermissionGranted = YES;
         } else {
-            _cameraPermissionGranted = NO;
+            self.cameraPermissionGranted = NO;
         }
         completionBlock();
     }];
@@ -55,9 +55,9 @@
 -(void)requestMicAccess :(void (^)(void))completionBlock {
     [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted){
         if(granted){
-            _microphonePermissionGranted = YES;
+            self.microphonePermissionGranted = YES;
         } else {
-            _microphonePermissionGranted = NO;
+            self.microphonePermissionGranted = NO;
         }
         completionBlock();
     }];
@@ -73,13 +73,13 @@
 -(void)checkMicrophonePermission {
     switch ([[AVAudioSession sharedInstance] recordPermission]) {
         case AVAudioSessionRecordPermissionGranted:
-            _microphonePermissionGranted = YES;
+            self.microphonePermissionGranted = YES;
             break;
         case AVAudioSessionRecordPermissionDenied:
-            _microphonePermissionGranted = NO;
+            self.microphonePermissionGranted = NO;
             break;
         case AVAudioSessionRecordPermissionUndetermined:
-            _microphonePermissionGranted = NO;
+            self.microphonePermissionGranted = NO;
             break;
         default:
             break;
@@ -89,16 +89,16 @@
 -(void)checkCameraPermission {
     switch ([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo]) {
         case AVAuthorizationStatusAuthorized:
-            _cameraPermissionGranted = YES;
+            self.cameraPermissionGranted = YES;
             break;
         case AVAuthorizationStatusDenied:
-            _cameraPermissionGranted = NO;
+            self.cameraPermissionGranted = NO;
             break;
         case AVAuthorizationStatusRestricted:
-            _cameraPermissionGranted = NO;
+            self.cameraPermissionGranted = NO;
             break;
         case  AVAuthorizationStatusNotDetermined:
-            _cameraPermissionGranted = NO;
+            self.cameraPermissionGranted = NO;
             break;
         default:
             break;
@@ -107,9 +107,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _myNavController = (MainNavigationController*) [self navigationController];
+    self.myNavController = (MainNavigationController*) [self navigationController];
     self.continueButton.layer.cornerRadius = 10.0;
-    [_continueButton setBackgroundColor:[Styles getMainUIColor]];
+    [self.continueButton setBackgroundColor:[Styles getMainUIColor]];
     // Do any additional setup after loading the view.
 }
 

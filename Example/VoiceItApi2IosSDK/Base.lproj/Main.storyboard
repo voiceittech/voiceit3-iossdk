@@ -42,6 +42,13 @@
                                     <action selector="faceVerificationClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="3Og-Yk-ySs"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7d-MH-rgQ">
+                                <rect key="frame" x="147.66666666666666" y="467" width="118.99999999999997" height="30"/>
+                                <state key="normal" title="Voice Verification"/>
+                                <connections>
+                                    <action selector="voiceVerificationClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="zjl-8e-Wde"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -49,8 +56,10 @@
                             <constraint firstItem="hsW-Co-a3P" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="EVk-vg-VV8"/>
                             <constraint firstItem="uLa-7O-kV6" firstAttribute="top" secondItem="hsW-Co-a3P" secondAttribute="bottom" constant="8" id="Ilp-yl-zl9"/>
                             <constraint firstItem="hsW-Co-a3P" firstAttribute="top" secondItem="dRg-oG-HjD" secondAttribute="bottom" constant="8" id="JMb-fp-NJ2"/>
+                            <constraint firstItem="C7d-MH-rgQ" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="L1t-d8-8cE"/>
                             <constraint firstItem="dRg-oG-HjD" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="Lxe-ro-ZgA"/>
                             <constraint firstItem="dRg-oG-HjD" firstAttribute="centerY" secondItem="TpU-gO-2f1" secondAttribute="centerY" id="Vsh-0U-B7u"/>
+                            <constraint firstItem="C7d-MH-rgQ" firstAttribute="top" secondItem="uLa-7O-kV6" secondAttribute="bottom" constant="8" id="dg6-3q-s3u"/>
                         </constraints>
                     </view>
                 </viewController>

@@ -264,7 +264,7 @@ NSString * const host = @"https://api.voiceit.io/";
 
 - (void)createGroup:(NSString *)description callback:(void (^)(NSString *))callback
 {
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", _boundary];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"groups"]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -274,7 +274,7 @@ NSString * const host = @"https://api.voiceit.io/";
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
     
     NSDictionary *params = @{@"description" : description};
-    NSData *body = [self createBodyWithBoundary:_boundary parameters:params paths:nil fieldName:nil];
+    NSData *body = [self createBodyWithBoundary:self.boundary parameters:params paths:nil fieldName:nil];
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response,
                                                                                                            NSError *error) {
         NSString *result =
@@ -304,7 +304,7 @@ NSString * const host = @"https://api.voiceit.io/";
     }
     
     
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", _boundary];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"groups/addUser"]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -314,7 +314,7 @@ NSString * const host = @"https://api.voiceit.io/";
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
     
     NSDictionary *params = @{@"userId" : userId, @"groupId": groupId};
-    NSData *body = [self createBodyWithBoundary:_boundary parameters:params paths:nil fieldName:nil];
+    NSData *body = [self createBodyWithBoundary:self.boundary parameters:params paths:nil fieldName:nil];
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response,
                                                                                                            NSError *error) {
         NSString *result =
@@ -343,7 +343,7 @@ NSString * const host = @"https://api.voiceit.io/";
         return;
     }
     
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", _boundary];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"groups/removeUser"]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -353,7 +353,7 @@ NSString * const host = @"https://api.voiceit.io/";
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
     
     NSDictionary *params = @{@"userId" : userId, @"groupId": groupId};
-    NSData *body = [self createBodyWithBoundary:_boundary parameters:params paths:nil fieldName:nil];
+    NSData *body = [self createBodyWithBoundary:self.boundary parameters:params paths:nil fieldName:nil];
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response,
                                                                                                            NSError *error) {
         NSString *result =
@@ -511,7 +511,7 @@ NSString * const host = @"https://api.voiceit.io/";
 
 - (void)createVoiceEnrollment
 {
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", _boundary];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"enrollments"]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -616,6 +616,34 @@ NSString * const host = @"https://api.voiceit.io/";
     [[self masterViewController] presentViewController: faceVerificationVC animated:YES completion:nil];
 }
 
+- (void)encapsulatedVoiceVerification:(NSString *)userId
+                      contentLanguage:(NSString*)contentLanguage
+                     voicePrintPhrase:(NSString*)voicePrintPhrase
+            userVerificationCancelled:(void (^)(void))userVerificationCancelled
+           userVerificationSuccessful:(void (^)(float, NSString *))userVerificationSuccessful
+               userVerificationFailed:(void (^)(float, NSString *))userVerificationFailed
+{
+    
+    if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
+        @throw [NSException exceptionWithName:@"Cannot Do Video Verification"
+                                       reason:@"Invalid userId passed"
+                                     userInfo:nil];
+        return;
+    }
+    
+    VoiceVerificationViewController *verifyVoice = [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"verifyVoiceVC"];
+    verifyVoice.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    verifyVoice.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    verifyVoice.userToVerifyUserId = userId;
+    verifyVoice.contentLanguage = contentLanguage;
+    verifyVoice.thePhrase = voicePrintPhrase;
+    verifyVoice.userVerificationCancelled = userVerificationCancelled;
+    verifyVoice.userVerificationSuccessful = userVerificationSuccessful;
+    verifyVoice.userVerificationFailed = userVerificationFailed;
+    verifyVoice.voiceItMaster = self;
+    [[self masterViewController] presentViewController: verifyVoice animated:YES completion:nil];
+}
+
 - (void)createVideoEnrollment:(NSString *)userId
               contentLanguage:(NSString*)contentLanguage
                     imageData:(NSData*)imageData
@@ -641,7 +669,7 @@ NSString * const host = @"https://api.voiceit.io/";
 
 - (void)createVideoEnrollment
 {
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", _boundary];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"enrollments/video"]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -695,8 +723,32 @@ NSString * const host = @"https://api.voiceit.io/";
     });
 }
 
+- (void)voiceVerification:(NSString *)userId
+          contentLanguage:(NSString*)contentLanguage
+                audioPath:(NSString*)audioPath
+                 callback:(void (^)(NSString *))callback
+{
+    
+    if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
+        @throw [NSException exceptionWithName:@"Cannot Call Video Verification"
+                                       reason:@"Invalid userId passed"
+                                     userInfo:nil];
+        return;
+    }
+    
+    _uniqueId = userId;
+    _contentLanguage = contentLanguage;
+    _recType = verification;
+    _voiceVerificationCompleted = callback;
+    
+    _recordingFilePath = audioPath;
+    // TODO: Save Photo to Photos for Testing
+    //    [Utilities savePhotoToPhotos:[UIImage imageWithData:_photoData]];
+    [self voiceVerification];
+}
+
 -(void)voiceVerification{
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", _boundary];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"verification"]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -744,7 +796,7 @@ NSString * const host = @"https://api.voiceit.io/";
 }
 
 -(void)faceVerification{
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", _boundary];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"verification/face"]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -798,7 +850,7 @@ NSString * const host = @"https://api.voiceit.io/";
 }
 
 -(void)videoVerification{
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", _boundary];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"verification/video"]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -852,7 +904,7 @@ NSString * const host = @"https://api.voiceit.io/";
 }
 
 - (void)voiceIdentification{
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", _boundary];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[self buildURL:@"identification"]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -945,7 +997,7 @@ NSString * const host = @"https://api.voiceit.io/";
 - (void)addParamsToBody:(NSMutableData *)httpBody parameters:(NSDictionary *)parameters {
     // add params (all params are strings)
     [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *parameterKey, NSString *parameterValue, BOOL *stop) {
-        [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", _boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", self.boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", parameterValue] dataUsingEncoding:NSUTF8StringEncoding]];
     }];
@@ -956,7 +1008,7 @@ NSString * const host = @"https://api.voiceit.io/";
     NSData   *data      = [NSData dataWithContentsOfFile:filePath];
     NSString *mimetype  = [self mimeTypeForPath:filePath];
     
-    [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", _boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", self.boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", fieldName, filename] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimetype] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:data];
@@ -966,7 +1018,7 @@ NSString * const host = @"https://api.voiceit.io/";
 -(void)addImageToBody:(NSMutableData *)httpBody imageData:(NSData *)imageData fieldName:(NSString *)fieldName{
     NSString *filename  = @"frame.jpg";
     NSString *mimetype  = @"image/jpeg";
-    [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", _boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", self.boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", fieldName, filename] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimetype] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:imageData];
@@ -974,7 +1026,7 @@ NSString * const host = @"https://api.voiceit.io/";
 }
 
 -(void)endBody:(NSMutableData *)body{
-    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", _boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", self.boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)recordAudio{

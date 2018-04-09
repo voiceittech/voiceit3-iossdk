@@ -17,17 +17,17 @@
 
 - (IBAction)doneButtonClicked:(id)sender {
     [[self navigationController] dismissViewControllerAnimated:YES completion:^{
-        [_myNavController userEnrollmentsPassed]();
+        [self.myNavController userEnrollmentsPassed]();
     }];
     // TODO: Give Successful Enrollment Completion Notification/Callback Here
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [_doneButton setBackgroundColor:[Styles getMainUIColor]];
-    _myNavController = (MainNavigationController*) [self navigationController];
+    [self.doneButton setBackgroundColor:[Styles getMainUIColor]];
+    self.myNavController = (MainNavigationController*) [self navigationController];
     [self.navigationItem setHidesBackButton: YES];
-    _doneButton.layer.cornerRadius = 10.0;
+    self.doneButton.layer.cornerRadius = 10.0;
     // Setup Cancel Button on top left of navigation controller
     // Do any additional setup after loading the view.
 }

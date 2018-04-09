@@ -21,7 +21,7 @@
     self.TEST_USER_ID = @"USER_ID_HERE";
 
     NSMutableDictionary * styles = [[NSMutableDictionary alloc] init];
-    [styles setObject:@"#FF0000" forKey:@"kThemeColor"];
+    [styles setObject:@"#FBC132" forKey:@"kThemeColor"];
     [styles setObject:@"default" forKey:@"kIconStyle"];
     _myVoiceIt  = [[VoiceItAPITwo alloc] init:self apiKey: self.API_KEY apiToken: self.API_TOKEN styles:styles];
 }
@@ -57,6 +57,15 @@
         NSLog(@"User Face Verication Successful faceConfidence : %g and RESPONSE : %@", faceConfidence, jsonResponse);
     } userVerificationFailed:^(float faceConfidence , NSString * jsonResponse){
         NSLog(@"User Face Verication Failed faceConfidence : %g and RESPONSE : %@", faceConfidence, jsonResponse);
+    }];
+}
+- (IBAction)voiceVerificationClicked:(id)sender {
+    [_myVoiceIt encapsulatedVoiceVerification: self.TEST_USER_ID contentLanguage:@"en-US" voicePrintPhrase:@"my face and voice identify me" userVerificationCancelled:^{
+        NSLog(@"User Verication Cancelled");
+    } userVerificationSuccessful:^(float voiceConfidence, NSString * jsonResponse){
+        NSLog(@"User Verication Successful voiceConfidence : %g ",voiceConfidence);
+    } userVerificationFailed:^(float voiceConfidence, NSString * jsonResponse){
+        NSLog(@"User Verication Failed voiceConfidence : %g",voiceConfidence);
     }];
 }
 

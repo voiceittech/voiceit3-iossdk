@@ -11,6 +11,10 @@
 		1A373325549AEBA3D2DCE2A80A5C4DE4 /* Styles.m in Sources */ = {isa = PBXBuildFile; fileRef = 331CF64A7295588A2C12DB6FE09A4FD7 /* Styles.m */; };
 		2119CE572066D73800C68801 /* VideoVerificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2119CE532065C7E600C68801 /* VideoVerificationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2119CE582066D73C00C68801 /* VideoVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2119CE542065C7E600C68801 /* VideoVerificationViewController.m */; };
+		21399600207AF0CE00838C01 /* VoiceVerificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 213995FC207AF0CE00838C01 /* VoiceVerificationViewController.h */; };
+		21399601207AF0CE00838C01 /* SCSiriWaveformView.h in Headers */ = {isa = PBXBuildFile; fileRef = 213995FD207AF0CE00838C01 /* SCSiriWaveformView.h */; };
+		21399602207AF0CE00838C01 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 213995FE207AF0CE00838C01 /* SCSiriWaveformView.m */; };
+		21399603207AF0CE00838C01 /* VoiceVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 213995FF207AF0CE00838C01 /* VoiceVerificationViewController.m */; };
 		28F54159955A477BD74D62BA20D457B5 /* Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = C9864F06E28EE1C66C8F0C57354378B7 /* Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		30305B728EA8C6F3F0D4D389E4BCE249 /* VoiceItLogo.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B09EB19927F1AB4EA9DA9DC34B99E1 /* VoiceItLogo.m */; };
 		362C5ED0B33AEB1448443EA868DA8F7F /* Prompts.strings in Resources */ = {isa = PBXBuildFile; fileRef = D686BBA68D26CB5F7FF5282FDBE0146A /* Prompts.strings */; };
@@ -78,6 +82,10 @@
 		208084799F3BFA2971A87EE846D391DE /* VoiceItAPITwo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VoiceItAPITwo.h; path = VoiceItApi2IosSDK/Classes/VoiceItAPITwo.h; sourceTree = "<group>"; };
 		2119CE532065C7E600C68801 /* VideoVerificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VideoVerificationViewController.h; path = VoiceItApi2IosSDK/Classes/VideoVerificationViewController.h; sourceTree = "<group>"; };
 		2119CE542065C7E600C68801 /* VideoVerificationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VideoVerificationViewController.m; path = VoiceItApi2IosSDK/Classes/VideoVerificationViewController.m; sourceTree = "<group>"; };
+		213995FC207AF0CE00838C01 /* VoiceVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VoiceVerificationViewController.h; path = VoiceItApi2IosSDK/Classes/VoiceVerificationViewController.h; sourceTree = "<group>"; };
+		213995FD207AF0CE00838C01 /* SCSiriWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCSiriWaveformView.h; path = VoiceItApi2IosSDK/Classes/SCSiriWaveformView.h; sourceTree = "<group>"; };
+		213995FE207AF0CE00838C01 /* SCSiriWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCSiriWaveformView.m; path = VoiceItApi2IosSDK/Classes/SCSiriWaveformView.m; sourceTree = "<group>"; };
+		213995FF207AF0CE00838C01 /* VoiceVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VoiceVerificationViewController.m; path = VoiceItApi2IosSDK/Classes/VoiceVerificationViewController.m; sourceTree = "<group>"; };
 		24793BA1A3E30E42043D179AA612B6DD /* Pods-VoiceItApi2IosSDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VoiceItApi2IosSDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		2658DB6382D610197EF5F49BE1E05160 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = Frameworks/frameworks/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 		28A709D613FF4AE28DC2F898CF6312BC /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = Frameworks/frameworks/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
@@ -390,6 +398,10 @@
 		A90C754CC1B39A23166B489F64351905 /* VoiceItApi2IosSDK */ = {
 			isa = PBXGroup;
 			children = (
+				213995FD207AF0CE00838C01 /* SCSiriWaveformView.h */,
+				213995FE207AF0CE00838C01 /* SCSiriWaveformView.m */,
+				213995FC207AF0CE00838C01 /* VoiceVerificationViewController.h */,
+				213995FF207AF0CE00838C01 /* VoiceVerificationViewController.m */,
 				05C1F21AA5FB5698389923FF1DC4A6E9 /* EnrollFinishViewController.h */,
 				772866D09EE120667B1AA1EB958A9A79 /* EnrollFinishViewController.m */,
 				56294D8667B0933179A05758DF919414 /* EnrollSetupViewController.h */,
@@ -494,6 +506,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDEFA941A8A287526AA030BE6B341BEE /* Pods-VoiceItApi2IosSDK_Example-umbrella.h in Headers */,
+				21399601207AF0CE00838C01 /* SCSiriWaveformView.h in Headers */,
+				21399600207AF0CE00838C01 /* VoiceVerificationViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +614,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -672,6 +686,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21399603207AF0CE00838C01 /* VoiceVerificationViewController.m in Sources */,
+				21399602207AF0CE00838C01 /* SCSiriWaveformView.m in Sources */,
 				BC6322AE8A0ABBD61B51E74EBA0CB164 /* Pods-VoiceItApi2IosSDK_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -736,6 +752,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -743,6 +760,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -839,6 +857,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -846,6 +865,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -54,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UYX-Kc-pB2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3311" y="1450"/>
+            <point key="canvasLocation" x="2796" y="922"/>
         </scene>
         <!--Enroll Finish View Controller-->
         <scene sceneID="BIp-NM-TPr">
@@ -207,7 +207,109 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MxS-2a-a7L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="648.79999999999995" y="923.38830584707648"/>
+            <point key="canvasLocation" x="1159" y="923"/>
+        </scene>
+        <!--Voice Verification View Controller-->
+        <scene sceneID="jl6-7a-nNL">
+            <objects>
+                <viewController storyboardIdentifier="verifyVoiceVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uKr-Sz-7dH" customClass="VoiceVerificationViewController" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="4hA-ci-qeO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="He1-Mt-Xv0">
+                                <rect key="frame" x="38" y="134" width="300" height="400"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6N-uC-cFM" customClass="SCSiriWaveformView">
+                                        <rect key="frame" x="16" y="8" width="268" height="212"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="primaryWaveLineWidth">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="secondaryWaveLineWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="idleAmplitude">
+                                                <real key="value" value="0.01"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="frequency">
+                                                <real key="value" value="1.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="amplitude">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="density">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="phaseShift">
+                                                <real key="value" value="-0.14999999999999999"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="waveColor">
+                                                <color key="value" red="0.98431372549999996" green="0.75686274509999996" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Say &quot;My face and voice identify me&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4b-S9-BwA">
+                                        <rect key="frame" x="8" y="228" width="284" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="oiS-bx-tiP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2g5-v2-qQH">
+                                        <rect key="frame" x="0.0" y="356" width="300" height="44"/>
+                                        <color key="backgroundColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="gXq-Vu-wFC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelClicked:" destination="uKr-Sz-7dH" eventType="touchUpInside" id="5jv-oG-4c3"/>
+                                        </connections>
+                                    </button>
+                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ad1-wD-HYs" customClass="SpinningView">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="G4b-S9-BwA" firstAttribute="leading" secondItem="He1-Mt-Xv0" secondAttribute="leading" constant="8" id="3GM-yY-Wtv"/>
+                                    <constraint firstItem="G4b-S9-BwA" firstAttribute="top" secondItem="u6N-uC-cFM" secondAttribute="bottom" constant="8" id="5iI-TI-FlD"/>
+                                    <constraint firstItem="u6N-uC-cFM" firstAttribute="leading" secondItem="He1-Mt-Xv0" secondAttribute="leading" constant="16" id="6aV-8s-hfc"/>
+                                    <constraint firstItem="2g5-v2-qQH" firstAttribute="top" secondItem="G4b-S9-BwA" secondAttribute="bottom" constant="8" id="ADP-va-jGD"/>
+                                    <constraint firstAttribute="trailing" secondItem="u6N-uC-cFM" secondAttribute="trailing" constant="16" id="DjX-Gu-ZLC"/>
+                                    <constraint firstItem="2g5-v2-qQH" firstAttribute="leading" secondItem="He1-Mt-Xv0" secondAttribute="leading" id="IZK-44-JGv"/>
+                                    <constraint firstAttribute="height" constant="400" id="NMf-fd-fnM"/>
+                                    <constraint firstAttribute="bottom" secondItem="2g5-v2-qQH" secondAttribute="bottom" id="T8A-qN-Dt3"/>
+                                    <constraint firstAttribute="trailing" secondItem="2g5-v2-qQH" secondAttribute="trailing" id="VT4-R1-Spf"/>
+                                    <constraint firstAttribute="width" constant="300" id="X4N-9c-OsS"/>
+                                    <constraint firstItem="u6N-uC-cFM" firstAttribute="top" secondItem="He1-Mt-Xv0" secondAttribute="top" constant="8" id="wXu-HG-5IA"/>
+                                    <constraint firstAttribute="trailing" secondItem="G4b-S9-BwA" secondAttribute="trailing" constant="8" id="ycq-jL-aaR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="He1-Mt-Xv0" firstAttribute="centerY" secondItem="4hA-ci-qeO" secondAttribute="centerY" id="GiY-YX-Dk4"/>
+                            <constraint firstItem="He1-Mt-Xv0" firstAttribute="centerX" secondItem="4hA-ci-qeO" secondAttribute="centerX" id="thb-tL-the"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="faV-MX-Px7"/>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="2g5-v2-qQH" id="WjC-xS-qjc"/>
+                        <outlet property="messageLabel" destination="G4b-S9-BwA" id="JXK-Eg-eaj"/>
+                        <outlet property="progressView" destination="ad1-wD-HYs" id="0g4-SP-QOM"/>
+                        <outlet property="verificationBox" destination="He1-Mt-Xv0" id="ImA-eX-Ae5"/>
+                        <outlet property="waveformView" destination="u6N-uC-cFM" id="uAe-11-uts"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i8E-nc-rB4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="280.80000000000001" y="921.58920539730138"/>
         </scene>
         <!--Enroll Setup View Controller-->
         <scene sceneID="OPs-PN-ukF">
@@ -239,7 +341,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This lets you use you login by verifying your face and voice" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="grO-3t-kIf">
-                                <rect key="frame" x="16" y="402" width="343" height="20.5"/>
+                                <rect key="frame" x="16" y="402" width="343" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -386,7 +488,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdD-Qm-Me7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="922.48875562218893"/>
+            <point key="canvasLocation" x="2044" y="922"/>
         </scene>
     </scenes>
 </document>

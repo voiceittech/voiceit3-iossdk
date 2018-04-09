@@ -13,6 +13,7 @@
 #import "MainNavigationController.h"
 #import "FaceVerificationViewController.h"
 #import "VideoVerificationViewController.h"
+#import "VoiceVerificationViewController.h"
 
 @import MobileCoreServices;
 
@@ -56,6 +57,13 @@ typedef enum { enrollment, verification, identification } RecordingType;
            userVerificationSuccessful:(void (^)(float, float, NSString *))userVerificationSuccessful
                userVerificationFailed:(void (^)(float, float, NSString *))userVerificationFailed;
 
+- (void)encapsulatedVoiceVerification:(NSString *)userId
+                      contentLanguage:(NSString*)contentLanguage
+                     voicePrintPhrase:(NSString*)voicePrintPhrase
+            userVerificationCancelled:(void (^)(void))userVerificationCancelled
+           userVerificationSuccessful:(void (^)(float, NSString *))userVerificationSuccessful
+               userVerificationFailed:(void (^)(float, NSString *))userVerificationFailed;
+
 - (void)encapsulatedFaceVerification:(NSString *)userId
            userVerificationCancelled:(void (^)(void))userVerificationCancelled
            userVerificationSuccessful:(void (^)(float, NSString *))userVerificationSuccessful
@@ -90,6 +98,10 @@ typedef enum { enrollment, verification, identification } RecordingType;
                      callback:(void (^)(NSString *))callback;
 #pragma mark - Verification API Calls
 - (void)voiceVerification:(NSString *)userId contentLanguage:(NSString*)contentLanguage recordingFinished:(void (^)(void))recordingFinished callback:(void (^)(NSString *))callback;
+- (void)voiceVerification:(NSString *)userId
+          contentLanguage:(NSString*)contentLanguage
+                audioPath:(NSString*)audioPath
+                 callback:(void (^)(NSString *))callback;
 - (void)faceVerification:(NSString *)userId
                videoPath:(NSString*)videoPath
                 callback:(void (^)(NSString *))callback;
