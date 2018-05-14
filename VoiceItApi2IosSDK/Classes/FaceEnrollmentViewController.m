@@ -44,6 +44,7 @@
     self.enrollmentStarted = NO;
     self.continueRunning  = YES;
     self.lookingIntoCamCounter = 0;
+    self.isReadyToWrite = NO;
     [self setNavigationTitle:@"Enrolling Face"];
     // Set up the AVCapture Session
     [self setupCaptureSession];
@@ -75,10 +76,10 @@
 }
 
 -(void)setupCaptureSession{
-    // Setup Video Input Device
+    // Setup Video Input Devices
     self.captureSession = [[AVCaptureSession alloc] init];
     [self.captureSession beginConfiguration];
-    [self.captureSession setSessionPreset: AVCaptureSessionPresetHigh];
+    [self.captureSession setSessionPreset: AVCaptureSessionPresetMedium];
     self.videoDevice = [AVCaptureDevice defaultDeviceWithDeviceType:AVCaptureDeviceTypeBuiltInWideAngleCamera mediaType:AVMediaTypeVideo position:AVCaptureDevicePositionFront];
     NSError * videoError;
     AVCaptureDeviceInput * videoInput = [AVCaptureDeviceInput deviceInputWithDevice: self.videoDevice error:&videoError];
@@ -240,17 +241,7 @@
       kCVPixelBufferPixelFormatTypeKey,
       nil]];
     
-    // Unique video URL
-    NSString *fileName = @"OriginalFile"; // Changed it So It Keeps Replacing File
-    self.videoPath  = [NSTemporaryDirectory()
-                       stringByAppendingPathComponent:[NSString
-                                                       stringWithFormat:@"%@.mp4", fileName]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:self.videoPath])
-    {
-        [[NSFileManager defaultManager] removeItemAtPath:self.videoPath
-                                                   error:nil];
-    }
-    
+    self.videoPath = [Utilities pathForTemporaryFileWithSuffix:@"mp4"];
     NSURL *videoURL = [NSURL fileURLWithPath:self.videoPath];
     
     /* Asset writer with MPEG4 format*/
@@ -262,12 +253,18 @@
     self.assetWriterInput.expectsMediaDataInRealTime = YES;
     [self.assetWriterMyData startWriting];
     [self.assetWriterMyData startSessionAtSourceTime:kCMTimeZero];
+    self.isReadyToWrite = YES;
 }
 
 -(void)stopWritingToVideoFile {
+    self.isReadyToWrite = NO;
     [self.assetWriterMyData finishWritingWithCompletionHandler:^{
         [self showLoading];
+        if(!self.continueRunning){
+            return;
+        }
         [self.myVoiceIt createFaceEnrollment:self.userToEnrollUserId videoPath:self.videoPath callback:^(NSString * jsonResponse){
+            [Utilities deleteFile:self.videoPath];
             [self removeLoading];
             NSLog(@"Face Enrollment JSON Response : %@", jsonResponse);
             NSDictionary *jsonObj = [Utilities getJSONObject:jsonResponse];
@@ -285,25 +282,19 @@
 }
 
 -(void)startEnrollmentProcess {
-    [self.myVoiceIt getAllEnrollmentsForUser:self.userToEnrollUserId callback:^(NSString * getEnrollmentsJSONResponse){
+    [self.myVoiceIt getAllFaceEnrollmentsForUser:self.userToEnrollUserId callback:^(NSString * getEnrollmentsJSONResponse){
         NSDictionary *getEnrollmentsJSONObj = [Utilities getJSONObject:getEnrollmentsJSONResponse];
         int enrollmentCount = [[getEnrollmentsJSONObj objectForKey: @"count"] intValue];
         NSLog(@"Enrollment Count From Server is %d", enrollmentCount);
-        if(enrollmentCount == 0){
-            [self makeLabelFlyIn: [ResponseManager getMessage:@"GET_ENROLLED"]];
-            [self startDelayedRecording:2.0];
-        } else {
-            [self.myVoiceIt deleteAllUserEnrollments:self.userToEnrollUserId callback:^(NSString * deleteEnrollmentsJSONResponse){
+        [self.myVoiceIt deleteAllUserEnrollments:self.userToEnrollUserId callback:^(NSString * deleteEnrollmentsJSONResponse){
                 [self makeLabelFlyIn: [ResponseManager getMessage:@"GET_ENROLLED"]];
                 [self startDelayedRecording:2.0];
             }];
-        }
     }];
     
 }
 
 -(void)makeLabelFlyAway :(void (^)(void))flewAway {
-    // TODO: Trying out New Label Animation Code
     dispatch_async(dispatch_get_main_queue(), ^{
         CGFloat flyAwayTime = 0.4;
         __block CGFloat currentX = [self.messageLabel center].x;
@@ -316,7 +307,6 @@
 }
 
 -(void)makeLabelFlyIn:(NSString *)message {
-    // TODO: Trying out New Label Animation Code
     CGFloat flyInTime = 0.8;
     dispatch_async(dispatch_get_main_queue(), ^{
         __block CGFloat currentX = [self.messageLabel center].x;
@@ -346,12 +336,12 @@
     }
     
     if(faceFound) {
-        if (self.lookingIntoCamCounter > MAX_TIME_TO_WAIT_TILL_FACE_FOUND && !self.lookingIntoCam && !self.enrollmentStarted) {
-            self.lookingIntoCam = YES;
+        self.lookingIntoCamCounter += 1;
+        self.lookingIntoCam = self.lookingIntoCamCounter > MAX_TIME_TO_WAIT_TILL_FACE_FOUND;
+        if (!self.lookingIntoCam && !self.enrollmentStarted) {
             self.enrollmentStarted = YES;
             [self startEnrollmentProcess];
         }
-        self.lookingIntoCamCounter += 1;
     } else if (!self.enrollmentStarted){
         [self makeLabelFlyIn:[ResponseManager getMessage:@"LOOK_INTO_CAM"]];
         self.lookingIntoCam = NO;
@@ -377,12 +367,13 @@
 didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 fromConnection:(AVCaptureConnection *)connection {
     
-    if(self.isRecording && !self.enoughRecordingTimePassed){
+   if(self.isRecording && !self.enoughRecordingTimePassed && self.isReadyToWrite){
         CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
         // a very dense way to keep track of the time at which this frame
         // occurs relative to the output stream, but it's just an example!
         static int64_t frameNumber = 0;
         if(self.assetWriterInput.readyForMoreMediaData){
+            
             if(self.pixelBufferAdaptor != nil){
                 [self.pixelBufferAdaptor appendPixelBuffer:imageBuffer
                                       withPresentationTime:CMTimeMake(frameNumber, 25)];

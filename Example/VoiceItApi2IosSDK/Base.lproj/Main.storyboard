@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,71 +22,109 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRg-oG-HjD">
-                                <rect key="frame" x="148.66666666666666" y="353" width="116.99999999999997" height="30"/>
-                                <state key="normal" title="Video Enrollment"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRg-oG-HjD">
+                                <rect key="frame" x="28" y="349.33333333333331" width="358" height="39"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <state key="normal" title="Voice Enrollment">
+                                    <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
-                                    <action selector="startEnrollmentClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="CJZ-mh-yzi"/>
+                                    <action selector="voiceEnrollmentClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="llH-Mt-Igr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbc-xY-4c8">
-                                <rect key="frame" x="152" y="505" width="110" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="Mh1-Cn-Vfq"/>
-                                </constraints>
-                                <state key="normal" title="Face Enrollment"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbc-xY-4c8">
+                                <rect key="frame" x="28" y="537.33333333333337" width="358" height="39"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <state key="normal" title="Face Verification">
+                                    <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
-                                    <action selector="faceEnrollmentClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="Vlj-y5-wR8"/>
+                                    <action selector="faceVerificationClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="GEi-TB-0EM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hsW-Co-a3P">
-                                <rect key="frame" x="146.66666666666666" y="391" width="120.99999999999997" height="30"/>
-                                <state key="normal" title="Video Verification"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbU-eX-1KH">
+                                <rect key="frame" x="28" y="584.33333333333337" width="358" height="39"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <state key="normal" title="Video Verification">
+                                    <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
-                                    <action selector="videoVerificationClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="R0e-jj-HOl"/>
+                                    <action selector="videoVerificationClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="uSx-Ao-yYW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLa-7O-kV6">
-                                <rect key="frame" x="150" y="429" width="114" height="30"/>
-                                <state key="normal" title="Face Verification"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hsW-Co-a3P">
+                                <rect key="frame" x="28" y="396.33333333333331" width="358" height="39"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <state key="normal" title="Face Enrollment">
+                                    <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
-                                    <action selector="faceVerificationClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="3Og-Yk-ySs"/>
+                                    <action selector="faceEnrollmentClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="TAO-WY-rHo"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7d-MH-rgQ">
-                                <rect key="frame" x="147.66666666666666" y="467" width="118.99999999999997" height="30"/>
-                                <state key="normal" title="Voice Verification"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLa-7O-kV6">
+                                <rect key="frame" x="28" y="443.33333333333331" width="358" height="39"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <state key="normal" title="Video Enrollment">
+                                    <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
-                                    <action selector="voiceVerificationClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="zjl-8e-Wde"/>
+                                    <action selector="videoEnrollmentClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="0ki-4r-WiA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbU-eX-1KH">
-                                <rect key="frame" x="150" y="543" width="115" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="115" id="oxw-pT-xkk"/>
-                                </constraints>
-                                <state key="normal" title="Voice Enrollment"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7d-MH-rgQ">
+                                <rect key="frame" x="28" y="490.33333333333331" width="358" height="38.999999999999943"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <state key="normal" title="Voice Verification">
+                                    <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
-                                    <action selector="voiceEnrollmentClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="Wy2-pI-hWJ"/>
+                                    <action selector="voiceVerificationClicked:" destination="whP-gf-Uak" eventType="touchUpInside" id="wBY-Wj-Wvt"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Lt-7z-QBg">
+                                <rect key="frame" x="28" y="310.33333333333331" width="358" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liveness Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7f-R0-ivN">
+                                        <rect key="frame" x="0.0" y="0.0" width="309" height="31"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Zr-Va-h86">
+                                        <rect key="frame" x="309" y="0.0" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="tbU-eX-1KH" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="3gO-MO-pru"/>
-                            <constraint firstItem="uLa-7O-kV6" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="CoS-3v-sKB"/>
-                            <constraint firstItem="hsW-Co-a3P" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="EVk-vg-VV8"/>
+                            <constraint firstItem="uLa-7O-kV6" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="8" id="0C7-nl-ZRJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8Lt-7z-QBg" secondAttribute="trailing" constant="8" id="5LU-VL-wdU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hsW-Co-a3P" secondAttribute="trailing" constant="8" id="HdK-aj-eyx"/>
                             <constraint firstItem="uLa-7O-kV6" firstAttribute="top" secondItem="hsW-Co-a3P" secondAttribute="bottom" constant="8" id="Ilp-yl-zl9"/>
                             <constraint firstItem="hsW-Co-a3P" firstAttribute="top" secondItem="dRg-oG-HjD" secondAttribute="bottom" constant="8" id="JMb-fp-NJ2"/>
-                            <constraint firstItem="C7d-MH-rgQ" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="L1t-d8-8cE"/>
-                            <constraint firstItem="dRg-oG-HjD" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="Lxe-ro-ZgA"/>
-                            <constraint firstItem="zbc-xY-4c8" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="Nnr-SZ-qze"/>
+                            <constraint firstItem="hsW-Co-a3P" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="8" id="Km5-3i-fRt"/>
+                            <constraint firstItem="tbU-eX-1KH" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="8" id="N1b-Ss-1Do"/>
+                            <constraint firstItem="zbc-xY-4c8" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="8" id="Pwl-Bl-l7g"/>
                             <constraint firstItem="dRg-oG-HjD" firstAttribute="centerY" secondItem="TpU-gO-2f1" secondAttribute="centerY" id="Vsh-0U-B7u"/>
+                            <constraint firstItem="dRg-oG-HjD" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="8" id="bDI-eS-Ko3"/>
                             <constraint firstItem="C7d-MH-rgQ" firstAttribute="top" secondItem="uLa-7O-kV6" secondAttribute="bottom" constant="8" id="dg6-3q-s3u"/>
+                            <constraint firstItem="C7d-MH-rgQ" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="8" id="f6Q-82-vHE"/>
                             <constraint firstItem="tbU-eX-1KH" firstAttribute="top" secondItem="zbc-xY-4c8" secondAttribute="bottom" constant="8" id="hGd-nn-Dkk"/>
+                            <constraint firstItem="8Lt-7z-QBg" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="8" id="hbL-iJ-Ghw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dRg-oG-HjD" secondAttribute="trailing" constant="8" id="ig9-Y0-z99"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zbc-xY-4c8" secondAttribute="trailing" constant="8" id="okE-Bh-vDD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uLa-7O-kV6" secondAttribute="trailing" constant="8" id="ozP-f7-d3h"/>
                             <constraint firstItem="zbc-xY-4c8" firstAttribute="top" secondItem="C7d-MH-rgQ" secondAttribute="bottom" constant="8" id="pTZ-Vz-igF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tbU-eX-1KH" secondAttribute="trailing" constant="8" id="ppe-Jj-9oQ"/>
+                            <constraint firstItem="dRg-oG-HjD" firstAttribute="top" secondItem="8Lt-7z-QBg" secondAttribute="bottom" constant="8" id="qCD-Fn-2VC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C7d-MH-rgQ" secondAttribute="trailing" constant="8" id="sGQ-JR-pn8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="livenessToggle" destination="0Zr-Va-h86" id="6fI-z2-4Ki"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

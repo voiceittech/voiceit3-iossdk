@@ -141,6 +141,7 @@
 }
 
 - (void)viewDidLoad {
+    // Do any additional setup after loading the view.
     [super viewDidLoad];
     self.myNavController = (MainNavigationController*) [self navigationController];
     self.continueButton.layer.cornerRadius = 10.0;
@@ -155,7 +156,7 @@
         [self.enrollmentSetupTitleLabel setText:@"Set Up Voice Verification"];
         [self.enrollmentSetupSubtitleLabel setText:@"This lets you log in by verifying your voice"];
     }
-    // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning {

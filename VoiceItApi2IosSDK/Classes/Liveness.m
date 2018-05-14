@@ -21,6 +21,21 @@
     self.messageLabel = mL;
     self.livenessSuccess = livenessPassed;
     self.livenessFailed = livenessFailed;
+    
+    [self resetVariables];
+    // Initialize the face detector.
+    NSDictionary *options = @{
+                              GMVDetectorFaceMinSize : @(0.3),
+                              GMVDetectorFaceTrackingEnabled : @(YES),
+                              GMVDetectorFaceClassificationType : @(GMVDetectorFaceClassificationAll),
+                              GMVDetectorFaceLandmarkType : @(GMVDetectorFaceLandmarkAll),
+                              GMVDetectorFaceMode : @(GMVDetectorFaceAccurateMode)
+                              };
+    self.faceDetector = [GMVDetector detectorOfType:GMVDetectorTypeFace options:options];
+    return self;
+}
+
+-(void)resetVariables{
     self.continueRunning = YES;
     self.successfulChallengesCounter = 0;
     self.currentChallenge = -1;
@@ -31,20 +46,10 @@
     self.blinkState = -1;
     self.failCounter = 0;
     self.livenessChallengeIsHappening = NO;
-    
     // Setup challenge array
     [self setupChallengeArray];
-    // Initialize the face detector.
-    NSDictionary *options = @{
-                              GMVDetectorFaceMinSize : @(0.3),
-                              GMVDetectorFaceTrackingEnabled : @(YES),
-                              GMVDetectorFaceClassificationType : @(GMVDetectorFaceClassificationAll),
-                              GMVDetectorFaceLandmarkType : @(GMVDetectorFaceLandmarkAll),
-                              GMVDetectorFaceMode : @(GMVDetectorFaceAccurateMode)
-                              };
-    self.faceDetector = [GMVDetector detectorOfType:GMVDetectorTypeFace options:options];
     [self setupLivenessCircles];
-    return self;
+    NSLog(@"ALL LIVENESS VARIABLES ARE RESET");
 }
 
 -(void)saveImageData:(UIImage *)image{
@@ -214,10 +219,8 @@
 -(void)doSmileDetection:(GMVFaceFeature *)face image:(UIImage *) image {
     if(face.hasSmilingProbability){
         if(face.smilingProbability > 0.85){
-            NSLog(@"\nSMILING\n");
             self.smileCounter++;
         } else {
-            NSLog(@"NOT SMILING\n");
             self.smileCounter = -1;
         }
     }
@@ -252,7 +255,7 @@
                 }
             }
         }
-        if(face.leftEyeOpenProbability < 0.3 && face.rightEyeOpenProbability < 0.3){
+        if(face.leftEyeOpenProbability < 0.5 && face.rightEyeOpenProbability < 0.5){
             if(self.blinkState == 0) { self.blinkState = 1; }
         }
     }

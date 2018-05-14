@@ -9,12 +9,15 @@
 
 @implementation Styles
 static NSMutableDictionary *styles;
+
 +(NSMutableDictionary *)get{
     return styles;
 }
+
 +(void)set:(NSMutableDictionary*)styleSettings{
     styles = styleSettings;
 }
+
 +(NSString *)getMainColor{
     NSString * mainColor = [styles objectForKey:@"kThemeColor"];
     if (mainColor == nil) {
@@ -22,6 +25,7 @@ static NSMutableDictionary *styles;
     }
     return mainColor;
 }
+
 +(NSString *)getIconColor{
     NSString * iconColor = [styles objectForKey:@"kIconStyle"];
     if (iconColor == nil) {
@@ -43,6 +47,7 @@ static NSMutableDictionary *styles;
 +(UIColor *)getIconUIColor{
     return [Utilities uiColorFromHexString:[Styles getIconColor]];
 }
+
 +(CGColorRef)getMainCGColor{
     return [Utilities cgColorFromHexString:[Styles getMainColor]];
 }

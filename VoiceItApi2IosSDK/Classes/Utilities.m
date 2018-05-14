@@ -95,5 +95,33 @@
     return imageData;
 }
 
++(NSString *)pathForTemporaryFileWithSuffix:(NSString *)suffix
+{
+    NSString *  result;
+    CFUUIDRef   uuid;
+    CFStringRef uuidStr;
+    
+    uuid = CFUUIDCreate(NULL);
+    assert(uuid != NULL);
+    
+    uuidStr = CFUUIDCreateString(NULL, uuid);
+    assert(uuidStr != NULL);
+    
+    result = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", uuidStr, suffix]];
+    assert(result != nil);
+    
+    CFRelease(uuidStr);
+    CFRelease(uuid);
+    
+    return result;
+}
+
++(void)deleteFile:(NSString *)filePath{
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        [[NSFileManager defaultManager] removeItemAtPath:filePath
+                                                   error:nil];
+    }
+}
 
 @end

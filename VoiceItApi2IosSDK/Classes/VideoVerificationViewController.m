@@ -34,6 +34,14 @@
     [self startDelayedRecording:0.4];
 }
 
+-(void)startDelayedLiveness:(NSTimeInterval)delayTime{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayTime * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        if(self.continueRunning){
+            [self.livenessDetector doLivenessDetection];
+        }
+    });
+}
+
 -(void)startDelayedRecording:(NSTimeInterval)delayTime{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayTime * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if(self.continueRunning){
@@ -50,12 +58,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.currentChallenge = -1;
-    self.okResponseCodes = [[NSMutableArray alloc] initWithObjects:@"FNFD",  nil];
+    self.okResponseCodes = [[NSMutableArray alloc] initWithObjects:@"FNFD", @"SSTQ", @"SSTL",  nil];
     self.myVoiceIt = (VoiceItAPITwo *) [self voiceItMaster];
     // Initialize Boolean and All
     self.lookingIntoCam = NO;
     self.continueRunning = YES;
     self.imageNotSaved = YES;
+    self.verificationStarted = NO;
     self.lookingIntoCamCounter = 0;
     self.failCounter = 0;
     
@@ -231,7 +240,7 @@
     [metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     
     // Setup Little Camera Circle and Positions
-    CALayer *rootLayer = [[self verificationBox] layer];
+    self.rootLayer = [[self verificationBox] layer];
     self.backgroundWidthHeight = (CGFloat) [self verificationBox].frame.size.height  * 0.50;
     CGFloat cameraViewWidthHeight = (CGFloat) [self verificationBox].frame.size.height  * 0.48;
     self.circleWidth = (self.backgroundWidthHeight - cameraViewWidthHeight) / 2;
@@ -271,9 +280,9 @@
     self.faceRectangleLayer.opacity = 0.7;
     [self.faceRectangleLayer setHidden:YES];
     
-    [rootLayer addSublayer:self.cameraBorderLayer];
+    [self.rootLayer addSublayer:self.cameraBorderLayer];
     if(self.doLivenessDetection){
-        self.livenessDetector = [[Liveness alloc] init:self cCP:self.cameraCenterPoint bgWH:self.backgroundWidthHeight cW:self.circleWidth rL:rootLayer mL:self.messageLabel livenessPassed:^(NSData * imageData){
+        self.livenessDetector = [[Liveness alloc] init:self cCP:self.cameraCenterPoint bgWH:self.backgroundWidthHeight cW:self.circleWidth rL: self.rootLayer mL:self.messageLabel livenessPassed:^(NSData * imageData){
             self.finalCapturedPhotoData = imageData;
             [self startVerificationProcess];
         } livenessFailed:^{
@@ -283,8 +292,8 @@
         }];
         
     }
-    [rootLayer addSublayer:self.progressCircle];
-    [rootLayer addSublayer:self.previewLayer];
+    [self.rootLayer addSublayer:self.progressCircle];
+    [self.rootLayer addSublayer:self.previewLayer];
     [self.previewLayer addSublayer:self.faceRectangleLayer];
     [self.captureSession commitConfiguration];
     [self.captureSession startRunning];
@@ -320,18 +329,9 @@
         NSLog(@"%@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
     }
     
-    // Unique recording URL
-    NSString *fileName = @"OriginalFile"; // Changed it So It Keeps Replacing File
-    self.audioPath = [NSTemporaryDirectory()
-                  stringByAppendingPathComponent:[NSString
-                                                  stringWithFormat:@"%@.wav", fileName]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:self.audioPath])
-    {
-        [[NSFileManager defaultManager] removeItemAtPath:self.audioPath
-                                                   error:nil];
-    }
-    
+    self.audioPath = [Utilities pathForTemporaryFileWithSuffix:@"wav"];
     NSURL *url = [NSURL fileURLWithPath:self.audioPath];
+    
     err = nil;
     self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:url settings:[Utilities getRecordingSettings] error:&err];
     if(!self.audioRecorder){
@@ -365,8 +365,9 @@
     }
     
     if(faceFound) {
-        if (self.lookingIntoCamCounter > MAX_TIME_TO_WAIT_TILL_FACE_FOUND && !self.lookingIntoCam) {
+        if (self.lookingIntoCamCounter > MAX_TIME_TO_WAIT_TILL_FACE_FOUND && !self.lookingIntoCam && !self.verificationStarted) {
             self.lookingIntoCam = YES;
+            self.verificationStarted = YES;
             if(self.doLivenessDetection){
                 [self.livenessDetector doLivenessDetection];
             } else {
@@ -440,18 +441,23 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 #pragma mark - AVAudioRecorderDelegate Methods
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag{
+    if(!self.continueRunning){
+        return;
+    }
     NSLog(@"AUDIO RECORDED FINISHED SUCCESS = %d", flag);
     [self setAudioSessionInactive];
     [self stopRecording];
     [self showLoading];
     [self.myVoiceIt videoVerification:self.userToVerifyUserId contentLanguage: self.contentLanguage imageData:self.finalCapturedPhotoData audioPath:self.audioPath callback:^(NSString * jsonResponse){
+            [Utilities deleteFile:self.audioPath];
             self.imageNotSaved = YES;
             [self removeLoading];
             NSLog(@"Video Verification JSON Response : %@", jsonResponse);
             NSDictionary *jsonObj = [Utilities getJSONObject:jsonResponse];
             NSLog(@"Response Code is %@ and message is : %@", [jsonObj objectForKey:@"responseCode"], [jsonObj objectForKey:@"message"]);
             NSString * responseCode = [jsonObj objectForKey:@"responseCode"];
-            
+//            NSString * responseCode = @"FNFD";
+        
             if([responseCode isEqualToString:@"SUCC"]){
                 [self setMessage:[ResponseManager getMessage:@"SUCCESS"]];
                 float faceConfidence = [[jsonObj objectForKey:@"faceConfidence"] floatValue];
@@ -461,6 +467,17 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                         [self userVerificationSuccessful](faceConfidence, voiceConfidence, jsonResponse);
                     }];
                 });
+            }
+        
+            else if([responseCode isEqualToString:@"FNFD"]){
+                [self setMessage:[ResponseManager getMessage: responseCode]];
+                if(self.doLivenessDetection){
+                    [self.livenessDetector resetVariables];
+                    [self startDelayedLiveness:3.0];
+                } else {
+                    [self startDelayedRecording:3.0];
+                }
+                
             } else {
                 if(![self.okResponseCodes containsObject:responseCode]){
                     self.failCounter += 1;

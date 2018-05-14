@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
-#define MAX_TIME_TO_WAIT_TILL_FACE_FOUND 10
+#define MAX_TIME_TO_WAIT_TILL_FACE_FOUND 5
 
 @interface Utilities : NSObject
 +(UIColor *)getGreenColor;
@@ -20,5 +20,6 @@
 +(NSData *)imageFromVideo:(NSURL *)videoURL atTime:(NSTimeInterval)time;
 +(NSDictionary *)getRecordingSettings;
 +(UIStoryboard *)getVoiceItStoryBoard;
-
++(NSString *)pathForTemporaryFileWithSuffix:(NSString *)suffix;
++(void)deleteFile:(NSString *)filePath;
 @end

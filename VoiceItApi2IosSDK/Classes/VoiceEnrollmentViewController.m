@@ -17,7 +17,7 @@
 -(void)cancelClicked{
     [self setAudioSessionInactive];
     self.continueRunning = NO;
-    [_myVoiceIt deleteAllUserEnrollments:_userToEnrollUserId callback:^(NSString * deleteEnrollmentsJSONResponse){
+    [self.myVoiceIt deleteAllUserEnrollments:_userToEnrollUserId callback:^(NSString * deleteEnrollmentsJSONResponse){
         [[self navigationController] dismissViewControllerAnimated:YES completion:^{
             [[self myNavController] userEnrollmentsCancelled];
         }];
@@ -100,18 +100,9 @@
     }
     err = nil;
     
-    // Unique recording URL
-    NSString *fileName = @"OriginalFile"; // Changed it So It Keeps Replacing File
-    self.audioPath = [NSTemporaryDirectory()
-                      stringByAppendingPathComponent:[NSString
-                                                      stringWithFormat:@"%@.wav", fileName]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:self.audioPath])
-    {
-        [[NSFileManager defaultManager] removeItemAtPath:self.audioPath
-                                                   error:nil];
-    }
-    
+    self.audioPath = [Utilities pathForTemporaryFileWithSuffix:@"wav"];
     NSURL *url = [NSURL fileURLWithPath:self.audioPath];
+    
     err = nil;
     self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:url settings:[Utilities getRecordingSettings] error:&err];
     if(!self.audioRecorder){
@@ -133,20 +124,15 @@
     [self.myVoiceIt getAllEnrollmentsForUser:self.userToEnrollUserId callback:^(NSString * getEnrollmentsJSONResponse){
         NSDictionary *getEnrollmentsJSONObj = [Utilities getJSONObject:getEnrollmentsJSONResponse];
         int enrollmentCount = [[getEnrollmentsJSONObj objectForKey: @"count"] intValue];
-        NSLog(@"Enrollment Count From Server is %d", enrollmentCount);
-        if(enrollmentCount == 0){
-            [self startDelayedRecording:0.0];
-        } else {
-            [self.myVoiceIt deleteAllUserEnrollments:self.userToEnrollUserId callback:^(NSString * deleteEnrollmentsJSONResponse){
+        NSLog(@"Voice Enrollment Count From Server is %d", enrollmentCount);
+        [self.myVoiceIt deleteAllUserEnrollments:self.userToEnrollUserId callback:^(NSString * deleteEnrollmentsJSONResponse){
+                NSLog(@"DELETING ENROLLMENTS IN THE BEGINNING %@",deleteEnrollmentsJSONResponse);
                 [self startDelayedRecording:0.0];
-            }];
-        }
+        }];
     }];
-    
 }
 
 -(void)makeLabelFlyAway :(void (^)(void))flewAway {
-    // TODO: Trying out New Label Animation Code
     dispatch_async(dispatch_get_main_queue(), ^{
         CGFloat flyAwayTime = 0.4;
         __block CGFloat currentX = [self.messageLabel center].x;
@@ -159,7 +145,6 @@
 }
 
 -(void)makeLabelFlyIn:(NSString *)message {
-    // TODO: Trying out New Label Animation Code
     CGFloat flyInTime = 0.8;
     dispatch_async(dispatch_get_main_queue(), ^{
         __block CGFloat currentX = [self.messageLabel center].x;
@@ -205,11 +190,14 @@
 }
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag{
-    NSLog(@"AUDIO RECORDED FINISHED SUCCESS = %d", flag);
+    if(!self.continueRunning){
+        return;
+    }
     [self setAudioSessionInactive];
     [self recordingStopped];
     [self showLoading];
     [self.myVoiceIt createVoiceEnrollment:self.userToEnrollUserId contentLanguage:self.contentLanguage audioPath:self.audioPath callback:^(NSString * jsonResponse){
+        [Utilities deleteFile:self.audioPath];
         [self removeLoading];
         NSLog(@"Voice Enrollment JSON Response : %@", jsonResponse);
         NSDictionary *jsonObj = [Utilities getJSONObject:jsonResponse];

@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import  "SpinningView.h"
-#import "EnrollViewController.h"
-#import "FaceEnrollmentViewController.h"
-#import "VoiceEnrollmentViewController.h"
-#import "Utilities.h"
 #import <AVFoundation/AVFoundation.h>
-#import "MainNavigationController.h"
+
+#import "SpinningView.h"
+#import "Utilities.h"
 #import "Styles.h"
+
+#import "MainNavigationController.h"
+#import "VoiceEnrollmentViewController.h"
+#import "FaceEnrollmentViewController.h"
+#import "EnrollViewController.h"
 
 @interface EnrollSetupViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *enrollmentSetupTitleLabel;

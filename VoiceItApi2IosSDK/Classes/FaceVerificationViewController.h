@@ -21,8 +21,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet SpinningView *progressView;
 @property  CGPoint cameraCenterPoint;
+@property CAShapeLayer * progressCircle;
 @property CALayer * cameraBorderLayer;
 @property CALayer * faceRectangleLayer;
+@property CALayer *rootLayer;
 
 #pragma mark -  Camera Related Stuff
 @property  AVCaptureSession * captureSession;
@@ -38,6 +40,8 @@
 @property BOOL continueRunning;
 @property BOOL enoughRecordingTimePassed;
 @property BOOL doLivenessDetection;
+@property BOOL verificationStarted;
+@property BOOL isReadyToWrite;
 
 #pragma mark -  Counters to keep track of stuff
 @property int lookingIntoCamCounter;

@@ -29,15 +29,18 @@ A fully comprehensive SDK that gives you access to VoiceIt's API 2.0 featuring V
       * [Get All Enrollments for User](#get-all-enrollments-for-user)
       * [Delete Enrollment for User](#delete-enrollment-for-user)
       * [Create Voice Enrollment](#create-voice-enrollment)
+      * [Create Face Enrollment](#create-face-enrollment)
       * [Create Video Enrollment](#create-video-enrollment)
       * [Encapsulated Voice Enrollment](#encapsulated-voice-enrollment)
+      * [Encapsulated Face Enrollment](#encapsulated-face-enrollment)
       * [Encapsulated Video Enrollment](#encapsulated-video-enrollment)
   * [Verification API Calls](#verification-api-calls)
       * [Voice Verification](#voice-verification)
+      * [Face Verification](#face-verification)
       * [Video Verification](#video-verification)
-      * [Encapsulated Video Verification](#encapsulated-video-verification)
-      * [Encapsulated Face Verification](#encapsulated-face-verification)
       * [Encapsulated Voice Verification](#encapsulated-voice-verification)
+      * [Encapsulated Face Verification](#encapsulated-face-verification)
+      * [Encapsulated Video Verification](#encapsulated-video-verification)
   * [Identification API Calls](#identification-api-calls)
       * [Voice Identification](#voice-identification)
       * [Video Identification](#video-identification)
@@ -369,7 +372,7 @@ myVoiceIt?.deleteEnrollment(forUser: "USER_ID_HERE", enrollmentId: "ENROLLMENT_I
 Create voice enrollment for user with given userId(begins with 'usr_') , contentLanguage('en-US','es-ES' etc.) and audio file.
 ##### *Swift*
 ```swift
-myVoiceIt?.createVoiceEnrollment("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", audioFilePath: "FILE_PATH_TO_VOICE_ENROLLMENT_HERE", callback: {
+myVoiceIt?.createVoiceEnrollment("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", audioPath: "FILE_PATH_TO_VOICE_ENROLLMENT_HERE", callback: {
     jsonResponse in
     print("JSON RESPONSE: \(jsonResponse!)")
 })
@@ -377,7 +380,25 @@ myVoiceIt?.createVoiceEnrollment("USER_ID_HERE", contentLanguage: "CONTENT_LANGU
 
 ##### *Objective-C*
 ```objc
-[_myVoiceIt createVoiceEnrollment:@"USER_ID_HERE" contentLanguage: @"CONTENT_LANGUAGE_HERE" audioFilePath: @"FILE_PATH_TO_VOICE_ENROLLMENT_HERE" callback:^(NSString * jsonResponse){
+[_myVoiceIt createVoiceEnrollment:@"USER_ID_HERE" contentLanguage: @"CONTENT_LANGUAGE_HERE" audioPath: @"FILE_PATH_TO_VOICE_ENROLLMENT_HERE" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
+} ];
+```
+
+#### Create Face Enrollment
+
+Create face enrollment for user with given userId(begins with 'usr_') and video file.
+##### *Swift*
+```swift
+myVoiceIt?.createFaceEnrollment("USER_ID_HERE", videoPath: "FILE_PATH_TO_FACE_ENROLLMENT_HERE", callback: {
+    jsonResponse in
+    print("JSON RESPONSE: \(jsonResponse!)")
+})
+```
+
+##### *Objective-C*
+```objc
+[_myVoiceIt createVideoEnrollment:@"USER_ID_HERE" videoPath: @"FILE_PATH_TO_FACE_ENROLLMENT_HERE" callback:^(NSString * jsonResponse){
     NSLog(@"JSONResponse: %@", jsonResponse);
 } ];
 ```
@@ -422,6 +443,28 @@ NSLog(@"User Enrollments Passed");
 }];
 ```
 
+#### Encapsulated Face Enrollment
+
+Create a face enrollment for user with the given userId(begins with 'usr_'). Note: Immediately upon calling this method it displays the user and enrollment view controller that completely takes care of enrolling the user's face, including the UI and then provides relevant callbacks for whether the user cancelled their enrollment or successfully completed it.
+
+##### *Swift*
+```swift
+myVoiceIt?.encapsulatedFaceEnrollUser("USER_ID_HERE", userEnrollmentsCancelled: {
+  print("User Enrollment Cancelled")
+}, userEnrollmentsPassed: {
+  print("User Enrollments Passed")
+})
+```
+
+##### *Objective-C*
+```objc
+[_myVoiceIt encapsulatedFaceEnrollUser:@"USER_ID_HERE" userEnrollmentsCancelled:^{
+      NSLog(@"User Enrollments Cancelled");
+  } userEnrollmentsPassed:^{
+      NSLog(@"User Enrollments Passed");
+  }];
+```
+
 #### Encapsulated Video Enrollment
 
 Create three video enrollments for user with the given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.) and a given phrase such as "my face and voice identify me". Note: Immediately upon calling this method it displays the user and enrollment view controller that completely takes care of the three enrollments, including the UI and then provides relevant callbacks for whether the user cancelled their enrollments or successfully completed them.
@@ -449,7 +492,7 @@ myVoiceIt?.encapsulatedVideoEnrollUser("USER_ID_HERE", contentLanguage: "CONTENT
 Verify user with the given userId(begins with 'usr_'), contentLanguage('en-US','es-ES' etc.) and audio file.
 ##### *Swift*
 ```swift
-myVoiceIt?.voiceVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", audioFilePath: "FILE_PATH_TO_VOICE_FOR_VERIFICATION_HERE", callback: {
+myVoiceIt?.voiceVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", audioPath: "FILE_PATH_TO_VOICE_FOR_VERIFICATION_HERE", callback: {
     jsonResponse in
     print("JSON RESPONSE: \(jsonResponse!)")
 })
@@ -458,6 +501,25 @@ myVoiceIt?.voiceVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_
 ##### *Objective-C*
 ```objc
 [_myVoiceIt voiceVerification:@"USER_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" audioPath: @"FILE_PATH_TO_VOICE_FOR_VERIFICATION_HERE" callback:^(NSString * jsonResponse){
+    NSLog(@"JSONResponse: %@", jsonResponse);
+} ];
+```
+
+#### Face Verification
+
+Verify user's face with given userId(begins with 'usr_') and video file.
+
+##### *Swift*
+```swift
+myVoiceIt?.faceVerification("USER_ID_HERE", videoPath: "FILE_PATH_TO_VIDEO_FOR_FACE_VERIFICATION_HERE", callback: {
+    jsonResponse in
+    print("JSON RESPONSE: \(jsonResponse!)")
+})
+```
+
+##### *Objective-C*
+```objc
+[_myVoiceIt faceVerification:@"USER_ID_HERE" videoPath: @"FILE_PATH_TO_VIDEO_FOR_FACE_VERIFICATION_HERE" callback:^(NSString * jsonResponse){
     NSLog(@"JSONResponse: %@", jsonResponse);
 } ];
 ```
@@ -481,29 +543,29 @@ myVoiceIt?.videoVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_
 } ];
 ```
 
-#### Encapsulated Video Verification
+#### Encapsulated Voice Verification
 
-Verify user with given userId(begins with 'usr_') , contentLanguage('en-US','es-ES' etc.) and a parameter to enable or disable liveness detection. Note: Immediately upon calling this method it displays a view controller with a camera view that verifies the user and provides relevant callbacks for whether the verification was successful or not, and associated voice and face confidences
+Verify user with given userId(begins with 'usr_'). Note: Immediately upon calling this method it displays a view controller with a view that records and verifies the user's voice and provides relevant callbacks for whether the verification was successful or not, and associated voice confidence
 
 ##### *Swift*
 ```swift
-myVoiceIt?.encapsulatedVideoVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", voicePrintPhrase: "my face and voice identify me", doLivenessDetection:true, userVerificationCancelled: {
-      print("User Cancelled Verification");
-    }, userVerificationSuccessful: {(faceConfidence, voiceConfidence, jsonResponse) in
-      print("User Verication Successful, voiceConfidence is \(voiceConfidence), faceConfidence is \(faceConfidence)")
-}, userVerificationFailed: { (faceConfidence, voiceConfidence, jsonResponse) in
-      print("User Verication Failed, voiceConfidence is \(voiceConfidence), faceConfidence is \(faceConfidence)")
-    })
+myVoiceIt?.encapsulatedVoiceVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", voicePrintPhrase: "my face and voice identify me", userVerificationCancelled: {
+print("User Cancelled Verification");
+}, userVerificationSuccessful: {(voiceConfidence, jsonResponse) in
+print("User Verication Successful, voiceConfidence is \(voiceConfidence)")
+}, userVerificationFailed: { (voiceConfidence, jsonResponse) in
+print("User Verication Failed, voiceConfidence is \(voiceConfidence)")
+})
 ```
 
 ##### *Objective-C*
 ```objc
-[_myVoiceIt encapsulatedVideoVerification:@"USER_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" voicePrintPhrase:@"my face and voice identify me" doLivenessDetection:YES userVerificationCancelled:^{
-     NSLog(@"User Cancelled Verification");
-} userVerificationSuccessful:^(float faceConfidence ,float voiceConfidence, NSString * jsonResponse){
-    NSLog(@"User Verication Successful, voiceConfidence : %g , faceConfidence : %g",voiceConfidence, faceConfidence);
+[_myVoiceIt encapsulatedVoiceVerification:@"USER_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" voicePrintPhrase:@"my face and voice identify me" userVerificationCancelled:^{
+NSLog(@"User Cancelled Verification");
+} userVerificationSuccessful:^(float voiceConfidence, NSString * jsonResponse){
+NSLog(@"User Verication Successful, voiceConfidence : %g",voiceConfidence);
 } userVerificationFailed:^(float faceConfidence ,float voiceConfidence, NSString * jsonResponse){
-    NSLog(@"User Verication Failed, voiceConfidence : %g , faceConfidence : %g",voiceConfidence, faceConfidence);
+NSLog(@"User Verication Failed, voiceConfidence : %g",voiceConfidence);
 }];
 ```
 
@@ -533,51 +595,68 @@ NSLog(@"User Verication Failed, faceConfidence : %g",faceConfidence);
 }];
 ```
 
-#### Encapsulated Voice Verification
 
-Verify user with given userId(begins with 'usr_'). Note: Immediately upon calling this method it displays a view controller with a view that records and verifies the user's voice and provides relevant callbacks for whether the verification was successful or not, and associated voice confidence
+#### Encapsulated Video Verification
+
+Verify user with given userId(begins with 'usr_') , contentLanguage('en-US','es-ES' etc.) and a parameter to enable or disable liveness detection. Note: Immediately upon calling this method it displays a view controller with a camera view that verifies the user and provides relevant callbacks for whether the verification was successful or not, and associated voice and face confidences
 
 ##### *Swift*
 ```swift
-myVoiceIt?.encapsulatedVoiceVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", voicePrintPhrase: "my face and voice identify me", userVerificationCancelled: {
-print("User Cancelled Verification");
-}, userVerificationSuccessful: {(voiceConfidence, jsonResponse) in
-print("User Verication Successful, voiceConfidence is \(voiceConfidence)")
-}, userVerificationFailed: { (voiceConfidence, jsonResponse) in
-print("User Verication Failed, voiceConfidence is \(voiceConfidence)")
-})
+myVoiceIt?.encapsulatedVideoVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", voicePrintPhrase: "my face and voice identify me", doLivenessDetection:true, userVerificationCancelled: {
+      print("User Cancelled Verification");
+    }, userVerificationSuccessful: {(faceConfidence, voiceConfidence, jsonResponse) in
+      print("User Verication Successful, voiceConfidence is \(voiceConfidence), faceConfidence is \(faceConfidence)")
+}, userVerificationFailed: { (faceConfidence, voiceConfidence, jsonResponse) in
+      print("User Verication Failed, voiceConfidence is \(voiceConfidence), faceConfidence is \(faceConfidence)")
+    })
 ```
 
 ##### *Objective-C*
 ```objc
-[_myVoiceIt encapsulatedVoiceVerification:@"USER_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" voicePrintPhrase:@"my face and voice identify me" userVerificationCancelled:^{
-NSLog(@"User Cancelled Verification");
-} userVerificationSuccessful:^(float voiceConfidence, NSString * jsonResponse){
-NSLog(@"User Verication Successful, voiceConfidence : %g",voiceConfidence);
+[_myVoiceIt encapsulatedVideoVerification:@"USER_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" voicePrintPhrase:@"my face and voice identify me" doLivenessDetection:YES userVerificationCancelled:^{
+     NSLog(@"User Cancelled Verification");
+} userVerificationSuccessful:^(float faceConfidence ,float voiceConfidence, NSString * jsonResponse){
+    NSLog(@"User Verication Successful, voiceConfidence : %g , faceConfidence : %g",voiceConfidence, faceConfidence);
 } userVerificationFailed:^(float faceConfidence ,float voiceConfidence, NSString * jsonResponse){
-NSLog(@"User Verication Failed, voiceConfidence : %g",voiceConfidence);
+    NSLog(@"User Verication Failed, voiceConfidence : %g , faceConfidence : %g",voiceConfidence, faceConfidence);
 }];
 ```
 
 #### Voice Identification
 
 Identify user inside group with the given groupId(begins with 'grp_') and contentLanguage('en-US','es-ES' etc.). Note: Immediately upon calling this method it records the user saying their VoicePrint phrase for 5 seconds calling the recordingFinished callback first, then it sends the recording to be identified and returns the found userId and confidence in the callback
+
 ##### *Swift*
 ```swift
-myVoiceIt?.voiceIdentification("GROUP_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", recordingFinished: {
-    print("Voice Identification Recording Finished, now waiting for API Call to respond")
-}, callback: {
-    jsonResponse in
-    print("JSON RESPONSE: \(jsonResponse!)")
+myVoiceIt?.voiceIdentification("GROUP_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", audioPath: "FILE_PATH_TO_VOICE_FOR_IDENTIFICATION_HERE", callback: {
+jsonResponse in
+print("JSON RESPONSE: \(jsonResponse!)")
 })
 ```
 
 ##### *Objective-C*
 ```objc
-[_myVoiceIt voiceIdentification:@"GROUP_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" recordingFinished:^(void){
-    NSLog(@"Voice Identification Recording Finished, now waiting for API Call to respond");
-} callback:^(NSString * jsonResponse){
-    NSLog(@"JSONResponse: %@", jsonResponse);
+[_myVoiceIt voiceIdentification:@"GROUP_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" audioPath: @"FILE_PATH_TO_VOICE_FOR_IDENTIFICATION_HERE" callback:^(NSString * jsonResponse){
+NSLog(@"JSONResponse: %@", jsonResponse);
+} ];
+```
+
+#### Video Identification
+
+Identify user inside group with the given groupId(begins with 'grp_') and contentLanguage('en-US','es-ES' etc.) and videoFile.
+
+##### *Swift*
+```swift
+myVoiceIt?.videoIdentification("GROUP_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", videoPath: "FILE_PATH_TO_VIDEO_FOR_IDENTIFICATION_HERE", callback: {
+jsonResponse in
+print("JSON RESPONSE: \(jsonResponse!)")
+})
+```
+
+##### *Objective-C*
+```objc
+[_myVoiceIt videoIdentification:@"GROUP_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" videoPath: @"FILE_PATH_TO_VIDEO_FOR_IDENTIFICATION_HERE" callback:^(NSString * jsonResponse){
+NSLog(@"JSONResponse: %@", jsonResponse);
 } ];
 ```
 

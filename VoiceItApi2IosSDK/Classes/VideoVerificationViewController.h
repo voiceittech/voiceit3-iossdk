@@ -28,6 +28,7 @@
 @property CAShapeLayer * progressCircle;
 @property CALayer * cameraBorderLayer;
 @property CALayer * faceRectangleLayer;
+@property CALayer *rootLayer;
 
 #pragma mark -  Camera Related Stuff
 @property  AVCaptureSession * captureSession;
@@ -43,6 +44,7 @@
 @property BOOL continueRunning;
 @property BOOL doLivenessDetection;
 @property BOOL imageNotSaved;
+@property BOOL verificationStarted;
 
 #pragma mark -  Counters to keep track of stuff
 @property int lookingIntoCamCounter;

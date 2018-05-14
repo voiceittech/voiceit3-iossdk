@@ -218,16 +218,7 @@
     }
     err = nil;
     
-    // Unique recording URL
-    NSString *fileName = @"OriginalFile"; // Changed it So It Keeps Replacing File
-    self.audioPath = [NSTemporaryDirectory()
-                  stringByAppendingPathComponent:[NSString
-                                                  stringWithFormat:@"%@.wav", fileName]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:self.audioPath])
-    {
-        [[NSFileManager defaultManager] removeItemAtPath:self.audioPath
-                                                   error:nil];
-    }
+    self.audioPath = [Utilities pathForTemporaryFileWithSuffix:@"wav"];
     
     NSURL *url = [NSURL fileURLWithPath:self.audioPath];
     err = nil;
@@ -266,12 +257,12 @@
     }
     
     if(faceFound) {
-        if (self.lookingIntoCamCounter > MAX_TIME_TO_WAIT_TILL_FACE_FOUND && !self.lookingIntoCam && !self.enrollmentStarted) {
-            self.lookingIntoCam = YES;
+        self.lookingIntoCamCounter += 1;
+        self.lookingIntoCam = self.lookingIntoCamCounter > MAX_TIME_TO_WAIT_TILL_FACE_FOUND;
+        if (!self.lookingIntoCam && !self.enrollmentStarted) {
             self.enrollmentStarted = YES;
             [self startEnrollmentProcess];
         }
-        self.lookingIntoCamCounter += 1;
     } else if (!self.enrollmentStarted){
         [self makeLabelFlyIn:[ResponseManager getMessage:@"LOOK_INTO_CAM"]];
         self.lookingIntoCam = NO;
@@ -290,21 +281,14 @@
         NSDictionary *getEnrollmentsJSONObj = [Utilities getJSONObject:getEnrollmentsJSONResponse];
         int enrollmentCount = [[getEnrollmentsJSONObj objectForKey: @"count"] intValue];
         NSLog(@"Enrollment Count From Server is %d", enrollmentCount);
-        if(enrollmentCount == 0){
-            [self makeLabelFlyIn: [ResponseManager getMessage:@"GET_ENROLLED"]];
-            [self startDelayedRecording:2.0];
-        } else {
-            [self.myVoiceIt deleteAllUserEnrollments:self.userToEnrollUserId callback:^(NSString * deleteEnrollmentsJSONResponse){
+        [self.myVoiceIt deleteAllUserEnrollments:self.userToEnrollUserId callback:^(NSString * deleteEnrollmentsJSONResponse){
                 [self makeLabelFlyIn: [ResponseManager getMessage:@"GET_ENROLLED"]];
                 [self startDelayedRecording:2.0];
-            }];
-        }
+        }];
     }];
-    
 }
 
 -(void)makeLabelFlyAway :(void (^)(void))flewAway {
-    // TODO: Trying out New Label Animation Code
     dispatch_async(dispatch_get_main_queue(), ^{
         CGFloat flyAwayTime = 0.4;
         __block CGFloat currentX = [self.messageLabel center].x;
@@ -317,7 +301,6 @@
 }
 
 -(void)makeLabelFlyIn:(NSString *)message {
-    // TODO: Trying out New Label Animation Code
     CGFloat flyInTime = 0.8;
     dispatch_async(dispatch_get_main_queue(), ^{
         __block CGFloat currentX = [self.messageLabel center].x;
@@ -371,6 +354,7 @@
     } else {
         [self showLoading];
         [self.myVoiceIt createVideoEnrollment:self.userToEnrollUserId contentLanguage: self.contentLanguage imageData:self.finalCapturedPhotoData audioPath:self.audioPath callback:^(NSString * jsonResponse){
+            [Utilities deleteFile:self.audioPath];
             [self removeLoading];
             self.imageNotSaved = YES;
             NSLog(@"Video Enrollment JSON Response : %@", jsonResponse);
@@ -416,7 +400,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         return;
     }
     
-    if(self.lookingIntoCamCounter > 5 && self.imageNotSaved){
+    if(self.imageNotSaved){
             [self saveImageData:[GMVUtility sampleBufferTo32RGBA:sampleBuffer]];
     }
     

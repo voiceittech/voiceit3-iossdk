@@ -42,6 +42,7 @@
 @property BOOL continueRunning;
 @property BOOL enoughRecordingTimePassed;
 @property BOOL enrollmentComplete;
+@property BOOL isReadyToWrite;
 
 #pragma mark -  Counters to keep track of stuff
 

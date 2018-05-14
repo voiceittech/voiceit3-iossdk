@@ -10,6 +10,7 @@
 #import "VoiceItAPITwo.h"
 #import "ResponseManager.h"
 #import "SCSiriWaveformView.h"
+#import "Utilities.h"
 
 @interface VoiceVerificationViewController ()
 @property (weak, nonatomic) IBOutlet SCSiriWaveformView *waveformView;
@@ -127,18 +128,8 @@
     {
         NSLog(@"%@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
     }
-    
-    // Unique recording URL
-    NSString *fileName = @"OriginalFile"; // Changed it So It Keeps Replacing File
-    self.audioPath = [NSTemporaryDirectory()
-                  stringByAppendingPathComponent:[NSString
-                                                  stringWithFormat:@"%@.wav", fileName]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:self.audioPath])
-    {
-        [[NSFileManager defaultManager] removeItemAtPath:self.audioPath
-                                                   error:nil];
-    }
-    
+
+    self.audioPath = [Utilities pathForTemporaryFileWithSuffix:@"wav"];
     NSURL *url = [NSURL fileURLWithPath:self.audioPath];
     err = nil;
     self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:url settings:[Utilities getRecordingSettings] error:&err];
@@ -189,10 +180,14 @@
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag{
     NSLog(@"AUDIO RECORDED FINISHED SUCCESS = %d", flag);
+    if(!self.continueRunning){
+        return;
+    }
     [self setAudioSessionInactive];
     [self stopRecording];
     [self showLoading];
     [self.myVoiceIt voiceVerification:_userToVerifyUserId contentLanguage: self.contentLanguage audioPath:self.audioPath callback:^(NSString * jsonResponse){
+        [Utilities deleteFile:self.audioPath];
         [self removeLoading];
         NSLog(@"Video Verification JSON Response : %@", jsonResponse);
         NSDictionary *jsonObj = [Utilities getJSONObject:jsonResponse];

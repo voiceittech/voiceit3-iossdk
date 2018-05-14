@@ -15,6 +15,7 @@
 -(void)processFrame:(CMSampleBufferRef)sampleBuffer;
 -(void)doLivenessDetection;
 -(void)setupLivenessCircles;
+-(void)resetVariables;
 
 @property NSTimer * timer;
 @property int currentChallenge;
