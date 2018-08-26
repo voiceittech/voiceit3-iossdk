@@ -240,7 +240,8 @@
 						TestTargetID = 6003F589195388D20070C39A;
 					};
 					6003F589195388D20070C39A = {
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = VS9YK7ML83;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -586,8 +587,9 @@
 			baseConfigurationReference = FAC46DA00FEA0C639E41311E /* Pods-VoiceItApi2IosSDK_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VS9YK7ML83;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VoiceItApi2IosSDK/VoiceItApi2IosSDK-Prefix.pch";
 				INFOPLIST_FILE = "VoiceItApi2IosSDK/VoiceItApi2IosSDK-Info.plist";
@@ -604,8 +606,9 @@
 			baseConfigurationReference = C644F06EB6C08DB4E94A2DB5 /* Pods-VoiceItApi2IosSDK_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VS9YK7ML83;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VoiceItApi2IosSDK/VoiceItApi2IosSDK-Prefix.pch";
 				INFOPLIST_FILE = "VoiceItApi2IosSDK/VoiceItApi2IosSDK-Info.plist";
