@@ -13,16 +13,22 @@
 #import "EnrollFinishViewController.h"
 #import "EnrollSetupViewController.h"
 #import "EnrollViewController.h"
+#import "FaceEnrollmentViewController.h"
 #import "FaceVerificationViewController.h"
+#import "Liveness.h"
 #import "MainNavigationController.h"
+#import "NSMutableArray+Shuffle.h"
 #import "ResponseManager.h"
+#import "SCSiriWaveformView.h"
 #import "SpinningView.h"
 #import "Styles.h"
 #import "Utilities.h"
-#import "VerificationViewController.h"
+#import "VideoVerificationViewController.h"
+#import "VoiceEnrollmentViewController.h"
 #import "VoiceItApi2IosSDK.h"
 #import "VoiceItAPITwo.h"
 #import "VoiceItLogo.h"
+#import "VoiceVerificationViewController.h"
 
 FOUNDATION_EXPORT double VoiceItApi2IosSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char VoiceItApi2IosSDKVersionString[];

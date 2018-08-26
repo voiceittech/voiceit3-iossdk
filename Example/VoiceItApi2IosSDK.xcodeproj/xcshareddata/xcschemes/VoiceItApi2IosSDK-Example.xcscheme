@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6003F5AD195388D20070C39A"
-               BuildableName = "VoiceItApi2IosSDK_Tests.xctest"
-               BlueprintName = "VoiceItApi2IosSDK_Tests"
+               BlueprintIdentifier = "2192DFF12133306E0078D2C9"
+               BuildableName = "VoiceItApi2IosSDK_Test.xctest"
+               BlueprintName = "VoiceItApi2IosSDK_Test"
                ReferencedContainer = "container:VoiceItApi2IosSDK.xcodeproj">
             </BuildableReference>
          </TestableReference>

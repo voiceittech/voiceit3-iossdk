@@ -74,7 +74,7 @@ class VoiceItApi2IosSDK_Test: VoiceItTest {
         let expectation = XCTestExpectation(description: "Testing Get All Users")
         myVoiceIt?.getAllUsers({
             jsonResponse in
-            VoiceItTest.basicAssert(expectedRC: "SUCC", expectedSC: 200, jsonResponse: jsonResponse!)
+            VoiceItTest.basicAssert(expectedRC: "UNAC", expectedSC: 401, jsonResponse: jsonResponse!)
             expectation.fulfill()
         })
         wait(for: [expectation], timeout: TIMEOUT)
