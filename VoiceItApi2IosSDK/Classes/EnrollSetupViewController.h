@@ -16,7 +16,7 @@
 #import "MainNavigationController.h"
 #import "VoiceEnrollmentViewController.h"
 #import "FaceEnrollmentViewController.h"
-#import "EnrollViewController.h"
+#import "VideoEnrollmentViewController.h"
 
 @interface EnrollSetupViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *enrollmentSetupTitleLabel;

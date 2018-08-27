@@ -121,7 +121,7 @@
 }
 
 -(void)startEnrollmentProcess {
-    [self.myVoiceIt getAllEnrollmentsForUser:self.userToEnrollUserId callback:^(NSString * getEnrollmentsJSONResponse){
+    [self.myVoiceIt getVoiceEnrollments:self.userToEnrollUserId callback:^(NSString * getEnrollmentsJSONResponse){
         NSDictionary *getEnrollmentsJSONObj = [Utilities getJSONObject:getEnrollmentsJSONResponse];
         int enrollmentCount = [[getEnrollmentsJSONObj objectForKey: @"count"] intValue];
         NSLog(@"Voice Enrollment Count From Server is %d", enrollmentCount);

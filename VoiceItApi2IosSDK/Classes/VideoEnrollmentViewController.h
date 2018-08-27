@@ -1,5 +1,5 @@
 //
-//  EnrollViewController.h
+//  VideoEnrollmentViewController.h
 //  Pods-VoiceItApi2IosSDK_Example
 //
 //  Created by Armaan Bindra on 10/1/17.
@@ -15,7 +15,7 @@
 #import "MainNavigationController.h"
 #import "Styles.h"
 
-@interface EnrollViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate,AVCaptureVideoDataOutputSampleBufferDelegate,AVAudioRecorderDelegate>
+@interface VideoEnrollmentViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate,AVCaptureVideoDataOutputSampleBufferDelegate,AVAudioRecorderDelegate>
 
 #pragma mark - Audio Recording Stuff
 @property (nonatomic, strong) AVAudioRecorder * audioRecorder;

@@ -100,7 +100,7 @@
             VoiceEnrollmentViewController * enrollVC = [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"voiceEnrollVC"];
             [[self navigationController] pushViewController:enrollVC animated: YES];
         } else if(self.myNavController.enrollmentType == video){
-            EnrollViewController * enrollVC = [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"enrollVC"];
+            VideoEnrollmentViewController * enrollVC = [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"videoEnrollVC"];
             [[self navigationController] pushViewController:enrollVC animated: YES];
         }
     });

@@ -12,7 +12,7 @@
 
 #import "EnrollFinishViewController.h"
 #import "EnrollSetupViewController.h"
-#import "EnrollViewController.h"
+#import "VideoEnrollmentViewController.h"
 #import "FaceEnrollmentViewController.h"
 #import "FaceVerificationViewController.h"
 #import "Liveness.h"

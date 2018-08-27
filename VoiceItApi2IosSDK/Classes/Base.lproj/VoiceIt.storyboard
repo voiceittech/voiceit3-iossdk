@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Enroll View Controller-->
+        <!--Video Enrollment View Controller-->
         <scene sceneID="apu-7t-KKW">
             <objects>
-                <viewController storyboardIdentifier="enrollVC" id="r6Q-v3-siJ" customClass="EnrollViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="videoEnrollVC" id="r6Q-v3-siJ" customClass="VideoEnrollmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X4f-7c-Dsh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,17 +1,17 @@
 //
-//  EnrollViewController.m
+//  VideoEnrollmentViewController.m
 //  Pods-VoiceItApi2IosSDK_Example
 //
 //  Created by Armaan Bindra on 10/1/17.
 //
 
-#import "EnrollViewController.h"
+#import "VideoEnrollmentViewController.h"
 #import "Liveness.h"
 #import "Utilities.h"
-@interface EnrollViewController ()
+@interface VideoEnrollmentViewController ()
 @end
 
-@implementation EnrollViewController
+@implementation VideoEnrollmentViewController
 
 #pragma mark - Life Cycle Methods
     
@@ -222,7 +222,7 @@
 }
     
 -(void)startEnrollmentProcess {
-    [self.myVoiceIt getAllEnrollmentsForUser:self.userToEnrollUserId callback:^(NSString * getEnrollmentsJSONResponse){
+    [self.myVoiceIt getVideoEnrollments:self.userToEnrollUserId callback:^(NSString * getEnrollmentsJSONResponse){
         NSDictionary *getEnrollmentsJSONObj = [Utilities getJSONObject:getEnrollmentsJSONResponse];
         int enrollmentCount = [[getEnrollmentsJSONObj objectForKey: @"count"] intValue];
         NSLog(@"Enrollment Count From Server is %d", enrollmentCount);

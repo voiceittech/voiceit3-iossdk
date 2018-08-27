@@ -18,7 +18,6 @@ class VoiceItTest : XCTestCase {
     var started = false
     
     class func basicAssert(expectedRC: String, expectedSC: Int, jsonResponse : String){
-//        print(jsonResponse)
         let ret = TestHelper.decodeSimpleJSON(jsonString: jsonResponse)!
         XCTAssertEqual(ret.responseCode, expectedRC)
         XCTAssertEqual(ret.status, expectedSC)
@@ -36,5 +35,35 @@ class VoiceItTest : XCTestCase {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateInitialViewController()
         self.myVoiceIt  = VoiceItAPITwo(viewController, apiKey: VI_API_KEY, apiToken: VI_API_TOKEN)
+    }
+    
+    func setupVoiceEnrollment(userId: String, fileName : String, callback : @escaping (String) -> Void){
+        TestHelper.downloadS3File(fileName: fileName, callback: {
+            voiceEnrollmentPath in
+            self.myVoiceIt?.createVoiceEnrollment(userId, contentLanguage: "en-US", audioPath: voiceEnrollmentPath, phrase: "never forget tomorrow is a new day", callback: {
+                jsonResponse in
+                callback(jsonResponse!)
+            })
+        })
+    }
+    
+    func setupFaceEnrollment(userId: String, fileName : String, callback : @escaping (String) -> Void){
+        TestHelper.downloadS3File(fileName: fileName, callback: {
+            faceEnrollmentPath in
+            self.myVoiceIt?.createFaceEnrollment(userId, videoPath: faceEnrollmentPath, callback: {
+                jsonResponse in
+                callback(jsonResponse!)
+            })
+        })
+    }
+    
+    func setupVideoEnrollment(userId: String, fileName : String, callback : @escaping (String) -> Void){
+        TestHelper.downloadS3File(fileName: fileName, callback: {
+            videoEnrollmentPath in
+            self.myVoiceIt?.createVideoEnrollment(userId, contentLanguage: "en-US", videoPath: videoEnrollmentPath, phrase: "never forget tomorrow is a new day", callback: {
+                jsonResponse in
+                callback(jsonResponse!)
+            })
+        })
     }
 }

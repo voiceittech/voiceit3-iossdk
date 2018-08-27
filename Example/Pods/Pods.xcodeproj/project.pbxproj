@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		04C791C948638BCBF4B7B709600927F2 /* VoiceItApi2IosSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4310976550DD05B0AB7DDACDCE52E0 /* VoiceItApi2IosSDK-dummy.m */; };
 		0B59A5713B32FA454AEE45A0023FCB24 /* NSMutableArray+Shuffle.h in Headers */ = {isa = PBXBuildFile; fileRef = 45F73D98DF69909DE310C0135DDAFF8F /* NSMutableArray+Shuffle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		11485366864FE717039342F96AA7D5AF /* EnrollViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD25E8FE295A111BB6CBC90F7592B89 /* EnrollViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11485366864FE717039342F96AA7D5AF /* VideoEnrollmentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD25E8FE295A111BB6CBC90F7592B89 /* VideoEnrollmentViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		146487077DA527FBB3D40C1EB2D72CF5 /* EnrollSetupViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7655860863362744934DDA4BFEFFB647 /* EnrollSetupViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		172C43CA9016D0E1C009A64A45908299 /* EnrollFinishViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71DD29DB3CACD08CA68B6ACFF32CF711 /* EnrollFinishViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		172F907D5E24A09B2224E40112E3CCB2 /* Styles.m in Sources */ = {isa = PBXBuildFile; fileRef = 813D9324DC6890FAD0F6C0A6B66C6964 /* Styles.m */; };
@@ -28,7 +28,7 @@
 		445C7BA580464A991BC3BF84831C3913 /* VoiceItApi2IosSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D03B3DEE117A978AB2B7D2C889EA66D7 /* VoiceItApi2IosSDK.bundle */; };
 		448EA9895A801A4426DC8015770830BA /* SpinningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B998A8307A6632756EA782C9B5CAFE /* SpinningView.m */; };
 		49D4FBF0E875D122BBBFBD62782C5514 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4087F2FEC2D595DD1D647A10E4CF0C32 /* MainNavigationController.m */; };
-		4F11E97CEC8F2597242DEE63C17DDFA0 /* EnrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2439FC473DFBD5014240435259C7FD /* EnrollViewController.m */; };
+		4F11E97CEC8F2597242DEE63C17DDFA0 /* VideoEnrollmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2439FC473DFBD5014240435259C7FD /* VideoEnrollmentViewController.m */; };
 		50A06BE125EE106E3C99D84695D9EAF7 /* EnrollFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C1B37B2BF10A95DAE27343E3E2EADFA /* EnrollFinishViewController.m */; };
 		660D06F4638ECD1013263151348E3436 /* VoiceItAPITwo.h in Headers */ = {isa = PBXBuildFile; fileRef = 0027EFA3BB1446E3134A12A7833E04F1 /* VoiceItAPITwo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F05F17D7EC422E40CAE0670DFF874B3 /* Styles.h in Headers */ = {isa = PBXBuildFile; fileRef = C48CDE128A85683CF5ECC7041524F3B8 /* Styles.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -93,22 +93,22 @@
 		0C1B37B2BF10A95DAE27343E3E2EADFA /* EnrollFinishViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EnrollFinishViewController.m; path = VoiceItApi2IosSDK/Classes/EnrollFinishViewController.m; sourceTree = "<group>"; };
 		0EAB1B565FF8268BC69D799BE741CB1B /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInterchangeUtilities.framework; path = Frameworks/frameworks/GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
 		11EBEFB2AB98B3BE49961A303DD9AB46 /* VoiceItApi2IosSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VoiceItApi2IosSDK-umbrella.h"; sourceTree = "<group>"; };
-		1219530191B54558E812D958A1C024FB /* BCLjoy_100.emd */ = {isa = PBXFileReference; includeInIndex = 1; name = BCLjoy_100.emd; path = FaceDetector/Resources/BCLjoy_100.emd; sourceTree = "<group>"; };
+		1219530191B54558E812D958A1C024FB /* BCLjoy_100.emd */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = BCLjoy_100.emd; path = FaceDetector/Resources/BCLjoy_100.emd; sourceTree = "<group>"; };
 		14B998A8307A6632756EA782C9B5CAFE /* SpinningView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SpinningView.m; path = VoiceItApi2IosSDK/Classes/SpinningView.m; sourceTree = "<group>"; };
-		16567F660EF4F36CD99EF7464D91A4ED /* VoiceItApi2IosSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = VoiceItApi2IosSDK.framework; path = VoiceItApi2IosSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		16567F660EF4F36CD99EF7464D91A4ED /* VoiceItApi2IosSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VoiceItApi2IosSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A744F75808FF304F617D0B740052475 /* MainNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MainNavigationController.h; path = VoiceItApi2IosSDK/Classes/MainNavigationController.h; sourceTree = "<group>"; };
-		1B2439FC473DFBD5014240435259C7FD /* EnrollViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EnrollViewController.m; path = VoiceItApi2IosSDK/Classes/EnrollViewController.m; sourceTree = "<group>"; };
+		1B2439FC473DFBD5014240435259C7FD /* VideoEnrollmentViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = VideoEnrollmentViewController.m; path = VoiceItApi2IosSDK/Classes/VideoEnrollmentViewController.m; sourceTree = "<group>"; };
 		2658DB6382D610197EF5F49BE1E05160 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = Frameworks/frameworks/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 		28A709D613FF4AE28DC2F898CF6312BC /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = Frameworks/frameworks/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
 		2B760CD6EAE19C2297E237B658FAC6FB /* Utilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Utilities.h; path = VoiceItApi2IosSDK/Classes/Utilities.h; sourceTree = "<group>"; };
-		2D5BF1C64D1CE20125730CE64A961D3B /* MFTprec_202.emd */ = {isa = PBXFileReference; includeInIndex = 1; name = MFTprec_202.emd; path = FaceDetector/Resources/MFTprec_202.emd; sourceTree = "<group>"; };
+		2D5BF1C64D1CE20125730CE64A961D3B /* MFTprec_202.emd */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = MFTprec_202.emd; path = FaceDetector/Resources/MFTprec_202.emd; sourceTree = "<group>"; };
 		315EA55352D7761EC904C728A78CD08E /* Pods-VoiceItApi2IosSDK_Test-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VoiceItApi2IosSDK_Test-dummy.m"; sourceTree = "<group>"; };
 		3A043521D1ECB9B85D24267C661F6BBD /* Pods-VoiceItApi2IosSDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VoiceItApi2IosSDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		4087F2FEC2D595DD1D647A10E4CF0C32 /* MainNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MainNavigationController.m; path = VoiceItApi2IosSDK/Classes/MainNavigationController.m; sourceTree = "<group>"; };
 		45F3EFAA863DA1B6999839895DFAA28B /* Pods-VoiceItApi2IosSDK_Test-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VoiceItApi2IosSDK_Test-frameworks.sh"; sourceTree = "<group>"; };
 		45F73D98DF69909DE310C0135DDAFF8F /* NSMutableArray+Shuffle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+Shuffle.h"; path = "VoiceItApi2IosSDK/Classes/NSMutableArray+Shuffle.h"; sourceTree = "<group>"; };
 		46794F65AB9DB19BACB0E69C5BA7C29A /* Pods-VoiceItApi2IosSDK_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VoiceItApi2IosSDK_Example-frameworks.sh"; sourceTree = "<group>"; };
-		47A0043E52F2B838D1D4536B91921C8C /* Pods_VoiceItApi2IosSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_VoiceItApi2IosSDK_Example.framework; path = "Pods-VoiceItApi2IosSDK_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47A0043E52F2B838D1D4536B91921C8C /* Pods_VoiceItApi2IosSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoiceItApi2IosSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		493BEBCA0EC9D78C89068CF142FAE703 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
 		4BE0D65A5EA5BBD46DA18786CB1360DB /* ResourceBundle-VoiceItApi2IosSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-VoiceItApi2IosSDK-Info.plist"; sourceTree = "<group>"; };
 		50E61F52195ADDC694DC2D41E18C4491 /* Pods-VoiceItApi2IosSDK_Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VoiceItApi2IosSDK_Test.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,30 +116,30 @@
 		53F49ED18EE70D27043376D29000F9F9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54F8E3141D0FE24C9F483561FD396E3E /* NSMutableArray+Shuffle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+Shuffle.m"; path = "VoiceItApi2IosSDK/Classes/NSMutableArray+Shuffle.m"; sourceTree = "<group>"; };
 		58589CCB22D0469BA29A223B54D82FAE /* Pods-VoiceItApi2IosSDK_Test-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VoiceItApi2IosSDK_Test-resources.sh"; sourceTree = "<group>"; };
-		5A3C5EDB6D00113A16E18FC540C1AC5C /* VoiceItApi2IosSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = VoiceItApi2IosSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		5A3C5EDB6D00113A16E18FC540C1AC5C /* VoiceItApi2IosSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = VoiceItApi2IosSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5C6BEFC192308407C09AC743CBD1E182 /* VideoVerificationViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VideoVerificationViewController.h; path = VoiceItApi2IosSDK/Classes/VideoVerificationViewController.h; sourceTree = "<group>"; };
-		6227D34FAD4AE250DA60A9C65406B2CF /* LMprec_600.emd */ = {isa = PBXFileReference; includeInIndex = 1; name = LMprec_600.emd; path = FaceDetector/Resources/LMprec_600.emd; sourceTree = "<group>"; };
+		6227D34FAD4AE250DA60A9C65406B2CF /* LMprec_600.emd */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = LMprec_600.emd; path = FaceDetector/Resources/LMprec_600.emd; sourceTree = "<group>"; };
 		6739FD46E9B0689C610B6D795652FFA1 /* Pods-VoiceItApi2IosSDK_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VoiceItApi2IosSDK_Example-dummy.m"; sourceTree = "<group>"; };
 		6AB8CFF0D86EE7F923664C8EE4B88E2A /* FaceEnrollmentViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FaceEnrollmentViewController.h; path = VoiceItApi2IosSDK/Classes/FaceEnrollmentViewController.h; sourceTree = "<group>"; };
 		6B9B83C5364E4BC2A55962D8FA2F7F40 /* Pods-VoiceItApi2IosSDK_Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VoiceItApi2IosSDK_Test.release.xcconfig"; sourceTree = "<group>"; };
 		6BE20C74BEF0319D1B064A20BA5FDF37 /* VoiceItApi2IosSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = VoiceItApi2IosSDK.modulemap; sourceTree = "<group>"; };
 		6D4EA716460C6983A28F8991B1DA9BBB /* Prompts.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = Prompts.strings; path = VoiceItApi2IosSDK/Classes/Base.lproj/Prompts.strings; sourceTree = "<group>"; };
-		6E39C74EF7FDE65B30F87B52FB496E18 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		6E39C74EF7FDE65B30F87B52FB496E18 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		6FEE77C30CADE29D0363F1A36F5E98E4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		71DD29DB3CACD08CA68B6ACFF32CF711 /* EnrollFinishViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EnrollFinishViewController.h; path = VoiceItApi2IosSDK/Classes/EnrollFinishViewController.h; sourceTree = "<group>"; };
 		73F030882843F7BB024A38FB0547EA11 /* VideoVerificationViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = VideoVerificationViewController.m; path = VoiceItApi2IosSDK/Classes/VideoVerificationViewController.m; sourceTree = "<group>"; };
 		7655860863362744934DDA4BFEFFB647 /* EnrollSetupViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EnrollSetupViewController.h; path = VoiceItApi2IosSDK/Classes/EnrollSetupViewController.h; sourceTree = "<group>"; };
-		78140800A02C5048161D8BA4C9EE32CF /* BCLrighteyeclosed_200.emd */ = {isa = PBXFileReference; includeInIndex = 1; name = BCLrighteyeclosed_200.emd; path = FaceDetector/Resources/BCLrighteyeclosed_200.emd; sourceTree = "<group>"; };
+		78140800A02C5048161D8BA4C9EE32CF /* BCLrighteyeclosed_200.emd */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = BCLrighteyeclosed_200.emd; path = FaceDetector/Resources/BCLrighteyeclosed_200.emd; sourceTree = "<group>"; };
 		7C4310976550DD05B0AB7DDACDCE52E0 /* VoiceItApi2IosSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "VoiceItApi2IosSDK-dummy.m"; sourceTree = "<group>"; };
 		7C81D5B502DC6790D7B7951F4EE5FEAD /* VoiceIt.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = VoiceIt.storyboard; path = VoiceItApi2IosSDK/Classes/Base.lproj/VoiceIt.storyboard; sourceTree = "<group>"; };
 		813D9324DC6890FAD0F6C0A6B66C6964 /* Styles.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Styles.m; path = VoiceItApi2IosSDK/Classes/Styles.m; sourceTree = "<group>"; };
 		8C75B389E286EA25C8C7CBDB768E903B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8DD25E8FE295A111BB6CBC90F7592B89 /* EnrollViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EnrollViewController.h; path = VoiceItApi2IosSDK/Classes/EnrollViewController.h; sourceTree = "<group>"; };
-		91176C1B626DA9F62441E2EFBBC3742C /* BCLlefteyeclosed_200.emd */ = {isa = PBXFileReference; includeInIndex = 1; name = BCLlefteyeclosed_200.emd; path = FaceDetector/Resources/BCLlefteyeclosed_200.emd; sourceTree = "<group>"; };
+		8DD25E8FE295A111BB6CBC90F7592B89 /* VideoEnrollmentViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VideoEnrollmentViewController.h; path = VoiceItApi2IosSDK/Classes/VideoEnrollmentViewController.h; sourceTree = "<group>"; };
+		91176C1B626DA9F62441E2EFBBC3742C /* BCLlefteyeclosed_200.emd */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = BCLlefteyeclosed_200.emd; path = FaceDetector/Resources/BCLlefteyeclosed_200.emd; sourceTree = "<group>"; };
 		9251B61DE1802C2FA6D86915531D7266 /* SCSiriWaveformView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SCSiriWaveformView.m; path = VoiceItApi2IosSDK/Classes/SCSiriWaveformView.m; sourceTree = "<group>"; };
 		9289238CDF612E29A10D80C404E7A0F3 /* VoiceItApi2IosSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = VoiceItApi2IosSDK.xcconfig; sourceTree = "<group>"; };
 		92BFAA3D4F3FE1786B9A01B776BD48D1 /* SCSiriWaveformView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SCSiriWaveformView.h; path = VoiceItApi2IosSDK/Classes/SCSiriWaveformView.h; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		95CE33235CC7846EFA7B8B9640B14BE5 /* FaceVerificationViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FaceVerificationViewController.h; path = VoiceItApi2IosSDK/Classes/FaceVerificationViewController.h; sourceTree = "<group>"; };
 		97A263E31AE1A772F7FC1E0ACFB40B16 /* VoiceItApi2IosSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VoiceItApi2IosSDK-prefix.pch"; sourceTree = "<group>"; };
 		9AAEB9EF0C6F0300D87D49361CBEA13A /* ResponseManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ResponseManager.h; path = VoiceItApi2IosSDK/Classes/ResponseManager.h; sourceTree = "<group>"; };
@@ -154,15 +154,15 @@
 		C8BEEDF9270DB5EBAD54D9C930C46587 /* FaceVerificationViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FaceVerificationViewController.m; path = VoiceItApi2IosSDK/Classes/FaceVerificationViewController.m; sourceTree = "<group>"; };
 		CAC3F6FAC1E6914D39649CB900909057 /* VoiceItAPITwo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = VoiceItAPITwo.m; path = VoiceItApi2IosSDK/Classes/VoiceItAPITwo.m; sourceTree = "<group>"; };
 		CC1019591D3EFF092AF0882FE1180B3C /* VoiceItApi2IosSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VoiceItApi2IosSDK.h; path = VoiceItApi2IosSDK/Classes/VoiceItApi2IosSDK.h; sourceTree = "<group>"; };
-		CFFB09557A2C6B2B226B83A02FE6E70E /* PFFprec_702.emd */ = {isa = PBXFileReference; includeInIndex = 1; name = PFFprec_702.emd; path = FaceDetector/Resources/PFFprec_702.emd; sourceTree = "<group>"; };
-		D03B3DEE117A978AB2B7D2C889EA66D7 /* VoiceItApi2IosSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = VoiceItApi2IosSDK.bundle; path = "VoiceItApi2IosSDK-VoiceItApi2IosSDK.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFFB09557A2C6B2B226B83A02FE6E70E /* PFFprec_702.emd */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = PFFprec_702.emd; path = FaceDetector/Resources/PFFprec_702.emd; sourceTree = "<group>"; };
+		D03B3DEE117A978AB2B7D2C889EA66D7 /* VoiceItApi2IosSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoiceItApi2IosSDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		D406D7457D64C5E991DC570943D90909 /* FaceEnrollmentViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FaceEnrollmentViewController.m; path = VoiceItApi2IosSDK/Classes/FaceEnrollmentViewController.m; sourceTree = "<group>"; };
 		D5D299F2BE473E587A827ACC093B14D9 /* Pods-VoiceItApi2IosSDK_Test-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VoiceItApi2IosSDK_Test-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D97F4E015BE1F15569A7C4554B082972 /* GoogleMobileVision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileVision.framework; path = Detector/Frameworks/frameworks/GoogleMobileVision.framework; sourceTree = "<group>"; };
 		D9A3117A7C9855D966E89D540DE64E7E /* Pods-VoiceItApi2IosSDK_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-VoiceItApi2IosSDK_Example.modulemap"; sourceTree = "<group>"; };
 		E23CD849F61B9733F1AEBD21DD66E70A /* FaceDetector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FaceDetector.framework; path = FaceDetector/Frameworks/frameworks/FaceDetector.framework; sourceTree = "<group>"; };
 		E2F74C0C1ABEF0493E54C18729BDD4D3 /* Utilities.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Utilities.m; path = VoiceItApi2IosSDK/Classes/Utilities.m; sourceTree = "<group>"; };
-		E3B7D38825145A9EE13D99763AD45079 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		E3B7D38825145A9EE13D99763AD45079 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E71E8DC3F37CD998B15B664C366366E4 /* Liveness.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Liveness.m; path = VoiceItApi2IosSDK/Classes/Liveness.m; sourceTree = "<group>"; };
 		E8BEA2227B31E8D99B9158F8AB155811 /* EnrollSetupViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EnrollSetupViewController.m; path = VoiceItApi2IosSDK/Classes/EnrollSetupViewController.m; sourceTree = "<group>"; };
 		EA12E98CA9F3F0E6B3E8B17E0B954C58 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -173,7 +173,7 @@
 		F2BF5E9D68EAC528D8EBCD934CA1A933 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		F66ABC9561A1E809E7813A1ADB07EDE0 /* VoiceEnrollmentViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VoiceEnrollmentViewController.h; path = VoiceItApi2IosSDK/Classes/VoiceEnrollmentViewController.h; sourceTree = "<group>"; };
 		F8B7888FAAA825114E647F542FC29E0C /* VoiceVerificationViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VoiceVerificationViewController.h; path = VoiceItApi2IosSDK/Classes/VoiceVerificationViewController.h; sourceTree = "<group>"; };
-		F96AD41872924D7F193574C667834104 /* Pods_VoiceItApi2IosSDK_Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_VoiceItApi2IosSDK_Test.framework; path = "Pods-VoiceItApi2IosSDK_Test.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F96AD41872924D7F193574C667834104 /* Pods_VoiceItApi2IosSDK_Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoiceItApi2IosSDK_Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC525954A358560B1ACCBD317BDF774C /* VoiceVerificationViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = VoiceVerificationViewController.m; path = VoiceItApi2IosSDK/Classes/VoiceVerificationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -229,8 +229,8 @@
 				0C1B37B2BF10A95DAE27343E3E2EADFA /* EnrollFinishViewController.m */,
 				7655860863362744934DDA4BFEFFB647 /* EnrollSetupViewController.h */,
 				E8BEA2227B31E8D99B9158F8AB155811 /* EnrollSetupViewController.m */,
-				8DD25E8FE295A111BB6CBC90F7592B89 /* EnrollViewController.h */,
-				1B2439FC473DFBD5014240435259C7FD /* EnrollViewController.m */,
+				8DD25E8FE295A111BB6CBC90F7592B89 /* VideoEnrollmentViewController.h */,
+				1B2439FC473DFBD5014240435259C7FD /* VideoEnrollmentViewController.m */,
 				6AB8CFF0D86EE7F923664C8EE4B88E2A /* FaceEnrollmentViewController.h */,
 				D406D7457D64C5E991DC570943D90909 /* FaceEnrollmentViewController.m */,
 				95CE33235CC7846EFA7B8B9640B14BE5 /* FaceVerificationViewController.h */,
@@ -295,7 +295,6 @@
 				3BABB8854DC348D9BC2976F64E4F28A2 /* Detector */,
 				52FA5E72C6808E219C05E1229EA70C7E /* FaceDetector */,
 			);
-			name = GoogleMobileVision;
 			path = GoogleMobileVision;
 			sourceTree = "<group>";
 		};
@@ -328,7 +327,6 @@
 			children = (
 				5B0BABB82EBFA784026C2050A42780AA /* Frameworks */,
 			);
-			name = GoogleNetworkingUtilities;
 			path = GoogleNetworkingUtilities;
 			sourceTree = "<group>";
 		};
@@ -345,7 +343,6 @@
 			children = (
 				34FA4ECC4EEEC7B1C4C2D6BE11E3D8CC /* Frameworks */,
 			);
-			name = GoogleInterchangeUtilities;
 			path = GoogleInterchangeUtilities;
 			sourceTree = "<group>";
 		};
@@ -450,7 +447,6 @@
 			children = (
 				813620BB9E572CAA8384C8C2820F9042 /* Frameworks */,
 			);
-			name = GoogleUtilities;
 			path = GoogleUtilities;
 			sourceTree = "<group>";
 		};
@@ -479,7 +475,6 @@
 			children = (
 				2A5D18506D4CC07B44B1D0DA3F516EBD /* Frameworks */,
 			);
-			name = GoogleSymbolUtilities;
 			path = GoogleSymbolUtilities;
 			sourceTree = "<group>";
 		};
@@ -551,7 +546,7 @@
 			files = (
 				172C43CA9016D0E1C009A64A45908299 /* EnrollFinishViewController.h in Headers */,
 				146487077DA527FBB3D40C1EB2D72CF5 /* EnrollSetupViewController.h in Headers */,
-				11485366864FE717039342F96AA7D5AF /* EnrollViewController.h in Headers */,
+				11485366864FE717039342F96AA7D5AF /* VideoEnrollmentViewController.h in Headers */,
 				C94BF15C140A586476F756DAEEEF74CE /* FaceEnrollmentViewController.h in Headers */,
 				2F7C709E408BAC9E9292CC2A76BD998F /* FaceVerificationViewController.h in Headers */,
 				FD36BAFB926CCA1D7C46816DD337FBA7 /* Liveness.h in Headers */,
@@ -703,7 +698,7 @@
 			files = (
 				50A06BE125EE106E3C99D84695D9EAF7 /* EnrollFinishViewController.m in Sources */,
 				8BD8E027281C1DE49DA21F7BA469C18A /* EnrollSetupViewController.m in Sources */,
-				4F11E97CEC8F2597242DEE63C17DDFA0 /* EnrollViewController.m in Sources */,
+				4F11E97CEC8F2597242DEE63C17DDFA0 /* VideoEnrollmentViewController.m in Sources */,
 				DEFDD32A224E3CC770395A1A411618F9 /* FaceEnrollmentViewController.m in Sources */,
 				A0845590AC1A8B4C8D5197B0B08393FF /* FaceVerificationViewController.m in Sources */,
 				3B2BCA4CCB75EE4CE45F31E1553E8E23 /* Liveness.m in Sources */,

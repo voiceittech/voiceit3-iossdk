@@ -48,11 +48,16 @@
 - (void)deleteGroup: (NSString *)groupId callback:(void (^)(NSString *))callback;
 
 #pragma mark - Enrollment API Calls
-- (void)getAllEnrollmentsForUser:(NSString *)userId callback:(void (^)(NSString *))callback;
-- (void)getAllFaceEnrollmentsForUser:(NSString *)userId callback:(void (^)(NSString *))callback;
-- (void)deleteEnrollmentForUser:(NSString *)userId enrollmentId:(NSString *)enrollmentId callback:(void (^)(NSString *))callback;
+- (void)getVoiceEnrollments:(NSString *)userId callback:(void (^)(NSString *))callback;
+- (void)getFaceEnrollments:(NSString *)userId callback:(void (^)(NSString *))callback;
+- (void)getVideoEnrollments:(NSString *)userId callback:(void (^)(NSString *))callback;
+- (void)deleteVoiceEnrollment:(NSString *)userId voiceEnrollmentId:(NSInteger)voiceEnrollmentId callback:(void (^)(NSString *))callback;
+- (void)deleteFaceEnrollment:(NSString *)userId faceEnrollmentId:(NSInteger)faceEnrollmentId callback:(void (^)(NSString *))callback;
+- (void)deleteVideoEnrollment:(NSString *)userId videoEnrollmentId:(NSInteger)videoEnrollmentId callback:(void (^)(NSString *))callback;
 - (void)deleteAllUserEnrollments: (NSString *)userId callback:(void (^)(NSString *))callback;
-
+- (void)deleteAllVoiceEnrollments: (NSString *)userId callback:(void (^)(NSString *))callback;
+- (void)deleteAllFaceEnrollments: (NSString *)userId callback:(void (^)(NSString *))callback;
+- (void)deleteAllVideoEnrollments: (NSString *)userId callback:(void (^)(NSString *))callback;
 - (void)createVoiceEnrollment:(NSString *)userId
               contentLanguage:(NSString*)contentLanguage
                     audioPath:(NSString*)audioPath
@@ -111,6 +116,10 @@
                   audioPath:(NSString*)audioPath
                      phrase:(NSString*)phrase
                    callback:(void (^)(NSString *))callback;
+
+- (void)faceIdentification:(NSString *)groupId
+                 videoPath:(NSString*)videoPath
+                  callback:(void (^)(NSString *))callback;
 
 - (void)videoIdentification:(NSString *)groupId
             contentLanguage:(NSString*)contentLanguage
@@ -174,6 +183,4 @@
             userVerificationCancelled:(void (^)(void))userVerificationCancelled
            userVerificationSuccessful:(void (^)(float, float, NSString *))userVerificationSuccessful
                userVerificationFailed:(void (^)(float, float, NSString *))userVerificationFailed;
-
 @end
-
