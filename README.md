@@ -68,8 +68,7 @@ Get a Developer Account at <a href="https://voiceit.io/signup" target="_blank">V
 
 The graphics below shows the encapsulatedVideoEnrollment and encapsulatedVideoVerification view respectively in action.
 
-<img width="200px" src="Graphics/VideoEnrollment.gif" style="display: inline !important"/>
-<img width="200px" src="Graphics/VideoVerification.gif" style="display: inline-block !important;"/>
+<img width="200px" src="Graphics/VideoEnrollment.gif" style="display: inline !important"/><img width="200px" src="Graphics/VideoVerification.gif" style="display: inline-block !important;"/>
 
 ## Installation
 
