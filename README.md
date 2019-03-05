@@ -1,6 +1,6 @@
 <img src="Graphics/ios.png" width="100%" style="width:100%">
 
-# VoiceIt2 iOS SDK [![Version](https://img.shields.io/cocoapods/v/VoiceItApi2IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceItApi2IosSDK) [![Build Status](https://travis-ci.org/voiceittech/VoiceItApi2IosSDK.svg?branch=master)](https://travis-ci.org/voiceittech/VoiceItApi2IosSDK) ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg) [![Platform](https://img.shields.io/cocoapods/p/VoiceItApi2IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceItApi2IosSDK)
+# VoiceIt2 iOS SDK [![Version](https://img.shields.io/cocoapods/v/VoiceItApi2IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceItApi2IosSDK) ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg) [![Platform](https://img.shields.io/cocoapods/p/VoiceItApi2IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceItApi2IosSDK)
 
 A fully comprehensive SDK that gives you access to VoiceIt's API 2.0 featuring Voice + Face Verification and Identification with built in user interfaces and liveness detection.
 
@@ -57,17 +57,19 @@ A fully comprehensive SDK that gives you access to VoiceIt's API 2.0 featuring V
       * [Voice Identification](#voice-identification)
       * [Video Identification](#video-identification)
 
+
+## UI Screenshots
+The following show Voice Verification, Face Verification (With liveness detection on) and Video Verification (with Liveness turned off), respectively.
+
+<div style="background: #000 !important;">
+  <img width="290px" src="./Graphics/voiceVerification.gif" style="display: inline-block !important"/><img width="290px" src="./Graphics/faceVerification.gif" style="display: inline-block !important;"/><img width="290px" src="./Graphics/videoVerification.gif" style="display: inline-block !important;"/>
+</div>
+
 ## Getting Started
 
-Get a Developer Account at <a href="https://voiceit.io/signup" target="_blank">VoiceIt</a> and view your API Key and Token in the settings page (as shown below). Also review the HTTP Documentation at <a href="https://api.voiceit.io" target="_blank">api.voiceit.io</a>. All the documentation shows code snippets in both Swift 4 and Objective-C.
+Sign up for a free Developer Account at <a href="https://voiceit.io/signup" target="_blank">VoiceIt.io</a> and view your API Key and Token in the settings page (as shown below). You can also review the HTTP Documentation at <a href="https://api.voiceit.io" target="_blank">api.voiceit.io</a>.
 
-<img src="Graphics/Settings.png" alt="View API Key and Token on Settings Page" width="600px" />
-
-## Previews
-
-Encapsulated Video Enrollment | Encapsulated Video Verification
---- | ---
-<img width="320px" src="Graphics/VideoEnrollment.gif" /> | <img width="320px" src="Graphics/VideoVerification.gif" />
+<img src="./Graphics/getcredentials.png" alt="API Key and Token" width="400px" />
 
 ## Installation
 
