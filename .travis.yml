@@ -3,7 +3,7 @@ podfile: Example/Podfile
 xcode_workspace: Example/VoiceItApi2IosSDK.xcworkspace
 xcode_scheme:  VoiceItApi2IosSDK-Example
 osx_image: xcode11.3
-xcode_destination: platform=iOS Simulator,OS=13.3,name=iPhone X
+xcode_destination: platform=iOS Simulator,OS=13.3,name=iPhone 8 Plus
 after_success:
   - ./email.sh
 notifications:
