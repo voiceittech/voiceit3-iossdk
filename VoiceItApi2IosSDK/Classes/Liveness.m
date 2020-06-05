@@ -2,7 +2,8 @@
 //  Liveness.m
 //  VoiceItApi2IosSDK
 //
-//  Created by VoiceIt Technolopgies, LLC on 4/21/18.
+//  Created by VoiceIt Technologies, LLC
+//  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.
 //
 
 #import "Liveness.h"
@@ -379,7 +380,8 @@
             [self livenessFailedAction];
         }
         else if ( (( fabs(face.rightEyePosition.x - face.rightEyePosition.y) < 80.0)
-            && ( fabs(face.leftEyePosition.x - face.leftEyePosition.y) < 25.0)) ) {
+            && ( fabs(face.leftEyePosition.x - face.leftEyePosition.y) < 25.0))
+                 && (abs((int) image.extent.origin.y - (int) face.mouthPosition.x) > 270) ) {
             // Head facing left side
             NSLog(@"Head Facing Left Side");
             if(self.faceDirection != -1){
@@ -403,7 +405,7 @@
     NSLog(@"Face hasRightEyePosition %d", face.hasRightEyePosition);
     NSLog(@"Face rightEyePosition %@", NSStringFromCGPoint(face.rightEyePosition));
     NSLog(@"Face leftEyePosition %@", NSStringFromCGPoint(face.leftEyePosition));
-    
+
     if (face.hasLeftEyePosition && face.hasRightEyePosition) {
         // Head Not facing right side
        if ( (( fabs(face.rightEyePosition.x - face.rightEyePosition.y) < 80.0)
@@ -413,7 +415,8 @@
             [self livenessFailedAction];
         }
         else if ( (( fabs(face.rightEyePosition.x - face.rightEyePosition.y) > 80.0)
-                && ( fabs(face.leftEyePosition.x - face.leftEyePosition.y) > 150.0)) ) {
+                && ( fabs(face.leftEyePosition.x - face.leftEyePosition.y) > 150.0))
+                && ( abs((int) image.extent.origin.y - (int) face.mouthPosition.x) < 370) ) {
             // Head facing right side
             NSLog(@"Head Facing Right Side");
             if(self.faceDirection != -1){
@@ -430,7 +433,6 @@
             }
         }
     }
-    
 }
 
 -(void)processFrame:(CMSampleBufferRef)sampleBuffer{
@@ -448,7 +450,7 @@
     
     // Establish the image orientation CI Detectors
     NSDictionary *options = @{CIDetectorSmile: @(YES), CIDetectorEyeBlink: @(YES), CIDetectorImageOrientation: [NSNumber numberWithInt:exifOrientation], CIDetectorNumberOfAngles: @(11), CIDetectorTracking: @(YES), CIDetectorMinFeatureSize: @(0.10),};
-
+    
     // Detect features using CIFaceFeatures
     NSArray<CIFeature *> *faces = [self.faceDetector featuresInImage:image options:options];
     dispatch_sync(dispatch_get_main_queue(), ^{

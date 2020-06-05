@@ -2,14 +2,14 @@
 //  VoiceItAPITwo.m
 //  VoiceItApi2IosSDK
 //
-//  Created by VoiceIt Technolopgies, LLC on 3/7/17.
-//  Copyright © 2020 VoiceIt Technologies, LLC. All rights reserved.
+//  Created by VoiceIt Technologies, LLC
+//  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.
 //
 
 #import "VoiceItAPITwo.h"
 #import "Styles.h"
 NSString * const host = @"https://api.voiceit.io/";
-NSString * const platformVersion = @"2.0.8";
+NSString * const platformVersion = @"2.0.9";
 NSString * const platformId = @"41";
 @implementation VoiceItAPITwo
 

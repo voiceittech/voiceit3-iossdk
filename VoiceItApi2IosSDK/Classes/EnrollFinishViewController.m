@@ -2,8 +2,8 @@
 //  EnrollFinishViewController.m
 //  VoiceItApi2IosSDK
 //
-//  Created by VoiceIt Technolopgies, LLC on 10/4/17.
-//  Copyright © 2017 VoiceIt Technologies LLC. All rights reserved.
+//  Created by VoiceIt Technologies, LLC 
+//  Copyright © 2020 VoiceIt Technologies LLC. All rights reserved.
 //
 
 #import "EnrollFinishViewController.h"

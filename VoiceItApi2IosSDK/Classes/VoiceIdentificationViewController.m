@@ -2,7 +2,8 @@
 //  VoiceIdentificationViewController.m
 //  VoiceItApi2IosSDK
 //
-//  Created by VoiceIt Technolopgies, LLC on 8/28/18.
+//  Created by VoiceIt Technologies, LLC
+//  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.
 //
 
 #import "VoiceIdentificationViewController.h"
@@ -103,13 +104,11 @@
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     NSError *err;
     [audioSession setCategory:AVAudioSessionCategoryRecord error:&err];
-    if (err)
-    {
+    if (err) {
         NSLog(@"%@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
     }
     err = nil;
-    if (err)
-    {
+    if (err) {
         NSLog(@"%@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
     }
     

@@ -2,8 +2,8 @@
 //  VoiceItAPITwo.h
 //  VoiceItApi2IosSDK
 //
-//  Created by VoiceIt Technolopgies, LLC on 3/7/17.
-//  Copyright © 2017 VoiceIt Technolopgies, LLC. All rights reserved.
+//  Created by VoiceIt Technologies, LLC
+//  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

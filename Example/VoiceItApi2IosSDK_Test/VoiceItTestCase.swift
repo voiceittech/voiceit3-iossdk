@@ -2,8 +2,8 @@
 //  VoiceItTestCase.swift
 //  VoiceItApi2IosSDK_Test
 //
-//  Created by VoiceIt Technolopgies, LLC on 8/26/18.
-//  Copyright © 2018 VoiceIt Technologies, LLC. All rights reserved.
+//  Created by VoiceIt Technologies, LLC
+//  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.
 //
 
 import XCTest

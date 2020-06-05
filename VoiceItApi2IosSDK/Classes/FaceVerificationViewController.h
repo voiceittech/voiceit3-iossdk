@@ -2,7 +2,8 @@
 //  FaceVerificationViewController.h
 //  VoiceItApi2IosSDK
 //
-//  Created by VoiceIt Technolopgies, LLC on 3/17/18.
+//  Created by VoiceIt Technologies, LLC
+//  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.
 //
 
 #import <AVFoundation/AVFoundation.h>

@@ -2,7 +2,8 @@
 //  VoiceItApi2IosSDK.h
 //  Pods
 //
-//  Created by VoiceIt Technolopgies, LLC on 3/23/17.
+//  Created by VoiceIt Technologies, LLC
+//  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.
 //
 //
 

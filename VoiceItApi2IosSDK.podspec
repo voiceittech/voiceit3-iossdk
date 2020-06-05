@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'VoiceItApi2IosSDK'
-s.version          = '2.0.8'
+s.version          = '2.0.9'
 s.summary          = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt.'
 
 # This description is used to generate tags and improve search results.
@@ -23,7 +23,7 @@ s.license          = { :type => 'MIT', :file => 'LICENSE' }
 s.author           = { 'voiceit' => 'support@voiceit.io' }
 s.source           = { :git => 'https://github.com/voiceittech/VoiceItApi2IosSDK.git', :tag => s.version.to_s }
 
-s.ios.deployment_target = '10.0'
+s.ios.deployment_target = '11.0'
 s.static_framework = true
 s.source_files = 'VoiceItApi2IosSDK/Classes/**/*.{h,m}'
 

@@ -2,8 +2,8 @@
 //  VoiceItViewController.m
 //  VoiceItApi2IosSDK
 //
-//  Created by VoiceIt Technologies, LLC on 03/23/2017.
-//  Copyright (c) 2017 VoiceIt Technologies, LLC. All rights reserved.
+//  Created by VoiceIt Technologies, LLC
+//  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.
 //
 
 #import "VoiceItViewController.h"
