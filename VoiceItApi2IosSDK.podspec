@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'VoiceItApi2IosSDK'
-s.version          = '2.0.9'
+s.version          = '2.1.0'
 s.summary          = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt.'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ s.static_framework = true
 s.source_files = 'VoiceItApi2IosSDK/Classes/**/*.{h,m}'
 
 s.resource_bundles = {
-  'VoiceItApi2IosSDK' => ['VoiceItApi2IosSDK/Classes/**/*.{lproj,storyboard,xib,xcassets,strings}']
+  'VoiceItApi2IosSDK' => ['VoiceItApi2IosSDK/Classes/**/*.{lproj,storyboard,xib,xcassets,strings}','VoiceItApi2IosSDK/Resources/*.wav']
 }
 
 s.frameworks = 'UIKit', 'AVFoundation'
