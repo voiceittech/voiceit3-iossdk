@@ -134,10 +134,10 @@
 }
 
 -(void)setLivenessChallengeMessages{
-    [self startWritingToVideoFile];
     
-    float time = [self.livenessChallengeTime floatValue]+5;
+    float time = [self.livenessChallengeTime floatValue];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, time * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self clearCircleForAnimation];
         [self.messageLabel setText:@""];
         [self showLoading];
         [self stopRecording];
@@ -314,7 +314,12 @@
 
 -(void) illuminateCircles:(NSString*) lcoSignal{
     if ([lcoSignal isEqualToString:@"FACE_UP"]) {
-        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: M_PI endAngle: 0 * M_PI clockwise:YES].CGPath;
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 1.2 * M_PI endAngle: 1.8 * M_PI clockwise:YES].CGPath;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    } else if ([lcoSignal isEqualToString:@"FACE_DOWN"]) {
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 0.2 * M_PI endAngle: 0.8 * M_PI clockwise:YES].CGPath;
         self.progressCircle.drawsAsynchronously = YES;
         self.progressCircle.borderWidth = 20;
         self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
@@ -480,7 +485,7 @@
                         [self startRecording];
                     } else{
                         if(!self.isProcessing){
-                        [self setMessage: self.livenessInstruction];
+                            [self setMessage: self.livenessInstruction];
                         }
                         dispatch_async(dispatch_get_main_queue(),^{
                             [self.cancelButton setTitle: [ResponseManager getMessage:@"Continue"] forState:UIControlStateNormal];
@@ -498,6 +503,7 @@
     self.isRecording = YES;
     
     if(self.doLivenessDetection && self.isChallengeRetrieved){
+        [self startWritingToVideoFile];
         [self setLivenessChallengeMessages];
     }
     
@@ -527,9 +533,18 @@
     });
 }
 
+//Reset circle for Animation
+-(void)clearCircleForAnimation {
+    self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 0*M_PI endAngle: 2 * M_PI clockwise:YES].CGPath;
+    self.progressCircle.drawsAsynchronously = YES;
+    self.progressCircle.borderWidth = 20;
+    self.progressCircle.fillColor =  [UIColor clearColor].CGColor;
+}
+
 -(void)animateProgressCircle {
+    
     if(self.doLivenessDetection){
-        return;
+        [self clearCircleForAnimation];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         self.progressCircle.strokeColor = [Styles getMainCGColor];
@@ -613,13 +628,16 @@ didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects
             [self.faceRectangleLayer setHidden:YES];
         }
         
-        if(self.doLivenessDetection && !self.isRecording && !self.lookingIntoCam){
+        if(self.doLivenessDetection && !self.isRecording && !self.lookingIntoCam && !self.isProcessing){
             [self setMessage:[ResponseManager getMessage:@"LOOK_INTO_CAM"]];
             [self.cancelButton setTitle:[ResponseManager getMessage:@"Cancel"] forState:UIControlStateNormal];
         }
         if(self.doLivenessDetection && !self.isRecording && self.lookingIntoCam && !self.isProcessing){
             [self setMessage:self.livenessInstruction];
             [self.cancelButton setTitle:[ResponseManager getMessage:@"Continue"] forState:UIControlStateNormal];
+        }
+        if(self.isProcessing){
+            [self.cancelButton setTitle:[ResponseManager getMessage:@"Cancel"] forState:UIControlStateNormal];
         }
     }
     

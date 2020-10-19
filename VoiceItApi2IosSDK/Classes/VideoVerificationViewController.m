@@ -297,7 +297,12 @@
 
 -(void) illuminateCircles:(NSString*) lcoSignal{
     if ([lcoSignal isEqualToString:@"FACE_UP"]) {
-        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: M_PI endAngle: 0 * M_PI clockwise:YES].CGPath;
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 1.2 * M_PI endAngle: 1.8 * M_PI clockwise:YES].CGPath;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    } else if ([lcoSignal isEqualToString:@"FACE_DOWN"]) {
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 0.2 * M_PI endAngle: 0.8 * M_PI clockwise:YES].CGPath;
         self.progressCircle.drawsAsynchronously = YES;
         self.progressCircle.borderWidth = 20;
         self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
