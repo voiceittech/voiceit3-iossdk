@@ -21,12 +21,16 @@
 @property NSTimer *timer;
 @property int currentChallenge;
 @property NSNumber *livenessChallengeTime;
-@property NSString *challengeString;
+@property NSArray *lcoStrings;
+@property NSArray *lco;
 @property BOOL isChallengeRetrieved;
 @property NSString *lcoId;
+@property NSString *result;
+@property NSString *uiMessage;
+@property NSString *livenessInstruction;
+@property BOOL isProcessing;
 @property Liveness *livenessDetector;
-@property BOOL didLivenessSucceed;
-@property BOOL canLivenessRetry;
+@property BOOL success;
 
 @end
 
@@ -42,6 +46,11 @@
     }
     return self;
 }
+- (IBAction)closeButtonClicked:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self userVerificationCancelled]();
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,21 +61,23 @@
     self.continueRunning = YES;
     self.verificationStarted = NO;
     self.failCounter = 0;
-    
+    self.isProcessing = NO;
     self.isReadyToWrite = NO;
     self.enoughRecordingTimePassed = NO;
     
     // Do any additional setup after loading the view.
     [self.progressView setHidden:YES];
     
-    //Get LCOID, challenge string and liveness time
-    [self getLivenessData];
-    
-    // Set up the AVCapture Session
-    [self setupCaptureSession];
-    [self setupVideoProcessing];
-    
-    [self setupScreen];
+    if([self doLivenessDetection]){
+        //Get LCOID, challenge string and liveness time
+        [self setLivenessData];
+    } else{
+        
+        // Set up the AVCapture Session
+        [self setupCaptureSession];
+        [self setupVideoProcessing];
+        [self setupScreen];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -90,16 +101,81 @@
 }
 #pragma mark - Liveness Data
 
--(void)getLivenessData{
+-(void)handleLivenessResponse: (NSString*)result{
+    NSDictionary *jsonObj = [Utilities getJSONObject:result];
+    self.uiMessage = [jsonObj objectForKey:@"uiMessage"];
+    BOOL retry = [[jsonObj objectForKey:@"retry"] boolValue];
+    self.success = [[jsonObj objectForKey:@"success"] boolValue];
+    self.result = result;
+    
+    if(!self.success && retry){
+        [self.myVoiceIt faceVerificationWithLiveness:self.userToVerifyUserId videoPath:self.videoPath callback:^(NSString *jsonResponse){
+            [self handleLivenessResponse: jsonResponse];
+        } lcoId: self.lcoId];
+    }
+    
+    if(!self.success && !retry){
+        [self removeLoading];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.cancelButton setTitle:[ResponseManager getMessage:@"Cancel"] forState:UIControlStateNormal];
+            [self.messageLabel setText:self.uiMessage];
+        });
+        [Utilities deleteFile:self.videoPath];
+    }
+    
+    if(self.success){
+        [self removeLoading];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.cancelButton setTitle:[ResponseManager getMessage:@"Done"] forState:UIControlStateNormal];
+            [self.messageLabel setText:self.uiMessage];
+        });
+        [Utilities deleteFile:self.videoPath];
+    }
+}
+
+-(void)setLivenessChallengeMessages{
+    [self startWritingToVideoFile];
+    
+    float time = [self.livenessChallengeTime floatValue]+5;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, time * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self.messageLabel setText:@""];
+        [self showLoading];
+        [self stopRecording];
+    });
+    
+    [self setMessage:[self.lcoStrings firstObject]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self illuminateCircles:[self.lco firstObject]];
+    });
+    
+    for(int i=1;i<self.lco.count;i++){
+        float time = [self.livenessChallengeTime floatValue]/(self.lco.count);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, time * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self setMessage:self.lcoStrings[i]];
+            [self illuminateCircles:self.lco[i]];
+        });
+    }
+}
+
+-(void)setLivenessData{
     if(!self.doLivenessDetection) return;
     
     [[self myVoiceIt] getLivenessID:self.userToVerifyUserId countryCode:
      @"en-US" callback:^(NSString *response) {
+        
         NSDictionary *data = [Utilities getJSONObject:response];
-        self.challengeString = [data valueForKey:@"challenges"];
+        self.lcoStrings = [data valueForKey:@"lcoStrings"];
         self.isChallengeRetrieved = [data valueForKey:@"success"];
         self.lcoId = [data valueForKey:@"lcoId"];
         self.livenessChallengeTime = [data valueForKey:@"livenessChallengeTime"];
+        self.lco = [data valueForKey:@"lco"];
+        self.livenessInstruction = [data valueForKey:@"uiLivenessInstruction"];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setupCaptureSession];
+            [self setupVideoProcessing];
+            [self setupScreen];
+        });
     }];
 }
 
@@ -212,6 +288,68 @@
 
 #pragma mark - Action Methods
 
+-(void) playSound:(NSString*) lco{
+    if(self.doAudioPrompts){
+        NSBundle * podBundle = [NSBundle bundleForClass: self.classForCoder];
+        NSURL * bundleURL = [[podBundle resourceURL] URLByAppendingPathComponent:@"VoiceItApi2IosSDK.bundle"];
+        NSString* soundFilePath;
+        if([lco isEqualToString:@"FACE_LEFT"]){
+            soundFilePath = [NSString stringWithFormat:@"%@/FACE_LEFT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
+        }
+        else if([lco isEqualToString:@"FACE_RIGHT"]){
+            soundFilePath = [NSString stringWithFormat:@"%@/FACE_RIGHT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
+        }
+        else if([lco isEqualToString:@"SMILE"]){
+            soundFilePath = [NSString stringWithFormat:@"%@/SMILE.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
+        }
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        NSError *error;
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+        self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:&error];
+        self.player.numberOfLoops = 0; //Infinite
+        [self.player play];
+    }
+}
+
+-(void) illuminateCircles:(NSString*) lcoSignal{
+    if ([lcoSignal isEqualToString:@"FACE_UP"]) {
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: M_PI endAngle: 0 * M_PI clockwise:YES].CGPath;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    } else if ([lcoSignal isEqualToString:@"FACE_DOWN"]) {
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 0 endAngle: M_PI clockwise:YES].CGPath;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    } else if ([lcoSignal isEqualToString:@"FACE_RIGHT"]) {
+        [self playSound:lcoSignal];
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 1.75 * M_PI endAngle: 0.25 * M_PI clockwise:YES].CGPath;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    } else if ([lcoSignal isEqualToString:@"FACE_LEFT"]) {
+        [self playSound:lcoSignal];
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 0.75 * M_PI endAngle: 1.25 * M_PI clockwise:YES].CGPath;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    } else if([lcoSignal isEqualToString:@"FACE_TILT_LEFT"]){
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: -0.5 * M_PI endAngle:-M_PI clockwise:NO].CGPath;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    }else if([lcoSignal isEqualToString:@"FACE_TILT_RIGHT"]){
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 0 endAngle: -0.4*M_PI clockwise:NO].CGPath;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    } else if ([lcoSignal isEqualToString:@"SMILE"]){
+        [self playSound:lcoSignal];
+    }
+}
+
 -(void)startWritingToVideoFile{
     NSDictionary *outputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
                                     [NSNumber numberWithInt:640], AVVideoWidthKey, [NSNumber numberWithInt:480], AVVideoHeightKey, AVVideoCodecTypeH264, AVVideoCodecKey,nil];
@@ -238,13 +376,6 @@
     [self.assetWriterMyData startWriting];
     [self.assetWriterMyData startSessionAtSourceTime:kCMTimeZero];
     self.isReadyToWrite = YES;
-}
-
--(void)finishVerificationWithLiveness:(NSString *)jsonResponse {
-    [self removeLoading];
-    [Utilities deleteFile:self.videoPath];
-    NSLog(@"FaceVerification JSON Response : %@", jsonResponse);
-    //Continue ..... Akshay
 }
 
 -(void)finishVerification:(NSString *)jsonResponse{
@@ -296,14 +427,14 @@
 
 -(void)sendPhoto{
     [self showLoading];
+    self.isProcessing = YES;
     if(!self.continueRunning){
         return;
     }
+    [self setMessage:@""];
     [self.myVoiceIt faceVerificationWithLiveness:self.userToVerifyUserId videoPath:self.videoPath callback:^(NSString *jsonResponse){
-        NSDictionary *data = [Utilities getJSONObject:jsonResponse];
-        [self setDidLivenessSucceed:[data valueForKey:@"success"]];
-        [self setCanLivenessRetry:[data valueForKey:@"retry"]];
-        [self finishVerificationWithLiveness:jsonResponse];
+        NSLog(@"%@",jsonResponse);
+        [self handleLivenessResponse:jsonResponse];
     } lcoId: self.lcoId];
 }
 
@@ -345,7 +476,16 @@
                 if(faceEnrollmentsCount < 1 && videoEnrollmentsCount < 1){
                     [self notEnoughEnrollments:@"{\"responseCode\":\"NFEF\",\"message\":\"No face enrollments found\"}"];
                 } else {
-                    [self startRecording];
+                    if(!self.doLivenessDetection){
+                        [self startRecording];
+                    } else{
+                        if(!self.isProcessing){
+                        [self setMessage: self.livenessInstruction];
+                        }
+                        dispatch_async(dispatch_get_main_queue(),^{
+                            [self.cancelButton setTitle: [ResponseManager getMessage:@"Continue"] forState:UIControlStateNormal];
+                        });
+                    }
                 }
             }];
         } else {
@@ -358,19 +498,12 @@
     self.isRecording = YES;
     
     if(self.doLivenessDetection && self.isChallengeRetrieved){
-        [self startWritingToVideoFile];
-        [self setMessage: self.challengeString];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, [self.livenessChallengeTime floatValue] * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [self setMessage:[ResponseManager getMessage:@"CHECKING"]];
-            [self setEnoughRecordingTimePassed:YES];
-            [self stopRecording];
-        });
+        [self setLivenessChallengeMessages];
     }
     
     else {
         [self startWritingToVideoFile];
         [self setMessage:[ResponseManager getMessage:@"WAIT_FOR_FACE_VERIFICATION"]];
-        
         
         // Start Progress Circle Around Face Animation
         [self animateProgressCircle];
@@ -430,10 +563,24 @@
     });
 }
 
-- (IBAction)cancelClicked:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:^{
-        [self userVerificationCancelled]();
-    }];
+- (IBAction)cancelClicked:(id)sender{
+    if(!self.doLivenessDetection){
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self userVerificationCancelled]();
+        }];
+    } else{
+        if(self.verificationStarted == YES && [self.cancelButton.titleLabel.text isEqual:@"Continue"]){
+            [self startRecording];
+        }
+        if(self.verificationStarted == NO || [self.cancelButton.titleLabel.text isEqual:@"Cancel"]){
+            [self dismissViewControllerAnimated:YES completion:^{
+            }];
+        }
+        if([self.cancelButton.titleLabel.text isEqual:@"Done"]){
+            [self dismissViewControllerAnimated:YES completion:^{
+            }];
+        }
+    }
 }
 
 #pragma mark - Camera Delegate Methods
@@ -442,26 +589,62 @@
 -(void)captureOutput:(AVCaptureOutput *)output
 didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects
       fromConnection:(AVCaptureConnection *)connection{
-    BOOL faceFound = NO;
-    for(AVMetadataObject *metadataObject in metadataObjects) {
-        if([metadataObject.type isEqualToString:AVMetadataObjectTypeFace]) {
-            faceFound = YES;
-            AVMetadataObject * face = [self.previewLayer transformedMetadataObjectForMetadataObject:metadataObject];
-            [Utilities showFaceRectangle:self.faceRectangleLayer face:face];
+    
+    if(self.doLivenessDetection){
+        BOOL faceFound = NO;
+        for(AVMetadataObject *metadataObject in metadataObjects) {
+            if([metadataObject.type isEqualToString:AVMetadataObjectTypeFace]) {
+                faceFound = YES;
+                AVMetadataObject * face = [self.previewLayer transformedMetadataObjectForMetadataObject:metadataObject];
+                [Utilities showFaceRectangle:self.faceRectangleLayer face:face];
+            }
+        }
+        
+        if(faceFound) {
+            self.lookingIntoCamCounter += 1;
+            self.lookingIntoCam = self.lookingIntoCamCounter > MAX_TIME_TO_WAIT_TILL_FACE_FOUND;
+            if (self.lookingIntoCam && !self.verificationStarted) {
+                self.verificationStarted = YES;
+                [self startVerificationProcess];
+            }
+        } else {
+            self.lookingIntoCam = NO;
+            self.lookingIntoCamCounter = 0;
+            [self.faceRectangleLayer setHidden:YES];
+        }
+        
+        if(self.doLivenessDetection && !self.isRecording && !self.lookingIntoCam){
+            [self setMessage:[ResponseManager getMessage:@"LOOK_INTO_CAM"]];
+            [self.cancelButton setTitle:[ResponseManager getMessage:@"Cancel"] forState:UIControlStateNormal];
+        }
+        if(self.doLivenessDetection && !self.isRecording && self.lookingIntoCam && !self.isProcessing){
+            [self setMessage:self.livenessInstruction];
+            [self.cancelButton setTitle:[ResponseManager getMessage:@"Continue"] forState:UIControlStateNormal];
         }
     }
     
-    if(faceFound) {
-        self.lookingIntoCamCounter += 1;
-        self.lookingIntoCam = self.lookingIntoCamCounter > MAX_TIME_TO_WAIT_TILL_FACE_FOUND;
-        if (self.lookingIntoCam && !self.verificationStarted) {
-            self.verificationStarted = YES;
-            [self startVerificationProcess];
+    else{
+        BOOL faceFound = NO;
+        for(AVMetadataObject *metadataObject in metadataObjects) {
+            if([metadataObject.type isEqualToString:AVMetadataObjectTypeFace]) {
+                faceFound = YES;
+                AVMetadataObject * face = [self.previewLayer transformedMetadataObjectForMetadataObject:metadataObject];
+                [Utilities showFaceRectangle:self.faceRectangleLayer face:face];
+            }
         }
-    } else {
-        self.lookingIntoCam = NO;
-        self.lookingIntoCamCounter = 0;
-        [self.faceRectangleLayer setHidden:YES];
+        
+        if(faceFound) {
+            self.lookingIntoCamCounter += 1;
+            self.lookingIntoCam = self.lookingIntoCamCounter > MAX_TIME_TO_WAIT_TILL_FACE_FOUND;
+            if (self.lookingIntoCam && !self.verificationStarted) {
+                self.verificationStarted = YES;
+                [self startVerificationProcess];
+            }
+        } else {
+            self.lookingIntoCam = NO;
+            self.lookingIntoCamCounter = 0;
+            [self.faceRectangleLayer setHidden:YES];
+        }
     }
 }
 
@@ -473,19 +656,19 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     if(!self.lookingIntoCam){
         return;
     }
-        if (self.isRecording && !self.enoughRecordingTimePassed && self.isReadyToWrite){
-            CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-            // a very dense way to keep track of the time at which this frame
-            // occurs relative to the output stream, but it's just an example!
-            static int64_t frameNumber = 0;
-            if(self.assetWriterInput.readyForMoreMediaData){
-                if(self.pixelBufferAdaptor != nil){
-                    [self.pixelBufferAdaptor appendPixelBuffer:imageBuffer
-                                          withPresentationTime:CMTimeMake(frameNumber, 25)];
-                    frameNumber++;
-                }
+    if (self.isRecording && !self.enoughRecordingTimePassed && self.isReadyToWrite){
+        CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+        // a very dense way to keep track of the time at which this frame
+        // occurs relative to the output stream, but it's just an example!
+        static int64_t frameNumber = 0;
+        if(self.assetWriterInput.readyForMoreMediaData){
+            if(self.pixelBufferAdaptor != nil){
+                [self.pixelBufferAdaptor appendPixelBuffer:imageBuffer
+                                      withPresentationTime:CMTimeMake(frameNumber, 25)];
+                frameNumber++;
             }
         }
+    }
 }
 
 #pragma mark - Cleanup Methods

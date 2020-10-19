@@ -34,6 +34,7 @@
 @property(nonatomic, strong) dispatch_queue_t videoDataOutputQueue;
 @property(nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
 @property (nonatomic, strong) NSData *finalCapturedPhotoData;
+@property (nonatomic,strong) AVAudioPlayer *player;
 
 #pragma mark -  Boolean Switches
 @property BOOL lookingIntoCam;
