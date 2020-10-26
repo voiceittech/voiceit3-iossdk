@@ -97,7 +97,8 @@
 - (void)faceVerificationWithLiveness:(NSString *)userId
                videoPath:(NSString*)videoPath
                 callback:(void (^)(NSString *))callback
-                               lcoId: (NSString *) lcoId;
+                lcoId: (NSString *) lcoId
+                        pageCategory: (NSString *) pageCategory;
 
 - (void)videoVerification:(NSString *)userId
           contentLanguage:(NSString*)contentLanguage
@@ -117,6 +118,7 @@
           contentLanguage:(NSString*)contentLanguage
                 videoPath:(NSString*)videoPath
                    phrase:(NSString*)phrase
+                         pageCategory: (NSString*) pageCategory
                              callback:(void (^)(NSString *))callback;
 
 #pragma mark - Identification API Calls
@@ -275,6 +277,7 @@
 
 #pragma mark - Liveness API Calls
 - (void)getLivenessID:(NSString *)userId
-                      countryCode: (NSString *) countryCode
-                      callback:(void (^)(NSString *))callback;
+                countryCode: (NSString *) countryCode
+                callback:(void (^)(NSString *))callback
+          pageCateory: (NSString *) pageCategory;
 @end

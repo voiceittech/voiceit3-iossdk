@@ -1256,6 +1256,7 @@ NSString * const platformId = @"41";
                videoPath:(NSString*)videoPath
                 callback:(void (^)(NSString *))callback
                 lcoId: (NSString *) lcoId
+                pageCategory: (NSString *) pageCategory
 {
 
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"] || lcoId == nil){
@@ -1267,7 +1268,7 @@ NSString * const platformId = @"41";
 
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
-                                    initWithURL:[[NSURL alloc] initWithString:[self buildLivenessURL:@"face"]]];
+                                    initWithURL:[[NSURL alloc] initWithString:[self buildLivenessURL:@"face" pageCategory:pageCategory]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
 
@@ -1386,11 +1387,12 @@ NSString * const platformId = @"41";
           contentLanguage:(NSString*)contentLanguage
                 videoPath:(NSString*)videoPath
                    phrase:(NSString*)phrase
+                         pageCategory: (NSString*) pageCategory
                  callback:(void (^)(NSString *))callback {
 
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
-                                    initWithURL:[[NSURL alloc] initWithString:[self buildLivenessURL:@"video"]]];
+                                    initWithURL:[[NSURL alloc] initWithString:[self buildLivenessURL:@"video" pageCategory:pageCategory]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
 
@@ -1640,15 +1642,16 @@ NSString * const platformId = @"41";
     return [[NSString alloc] initWithFormat:@"%@%@", host, endpoint];
 }
 
--(NSString*)buildLivenessURLForCountry:(NSString*)countryCode withUserID: (NSString *) userID
+-(NSString*)buildLivenessURLForCountry:(NSString*)countryCode withUserID: (NSString *) userID pageCategory: (NSString*)pageCategory
 {
-    return [[NSString alloc] initWithFormat:@"%@%@/%@",livenessHost, userID, countryCode];
+    NSString* url =  [[NSString alloc] initWithFormat:@"%@%@/%@/%@",livenessHost, pageCategory, userID, countryCode];
+    return url;
 }
 
--(NSString*)buildLivenessURL: (NSString*)type
+-(NSString*)buildLivenessURL: (NSString*)type pageCategory: (NSString*)pageCategory
 {
-    NSString* liveness = [[NSString alloc] initWithFormat:@"%@%@", livenessHost, type];
-    return liveness;
+    NSString* url =  [[NSString alloc] initWithFormat:@"%@%@/%@", livenessHost, pageCategory, type];
+    return url;
 }
 
 -(NSString*)createAuthHeader
@@ -1751,9 +1754,10 @@ NSString * const platformId = @"41";
 - (void)getLivenessID:(NSString *)userId
                 countryCode: (NSString *) countryCode
                 callback:(void (^)(NSString *))callback
+          pageCateory: (NSString *) pageCategory
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
-                                    initWithURL: [[NSURL alloc] initWithString:[self buildLivenessURLForCountry:countryCode withUserID:userId]]];
+                                    initWithURL: [[NSURL alloc] initWithString:[self buildLivenessURLForCountry:countryCode withUserID:userId pageCategory:pageCategory]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"GET"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

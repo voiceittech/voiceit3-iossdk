@@ -183,7 +183,7 @@
             [self setupVideoProcessing];
             [self setupScreen];
         });
-    }];
+    } pageCateory:@"verification"];
 }
 
 #pragma mark - Setup Methods
@@ -433,7 +433,7 @@
     [self.myVoiceIt faceVerificationWithLiveness:self.userToVerifyUserId videoPath:self.videoPath callback:^(NSString *jsonResponse){
         NSLog(@"%@",jsonResponse);
         [self handleLivenessResponse:jsonResponse];
-    } lcoId: self.lcoId];
+    } lcoId: self.lcoId pageCategory:@"verification"];
 }
 
 -(void)stopWritingToVideoFile {

@@ -153,7 +153,7 @@
             [self setupScreen];
             [self setupCameraCircle];
         });
-    }];
+    } pageCateory:@"verification"];
 }
 
 -(void)setLivenessChallengeMessages{
@@ -679,7 +679,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     if(self.doLivenessDetection){
         [Utilities mergeAudio:self.audioPath withVideo:self.videoPath andSaveToPathUrl:self.savedVideoPath completion:^ {
             
-            [self.myVoiceIt videoVerificationWithLiveness:self.lcoId userId: self.userToVerifyUserId contentLanguage:self.contentLanguage videoPath:self.savedVideoPath phrase:self.thePhrase callback:^(NSString * result) {
+            [self.myVoiceIt videoVerificationWithLiveness:self.lcoId userId: self.userToVerifyUserId contentLanguage:self.contentLanguage videoPath:self.savedVideoPath phrase:self.thePhrase pageCategory:@"verification" callback:^(NSString * result) {
                 [self handleLivenessResponse: result];
             }];
         }];

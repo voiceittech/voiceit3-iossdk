@@ -17,10 +17,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.API_KEY = @"key_ca7825c5dc814a889ac83a76ca1aecef";
-    self.API_TOKEN = @"tok_e76ff102577248e9b00339fca47a2e27";
-    self.TEST_USER_ID_ONE = @"usr_19fe7365ff5848108580260ce15f3495";
-    self.TEST_USER_ID_TWO = @"usr_3ee09a2113fa45d5b5afbc56d922aaf2";
+//    self.API_KEY = @"key_ca7825c5dc814a889ac83a76ca1aecef";
+//    self.API_TOKEN = @"tok_e76ff102577248e9b00339fca47a2e27";
+//    self.TEST_USER_ID_ONE = @"usr_19fe7365ff5848108580260ce15f3495";
+//    self.TEST_USER_ID_TWO = @"usr_3ee09a2113fa45d5b5afbc56d922aaf2";
+    
+    //STAGING
+    self.API_KEY = @"key_425737312aa1450eb4ddd1ea928588b1";
+    self.API_TOKEN = @"tok_be382af6831846cc98876f32cf8c54d5";
+    self.TEST_USER_ID_ONE = @"usr_f500cf2f2e004aeea572fb5e1cefae59";
+    self.TEST_USER_ID_TWO = @"usr_f500cf2f2e004aeea572fb5e1cefae59";
     self.TEST_USER_ID = self.TEST_USER_ID_ONE;
     self.TEST_GROUP_ID = @"GROUP_ID_HERE";
     self.TEST_PHRASE = @"never forget tomorrow is a new day";
