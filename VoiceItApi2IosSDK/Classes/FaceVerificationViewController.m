@@ -294,14 +294,15 @@
         NSURL * bundleURL = [[podBundle resourceURL] URLByAppendingPathComponent:@"VoiceItApi2IosSDK.bundle"];
         NSString* soundFilePath;
         if([lco isEqualToString:@"FACE_LEFT"]){
-            soundFilePath = [NSString stringWithFormat:@"%@/FACE_LEFT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/es-ES/FACE_LEFT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
         }
         else if([lco isEqualToString:@"FACE_RIGHT"]){
-            soundFilePath = [NSString stringWithFormat:@"%@/FACE_RIGHT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/es-ES/FACE_RIGHT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
         }
         else if([lco isEqualToString:@"SMILE"]){
-            soundFilePath = [NSString stringWithFormat:@"%@/SMILE.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/es-ES/SMILE.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
         }
+        
         NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
         NSError *error;
         AVAudioSession *session = [AVAudioSession sharedInstance];
