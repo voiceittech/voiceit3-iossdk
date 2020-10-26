@@ -26,8 +26,10 @@
 @property BOOL isChallengeRetrieved;
 @property NSString *lcoId;
 @property NSString *result;
+@property NSString *countryCode;
 @property NSString *uiMessage;
 @property NSString *livenessInstruction;
+@property NSString *audioPromptType;
 @property BOOL isProcessing;
 @property Liveness *livenessDetector;
 @property BOOL success;
@@ -64,6 +66,7 @@
     self.isProcessing = NO;
     self.isReadyToWrite = NO;
     self.enoughRecordingTimePassed = NO;
+    self.countryCode = @"en-US";
     
     // Do any additional setup after loading the view.
     [self.progressView setHidden:YES];
@@ -106,6 +109,7 @@
     self.uiMessage = [jsonObj objectForKey:@"uiMessage"];
     BOOL retry = [[jsonObj objectForKey:@"retry"] boolValue];
     self.success = [[jsonObj objectForKey:@"success"] boolValue];
+    self.audioPromptType = [jsonObj objectForKey:@"audioPrompt"];
     self.result = result;
     
     if(!self.success && retry){
@@ -121,6 +125,7 @@
             [self.messageLabel setText:self.uiMessage];
         });
         [Utilities deleteFile:self.videoPath];
+        [self playSound:self.audioPromptType];
     }
     
     if(self.success){
@@ -130,6 +135,7 @@
             [self.messageLabel setText:self.uiMessage];
         });
         [Utilities deleteFile:self.videoPath];
+        [self playSound:self.audioPromptType];
     }
 }
 
@@ -290,19 +296,46 @@
 
 -(void) playSound:(NSString*) lco{
     if(self.doAudioPrompts){
+        float time = [self.livenessChallengeTime floatValue];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, time * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self.player stop];
+        });
         NSBundle * podBundle = [NSBundle bundleForClass: self.classForCoder];
         NSURL * bundleURL = [[podBundle resourceURL] URLByAppendingPathComponent:@"VoiceItApi2IosSDK.bundle"];
         NSString* soundFilePath;
         if([lco isEqualToString:@"FACE_LEFT"]){
-            soundFilePath = [NSString stringWithFormat:@"%@/wav/es-ES/FACE_LEFT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/%@/FACE_LEFT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath],self.countryCode];
         }
         else if([lco isEqualToString:@"FACE_RIGHT"]){
-            soundFilePath = [NSString stringWithFormat:@"%@/wav/es-ES/FACE_RIGHT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/%@/FACE_RIGHT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath],self.countryCode];
         }
         else if([lco isEqualToString:@"SMILE"]){
-            soundFilePath = [NSString stringWithFormat:@"%@/wav/es-ES/SMILE.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath]];
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/%@/SMILE.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath],self.countryCode];
         }
-        
+        else if([lco isEqualToString:@"FACE_NEUTRAL"]){
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/%@/FACE_NEUTRAL.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath],self.countryCode];
+        }
+        else if([lco isEqualToString:@"FACE_TILT_RIGHT"]){
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/%@/FACE_TILT_RIGHT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath],self.countryCode];
+        }
+        else if([lco isEqualToString:@"FACE_TILT_LEFT"]){
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/%@/FACE_TILT_LEFT.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath],self.countryCode];
+        }
+        else if([lco isEqualToString:@"FACE_UP"]){
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/%@/FACE_UP.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath],self.countryCode];
+        }
+        else if([lco isEqualToString:@"FACE_DOWN"]){
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/%@/FACE_DOWN.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath],self.countryCode];
+        }
+        else if([lco isEqualToString:@"LIVENESS_FAILED"]){
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/%@/LIVENESS_FAILED.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath],self.countryCode];
+        }
+        else if([lco isEqualToString:@"LIVENESS_SUCCESS"]){
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/%@/LIVENESS_SUCCESS.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath],self.countryCode];
+        }
+        else if([lco isEqualToString:@"LIVENESS_TRY_AGAIN"]){
+            soundFilePath = [NSString stringWithFormat:@"%@/wav/%@/LIVENESS_TRY_AGAIN.wav",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath],self.countryCode];
+        }
         NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
         NSError *error;
         AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -314,6 +347,7 @@
 }
 
 -(void) illuminateCircles:(NSString*) lcoSignal{
+    [self playSound:lcoSignal];
     if ([lcoSignal isEqualToString:@"FACE_UP"]) {
         self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 1.2 * M_PI endAngle: 1.8 * M_PI clockwise:YES].CGPath;
         self.progressCircle.drawsAsynchronously = YES;
@@ -324,19 +358,12 @@
         self.progressCircle.drawsAsynchronously = YES;
         self.progressCircle.borderWidth = 20;
         self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
-    } else if ([lcoSignal isEqualToString:@"FACE_DOWN"]) {
-        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 0 endAngle: M_PI clockwise:YES].CGPath;
-        self.progressCircle.drawsAsynchronously = YES;
-        self.progressCircle.borderWidth = 20;
-        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
     } else if ([lcoSignal isEqualToString:@"FACE_RIGHT"]) {
-        [self playSound:lcoSignal];
         self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 1.75 * M_PI endAngle: 0.25 * M_PI clockwise:YES].CGPath;
         self.progressCircle.drawsAsynchronously = YES;
         self.progressCircle.borderWidth = 20;
         self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
     } else if ([lcoSignal isEqualToString:@"FACE_LEFT"]) {
-        [self playSound:lcoSignal];
         self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 0.75 * M_PI endAngle: 1.25 * M_PI clockwise:YES].CGPath;
         self.progressCircle.borderWidth = 20;
         self.progressCircle.drawsAsynchronously = YES;
@@ -351,8 +378,6 @@
         self.progressCircle.borderWidth = 20;
         self.progressCircle.drawsAsynchronously = YES;
         self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
-    } else if ([lcoSignal isEqualToString:@"SMILE"]){
-        [self playSound:lcoSignal];
     }
 }
 
