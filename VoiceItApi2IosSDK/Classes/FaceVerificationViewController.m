@@ -110,9 +110,11 @@
     self.audioPromptType = [jsonObj objectForKey:@"audioPrompt"];
     self.result = result;
     
+    [Utilities deleteFile:self.videoPath];
+        
     if(!self.success && retry){
         [self removeLoading];
-        [Utilities deleteFile:self.videoPath];
+        [self setMessage:self.uiMessage];
         [self playSound:self.audioPromptType];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             [self startRecording];
@@ -125,7 +127,6 @@
             [self.cancelButton setTitle:[ResponseManager getMessage:@"Cancel"] forState:UIControlStateNormal];
             [self.messageLabel setText:self.uiMessage];
         });
-        [Utilities deleteFile:self.videoPath];
         [self playSound:self.audioPromptType];
     }
     
@@ -135,7 +136,6 @@
             [self.cancelButton setTitle:[ResponseManager getMessage:@"Done"] forState:UIControlStateNormal];
             [self.messageLabel setText:self.uiMessage];
         });
-        [Utilities deleteFile:self.videoPath];
         [self playSound:self.audioPromptType];
     }
 }
@@ -552,10 +552,8 @@
 
 -(void)stopRecording{
     self.isRecording = NO;
-    if(self.doLivenessDetection){
+    if(!self.doLivenessDetection){
         [self setEnoughRecordingTimePassed:YES];
-    }else{
-        [self setEnoughRecordingTimePassed:NO];
     }
     [self stopWritingToVideoFile];
 }
