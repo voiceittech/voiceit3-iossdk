@@ -332,7 +332,7 @@
     if([lco isEqualToString:@"FACE_NEUTRAL.wav"])
         return @"FACE_NEUTRAL_ES.wav";
     if([lco isEqualToString:@"FACE_UP.wav"])
-        return @"FACE_UP.wav";
+        return @"FACE_UP_ES.wav";
     if([lco isEqualToString:@"LIVENESS_FAILED.wav"])
         return @"LIVENESS_FAILED_ES.wav";
     if([lco isEqualToString:@"LIVENESS_SUCCESS.wav"])
