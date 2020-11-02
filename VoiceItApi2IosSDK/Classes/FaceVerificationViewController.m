@@ -306,7 +306,8 @@
         });
         NSBundle * podBundle = [NSBundle bundleForClass: self.classForCoder];
         NSURL * bundleURL = [[podBundle resourceURL] URLByAppendingPathComponent:@"VoiceItApi2IosSDK.bundle"];
-        NSString* soundFilePath = [NSString stringWithFormat:@"%@/%@",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath], lco];
+        NSString* soundFilePath = [self.contentLanguage isEqualToString:@"es-ES"] ?
+        [NSString stringWithFormat:@"%@/%@",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath], [self getSpanishPrompts:lco]] : [NSString stringWithFormat:@"%@/%@",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath], lco];
         NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
         NSError *error;
         AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -315,6 +316,32 @@
         self.player.numberOfLoops = 0; //Infinite
         [self.player play];
     }
+}
+
+-(NSString*) getSpanishPrompts: (NSString*)lco{
+    if([lco isEqualToString:@"FACE_DOWN.wav"])
+        return @"FACE_DOWN_ES.wav";
+    if([lco isEqualToString:@"FACE_LEFT.wav"])
+        return @"FACE_LEFT_ES.wav";
+    if([lco isEqualToString:@"FACE_RIGHT.wav"])
+        return @"FACE_RIGHT_ES.wav";
+    if([lco isEqualToString:@"FACE_TILT_LEFT.wav"])
+        return @"FACE_TILT_LEFT_ES.wav";
+    if([lco isEqualToString:@"FACE_TILT_RIGHT.wav"])
+        return @"FACE_TILT_RIGHT_ES.wav";
+    if([lco isEqualToString:@"FACE_NEUTRAL.wav"])
+        return @"FACE_NEUTRAL_ES.wav";
+    if([lco isEqualToString:@"FACE_UP.wav"])
+        return @"FACE_UP.wav";
+    if([lco isEqualToString:@"LIVENESS_FAILED.wav"])
+        return @"LIVENESS_FAILED_ES.wav";
+    if([lco isEqualToString:@"LIVENESS_SUCCESS.wav"])
+        return @"LIVENESS_SUCCESS_ES.wav";
+    if([lco isEqualToString:@"LIVENESS_TRY_AGAIN.wav"])
+        return @"LIVENESS_TRY_AGAIN.wav";
+    if([lco isEqualToString:@"SMILE.wav"])
+        return @"SMILE_ES.wav";
+    return @"";
 }
 
 -(void) illuminateCircles:(NSString*) lcoSignal{
