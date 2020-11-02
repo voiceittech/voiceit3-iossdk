@@ -25,7 +25,7 @@ s.source           = { :git => 'https://github.com/voiceittech/VoiceItApi2IosSDK
 
 s.ios.deployment_target = '11.0'
 s.static_framework = true
-s.source_files = 'VoiceItApi2IosSDK/Classes/**/*.{h,m}'
+s.source_files = 'VoiceItApi2IosSDK/Classes/**/*.{h,m}','Audio/**/*.{wav}'
 
 s.resource_bundles = {
   'VoiceItApi2IosSDK' => ['VoiceItApi2IosSDK/Classes/**/*.{lproj,storyboard,xib,xcassets,strings}','Audio/**/*.{wav}']
