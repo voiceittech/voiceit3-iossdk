@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import VoiceIt2-IosSDK
+@testable import VoiceIt2_IosSDK
 
 class VoiceItTest : XCTestCase {
     var myVoiceIt:VoiceItAPITwo?

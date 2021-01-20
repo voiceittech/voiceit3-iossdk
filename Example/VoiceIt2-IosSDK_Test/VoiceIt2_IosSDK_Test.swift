@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 
-class VoiceIt2-IosSDK_Test: VoiceItTest {
+class VoiceIt2IosSDK_Test: VoiceItTest {
     var usersToDelete = [UserResponse]()
     var groupsToDelete = [GroupResponse]()
     override func setUp() {
