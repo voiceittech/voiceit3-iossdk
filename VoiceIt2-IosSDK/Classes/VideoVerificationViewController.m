@@ -99,9 +99,6 @@
     
     if(!self.success && retry){
         [self removeLoading];
-        [Utilities deleteFile:self.audioPath];
-        [Utilities deleteFile:self.videoPath];
-        [Utilities deleteFile:self.savedVideoPath];
         [self playSound:self.audioPromptType];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             [self startVerificationProcess];
@@ -112,11 +109,6 @@
         [self removeLoading];
         // Play LCO Failed Audio File
         [self playSound:self.audioPromptType];
-        // Delete video file
-        [Utilities deleteFile:self.audioPath];
-        [Utilities deleteFile:self.videoPath];
-        [Utilities deleteFile:self.savedVideoPath];
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.messageLabel setText:self.uiMessage];
         });
@@ -131,10 +123,6 @@
     
     if(self.success){
         [self removeLoading];
-        [Utilities deleteFile:self.audioPath];
-        // Delete Video Files
-        [Utilities deleteFile:self.videoPath];
-        [Utilities deleteFile:self.savedVideoPath];
         [self playSound:self.audioPromptType];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -175,7 +163,10 @@
 
 -(void)setLivenessChallengeMessages{
     self.hasSessionEnded = NO;
+    //start recording video
     [self startWritingToVideoFile];
+    //start recording audio for liveness + 5 sec
+    //after liveness + 4 sec time autmatically audioRecorderDidFinishRecording is called
     [self startRecording];
     [self setMessage:[self.lcoStrings firstObject]];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -676,6 +667,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 #pragma mark - AVAudioRecorderDelegate Methods
 
 -(void)startWritingToVideoFile{
+    self.isReadyToWrite = YES;
     NSDictionary *outputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
                                     [NSNumber numberWithInt:640], AVVideoWidthKey, [NSNumber numberWithInt:480], AVVideoHeightKey, AVVideoCodecTypeH264, AVVideoCodecKey,nil];
     self.assetWriterInput = [AVAssetWriterInput  assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:outputSettings];
@@ -700,16 +692,17 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     self.assetWriterInput.expectsMediaDataInRealTime = YES;
     [self.assetWriterMyData startWriting];
     [self.assetWriterMyData startSessionAtSourceTime:kCMTimeZero];
-    self.isReadyToWrite = YES;
 }
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag{
+    // called after liveness + 5 sec lapse
     if(!self.continueRunning){
         return;
     }
     [self setAudioSessionInactive];
     self.isRecording = NO;
     self.progressCircle.strokeColor = [UIColor clearColor].CGColor;
+    //stop writing to video file and save file
     [self stopWritingToVideoFile];
     [self showLoading];
     self.hasSessionEnded = YES;
@@ -776,14 +769,23 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 -(void)stopWritingToVideoFile {
     self.isReadyToWrite = NO;
+    //make sure file writing is completed
     [self.assetWriterMyData finishWritingWithCompletionHandler:^{
         if(!self.continueRunning){
             return;
         }
+        // exclusively for liveness enabled
+        // merge files as audio and video ones are written and ready
         if(self.doLivenessDetection){
             self.savedVideoPath = [Utilities pathForTemporaryMergedFileWithSuffix:@"mov"];
             [Utilities mergeAudio:self.audioPath withVideo:self.videoPath andSaveToPathUrl:self.savedVideoPath completion:^ {
+                //After merge complete fire the verification api call
                 [self.myVoiceIt videoVerificationWithLiveness:self.lcoId userId: self.userToVerifyUserId contentLanguage:self.contentLanguage videoPath:self.savedVideoPath phrase:self.thePhrase pageCategory:@"verification" callback:^(NSString * result) {
+                    //delete all files when response arrives
+                    [Utilities deleteFile:self.audioPath];
+                    [Utilities deleteFile:self.videoPath];
+                    [Utilities deleteFile:self.savedVideoPath];
+                    //handle response and maybe start again
                     [self handleLivenessResponse: result];
                 }];
             }];
