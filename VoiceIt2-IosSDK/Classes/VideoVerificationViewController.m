@@ -632,16 +632,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         });
         return;
     }
-    // Don't do any analysis when not looking into the camera with liveness test enabled
-    // Set button to Cancel and change message to Look into Camera
-    if(!self.lookingIntoCam && self.doLivenessDetection &&
-       !self.isRecording && !self.hasSessionEnded){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.messageLabel setText: [ResponseManager getMessage:@"LOOK_INTO_CAM"]];
-            [self.cancelButton setTitle:[ResponseManager getMessage:@"Cancel"] forState:UIControlStateNormal];
-        });
-        return;
-    }
     // When enough looking into camera time has passed and recording has not yet begun
     if(self.lookingIntoCamCounter > 5 && self.imageNotSaved && !self.doLivenessDetection){
         // Convert to CIPixelBuffer for faceDetector
@@ -651,49 +641,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         // Create CIImage for faceDetector
         CIImage *image = [CIImage imageWithCVImageBuffer:pixelBuffer];
         [self saveImageData:image];
-    }
-    // When enough looking into camera time has passed and recording has not yet begun liveness
-    // Change message to liveness instruction and button nature to continue
-    if(self.lookingIntoCamCounter > 5 && !self.isRecording && self.doLivenessDetection){
-        if(self.hasSessionEnded && !self.success){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.cancelButton setTitle:[ResponseManager getMessage:@"Cancel"] forState:UIControlStateNormal];
-            });
-        }
-        
-        if(self.hasSessionEnded && self.success){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.cancelButton setTitle:[ResponseManager getMessage:@"Done"] forState:UIControlStateNormal];
-            });
-        }
-        if(!self.hasSessionEnded) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.cancelButton setTitle:[ResponseManager getMessage:@"Continue"] forState:UIControlStateNormal];
-                [self.messageLabel setText: self.livenessInstruction];
-            });
-        }
-    }
-    // When recording is complete and Service session is active DO NOT
-    // change to continue
-    if(self.lookingIntoCamCounter > 5 && self.isRecording && self.doLivenessDetection){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.cancelButton setTitle:[ResponseManager getMessage:@"Cancel"] forState:UIControlStateNormal];
-        });
-    }
-    
-    // Start recording and saving video when liveness is enabled and user hits continue
-    if (self.isReadyToWrite && self.doLivenessDetection){
-        CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-        // a very dense way to keep track of the time at which this frame
-        // occurs relative to the output stream, but it's just an example!
-        static int64_t frameNumber = 0;
-        if(self.assetWriterInput.readyForMoreMediaData){
-            if(self.pixelBufferAdaptor != nil){
-                [self.pixelBufferAdaptor appendPixelBuffer:imageBuffer
-                                      withPresentationTime:CMTimeMake(frameNumber, 25)];
-                frameNumber++;
-            }
-        }
     }
 }
 
