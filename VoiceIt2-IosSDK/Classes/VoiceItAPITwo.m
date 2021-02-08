@@ -916,27 +916,27 @@ NSString * const platformId = @"41";
 
 - (void)encapsulatedFaceIdentification:(NSString *)groupId
                    doLivenessDetection:(bool)doLivenessDetection
-                       contentLanguage:(NSString *)contentLanguage
                         doAudioPrompts:(bool)doAudioPrompts
+                       contentLanguage:(NSString *)contentLanguage
            userIdentificationCancelled:(void (^)(void))userIdentificationCancelled
           userIdentificationSuccessful:(void (^)(float, NSString *, NSString *))userIdentificationSuccessful
               userIdentificationFailed:(void (^)(float, NSString *))userIdentificationFailed
 {
         [self encapsulatedFaceIdentification:groupId
                          doLivenessDetection:doLivenessDetection
-                             contentLanguage:contentLanguage
                               doAudioPrompts:(bool)doAudioPrompts
+                             contentLanguage:contentLanguage
                              numFailsAllowed:3
                livenessChallengeFailsAllowed:0
-                 userIdentificationCancelled: userIdentificationCancelled
+                 userIdentificationCancelled:userIdentificationCancelled
                 userIdentificationSuccessful:userIdentificationSuccessful userIdentificationFailed:userIdentificationFailed
         ];
 }
 
 - (void)encapsulatedFaceIdentification:(NSString *)groupId
                    doLivenessDetection:(bool)doLivenessDetection
-                       contentLanguage:(NSString *) contentLanguage
                         doAudioPrompts:(bool)doAudioPrompts
+                       contentLanguage:(NSString *) contentLanguage
                        numFailsAllowed:(int)numFailsAllowed
          livenessChallengeFailsAllowed:(int)livenessChallengeFailsAllowed
            userIdentificationCancelled:(void (^)(void))userIdentificationCancelled

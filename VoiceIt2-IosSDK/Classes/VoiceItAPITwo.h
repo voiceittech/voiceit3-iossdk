@@ -241,8 +241,8 @@
 
 - (void)encapsulatedFaceIdentification:(NSString *)groupId
                    doLivenessDetection:(bool)doLivenessDetection
-                       contentLanguage:(NSString *)contentLanguage
                         doAudioPrompts:(bool)doAudioPrompts
+                       contentLanguage:(NSString *)contentLanguage
            userIdentificationCancelled:(void (^)(void))userIdentificationCancelled
           userIdentificationSuccessful:(void (^)(float, NSString *, NSString *))userIdentificationSuccessful
               userIdentificationFailed:(void (^)(float, NSString *))userIdentificationFailed;
@@ -250,6 +250,7 @@
 - (void)encapsulatedFaceIdentification:(NSString *)groupId
                    doLivenessDetection:(bool)doLivenessDetection
                         doAudioPrompts:(bool)doAudioPrompts
+                       contentLanguage:(NSString *)contentLanguage
                        numFailsAllowed:(int)numFailsAllowed
          livenessChallengeFailsAllowed:(int)livenessChallengeFailsAllowed
            userIdentificationCancelled:(void (^)(void))userIdentificationCancelled
