@@ -8,7 +8,6 @@
 
 #import "VideoIdentificationViewController.h"
 #import "Styles.h"
-#import "Liveness.h"
 
 @interface VideoIdentificationViewController ()
 @property(nonatomic, strong)  VoiceItAPITwo * myVoiceIt;
@@ -17,7 +16,14 @@
 @property CGFloat backgroundWidthHeight;
 @property NSTimer * timer;
 @property int currentChallenge;
-@property Liveness * livenessDetector;
+@property BOOL isChallengeRetrieved;
+@property NSString *lcoId;
+@property NSNumber *livenessChallengeTime;
+@property NSString *uiMessage;
+@property NSString *livenessInstruction;
+@property NSArray *lco;
+@property NSString *audioPromptType;
+@property NSArray *lcoStrings;
 @end
 
 @implementation VideoIdentificationViewController
@@ -44,14 +50,16 @@
     self.lookingIntoCamCounter = 0;
     self.failCounter = 0;
     
-    // Do any additional setup after loading the view.
-    [self.progressView setHidden:YES];
-    
-    // Set up the AVCapture Session
-    [self setupCaptureSession];
-    [self setupVideoProcessing];
-    
-    [self setupScreen];
+    if(self.doLivenessDetection) {
+        [self setLivenessData];
+    } else{
+        // Do any additional setup after loading the view.
+        [self.progressView setHidden:YES];
+        // Set up the AVCapture Session
+        [self setupCaptureSession];
+        [self setupVideoProcessing];
+        [self setupScreen];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -90,8 +98,8 @@
 - (void)setupVideoProcessing {
     self.videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
     NSDictionary *rgbOutputSettings = @{
-                                        (__bridge NSString*)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA)
-                                        };
+        (__bridge NSString*)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA)
+    };
     [self.videoDataOutput setVideoSettings:rgbOutputSettings];
     
     if (![self.captureSession canAddOutput:self.videoDataOutput]) {
@@ -113,6 +121,31 @@
     NSError * videoError;
     AVCaptureDeviceInput * videoInput = [AVCaptureDeviceInput deviceInputWithDevice: self.videoDevice error:&videoError];
     [self.captureSession addInput:videoInput];
+    //Add Audio when doing liveness
+    if(self.doLivenessDetection){
+        AVCaptureDevice *audioCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+        NSError *error = nil;
+        AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioCaptureDevice error:&error];
+        if (audioInput){
+            [self.captureSession addInput:audioInput];
+        }
+        self.movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+        Float64 TotalSeconds = 60;
+        int32_t preferredTimeScale = 30;
+        CMTime maxDuration = CMTimeMakeWithSeconds(TotalSeconds, preferredTimeScale);
+        self.movieFileOutput.maxRecordedDuration = maxDuration;
+        self.movieFileOutput.minFreeDiskSpaceLimit = 1024 * 1024;
+        if ([self.captureSession canAddOutput:self.movieFileOutput]){
+            [self.captureSession addOutput:self.movieFileOutput];
+            [self.captureSession setSessionPreset:AVCaptureSessionPresetMedium];
+        }
+        AVCaptureConnection *CaptureConnection = [self.movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+        if ([CaptureConnection isVideoOrientationSupported])
+        {
+            AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
+            [CaptureConnection setVideoOrientation:orientation];
+        }
+    }
 }
 
 -(void)setupCameraCircle{
@@ -165,21 +198,170 @@
     [Utilities setupFaceRectangle:self.faceRectangleLayer];
     
     [self.rootLayer addSublayer:self.cameraBorderLayer];
-    if(self.doLivenessDetection){
-        self.livenessDetector = [[Liveness alloc] init:self cCP:self.cameraCenterPoint bgWH:self.backgroundWidthHeight cW:self.circleWidth rL:self.rootLayer mL:self.messageLabel doAudio:self.doAudioPrompts lFA:self.numberOfLivenessFailsAllowed livenessPassed:^(NSData * imageData) {
-            self.finalCapturedPhotoData = imageData;
-            [self startIdentificationProcess];
-        } livenessFailed:^{
-            self.continueRunning = NO;
-            self.livenessDetector.continueRunning = NO;
-            [self livenessFailedAction];
-        }];
-    }
     [self.rootLayer addSublayer:self.progressCircle];
     [self.rootLayer addSublayer:self.previewLayer];
     [self.previewLayer addSublayer:self.faceRectangleLayer];
     [self.captureSession commitConfiguration];
     [self.captureSession startRunning];
+}
+
+#pragma mark - Player and liveness generation
+
+- (IBAction)closeButtonClicked:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self userIdentificationCancelled]();
+    }];
+}
+
+-(void) playSound:(NSString*) lco{
+    if(self.doAudioPrompts){
+        float time = [self.livenessChallengeTime floatValue];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, time * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self.player stop];
+        });
+        NSBundle * podBundle = [NSBundle bundleForClass: self.classForCoder];
+        NSURL * bundleURL = [[podBundle resourceURL] URLByAppendingPathComponent:@"VoiceIt2-IosSDK.bundle"];
+        NSString* soundFilePath = [self.contentLanguage isEqualToString:@"es-ES"] ?
+        [NSString stringWithFormat:@"%@/%@",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath], [self getSpanishPrompts:lco]] : [NSString stringWithFormat:@"%@/%@",[[[NSBundle alloc] initWithURL:bundleURL] resourcePath], lco];
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        NSError *error;
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+        self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:&error];
+        self.player.numberOfLoops = 0; //Infinite
+        [self.player play];
+    }
+}
+
+-(NSString*) getSpanishPrompts: (NSString*)lco{
+    if([lco isEqualToString:@"FACE_DOWN.wav"])
+        return @"FACE_DOWN_ES.wav";
+    if([lco isEqualToString:@"FACE_LEFT.wav"])
+        return @"FACE_LEFT_ES.wav";
+    if([lco isEqualToString:@"FACE_RIGHT.wav"])
+        return @"FACE_RIGHT_ES.wav";
+    if([lco isEqualToString:@"FACE_TILT_LEFT.wav"])
+        return @"FACE_TILT_LEFT_ES.wav";
+    if([lco isEqualToString:@"FACE_TILT_RIGHT.wav"])
+        return @"FACE_TILT_RIGHT_ES.wav";
+    if([lco isEqualToString:@"FACE_NEUTRAL.wav"])
+        return @"FACE_NEUTRAL_ES.wav";
+    if([lco isEqualToString:@"FACE_UP.wav"])
+        return @"FACE_UP_ES.wav";
+    if([lco isEqualToString:@"LIVENESS_FAILED.wav"])
+        return @"LIVENESS_FAILED_ES.wav";
+    if([lco isEqualToString:@"LIVENESS_SUCCESS.wav"])
+        return @"LIVENESS_SUCCESS_ES.wav";
+    if([lco isEqualToString:@"LIVENESS_TRY_AGAIN.wav"])
+        return @"LIVENESS_TRY_AGAIN.wav";
+    if([lco isEqualToString:@"SMILE.wav"])
+        return @"SMILE_ES.wav";
+    return @"";
+}
+
+-(void) illuminateCircles:(NSString*) lcoSignal{
+    [self playSound: [NSString stringWithFormat:@"%@.wav",lcoSignal]];
+    if ([lcoSignal isEqualToString:@"FACE_UP"]) {
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 1.2 * M_PI endAngle: 1.8 * M_PI clockwise:YES].CGPath;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    } else if ([lcoSignal isEqualToString:@"FACE_DOWN"]) {
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 0.2 * M_PI endAngle: 0.8 * M_PI clockwise:YES].CGPath;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    } else if ([lcoSignal isEqualToString:@"FACE_RIGHT"]) {
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 1.75 * M_PI endAngle: 0.25 * M_PI clockwise:YES].CGPath;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    } else if ([lcoSignal isEqualToString:@"FACE_LEFT"]) {
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 0.75 * M_PI endAngle: 1.25 * M_PI clockwise:YES].CGPath;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    } else if([lcoSignal isEqualToString:@"FACE_TILT_LEFT"]){
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: -0.5 * M_PI endAngle:-M_PI clockwise:NO].CGPath;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    }else if([lcoSignal isEqualToString:@"FACE_TILT_RIGHT"]){
+        self.progressCircle.path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle: 0 endAngle: -0.4 * M_PI clockwise:NO].CGPath;
+        self.progressCircle.borderWidth = 20;
+        self.progressCircle.drawsAsynchronously = YES;
+        self.progressCircle.fillColor =  [UIColor greenColor].CGColor;
+    }
+}
+
+-(void)setLivenessChallengeMessages{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.cancelButton setTitle:[ResponseManager getMessage:@"Cancel"] forState:UIControlStateNormal];
+    });
+    [self recordVideoLiveness];
+    [self setMessage:[self.lcoStrings firstObject]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self illuminateCircles:[self.lco firstObject]];
+    });
+    
+    float timeToStop = [self.livenessChallengeTime floatValue] + 5.0;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, timeToStop * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self stopRecordingVideoLiveness];
+    });
+    
+    for(int i=1;i<self.lco.count;i++){
+        float time = [self.livenessChallengeTime floatValue]/(self.lco.count);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, time * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self setMessage:self.lcoStrings[i]];
+            [self illuminateCircles:self.lco[i]];
+        });
+    }
+}
+
+-(void)setLivenessData{
+    [self.messageLabel setText: [ResponseManager getMessage:@"LOOK_INTO_CAM"]];
+    [self.cancelButton setTitle:[ResponseManager getMessage:@"Cancel"] forState:UIControlStateNormal];
+    [[self myVoiceIt] getLivenessID:self.userToVerifyUserId countryCode:
+     self.contentLanguage callback:^(NSString *response) {
+        NSDictionary *data = [Utilities getJSONObject:response];
+        self.lcoStrings = [data valueForKey:@"lcoStrings"];
+        self.isChallengeRetrieved = [data valueForKey:@"success"];
+        self.lcoId = [data valueForKey:@"lcoId"];
+        self.livenessChallengeTime = [data valueForKey:@"livenessChallengeTime"];
+        self.lco = [data valueForKey:@"lco"];
+        self.livenessInstruction = [data valueForKey:@"uiLivenessInstruction"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setupCaptureSession];
+            [self setupVideoProcessing];
+            [self setupScreen];
+            [self setupCameraCircle];
+            [self.messageLabel setText: [ResponseManager getMessage:self.livenessInstruction]];
+            [self.cancelButton setTitle:[ResponseManager getMessage:@"Continue"] forState:UIControlStateNormal];
+        });
+    } pageCateory:@"verification"];
+}
+
+- (void)recordVideoLiveness
+{
+    NSString *outputPath = [Utilities pathForTemporaryFileWithSuffix:@"mov"];
+    NSURL *outputURL = [[NSURL alloc] initFileURLWithPath:outputPath];
+    [self.movieFileOutput startRecordingToOutputFileURL:outputURL recordingDelegate:self];
+}
+
+-(void) stopRecordingVideoLiveness
+{
+    [self.movieFileOutput stopRecording];
+}
+
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput
+didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
+      fromConnections:(NSArray *)connections
+                error:(NSError *)error
+{
+    //    [self.myVoiceIt videoVerificationWithLiveness:self.lcoId userId: self.userToVerifyUserId contentLanguage:self.contentLanguage videoPath:[outputFileURL path] phrase:self.thePhrase pageCategory:@"verification" callback:^(NSString * result) {
+    //        [self handleLivenessResponse: result];
+    //    }];
+    
 }
 
 #pragma mark - Action Methods
@@ -188,13 +370,6 @@
     [self startDelayedRecording:0.4];
 }
 
--(void)startDelayedLiveness:(NSTimeInterval)delayTime{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayTime * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        if(self.continueRunning){
-            [self.livenessDetector doLivenessDetection];
-        }
-    });
-}
 
 -(void)startDelayedRecording:(NSTimeInterval)delayTime{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayTime * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -209,36 +384,6 @@
     });
 }
 
--(void)livenessFailedAction{
-    if(self.doLivenessDetection){
-        self.livenessDetector.continueRunning = NO;
-    }
-    self.continueRunning = NO;
-    self.lookingIntoCam = NO;
-    [self setMessage: [ResponseManager getMessage:@"VIDEO_IDENTIFY_FAILED"]];
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.8 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self dismissViewControllerAnimated: YES completion:^{
-            NSError *error;
-            NSMutableDictionary * jsonResponse = [[NSMutableDictionary alloc] init];
-            [jsonResponse setObject:@"LDFA" forKey:@"responseCode"];
-            [jsonResponse setObject:@0.0 forKey:@"voiceConfidence"];
-            [jsonResponse setObject:@0.0 forKey:@"faceConfidence"];
-            [jsonResponse setObject:@"Liveness detection failed" forKey:@"message"];
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject: jsonResponse options:0 error:&error];
-            if (!jsonData) {
-                NSLog(@"Got an error: %@", error);
-            } else {
-                NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                [self userIdentificationFailed]( 0.0, 0.0, jsonString);
-            }
-        }];
-    });
-}
-
--(void)timerDone{
-    [self livenessFailedAction];
-}
 
 - (UIImage *)imageFromCIImage:(CIImage *)ciImage {
     CIContext *ciContext = [CIContext contextWithOptions:nil];
@@ -336,9 +481,27 @@
 }
 
 - (IBAction)cancelClicked:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:^{
-        [self userIdentificationCancelled]();
-    }];
+    if(!self.doLivenessDetection){
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self userIdentificationCancelled]();
+        }];
+    } else{
+        if(self.identificationStarted == YES && [self.cancelButton.titleLabel.text isEqual:@"Continue"]){
+            [self setLivenessChallengeMessages];
+        }
+        if(self.identificationStarted == NO || [self.cancelButton.titleLabel.text isEqual:@"Cancel"]){
+            [self dismissViewControllerAnimated:YES completion:^{
+                [self userIdentificationCancelled]();
+                [self.player stop];
+            }];
+        }
+        if([self.cancelButton.titleLabel.text isEqual:@"Done"]){
+            [self dismissViewControllerAnimated:YES completion:^{
+//                [self userIdentificationSuccessful](0,0,self.);
+            }];
+        }
+    }
+    
 }
 
 #pragma mark - Camera Delegate Methods
@@ -361,7 +524,7 @@ didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects
         if (self.lookingIntoCam && !self.identificationStarted) {
             self.identificationStarted = YES;
             if(self.doLivenessDetection){
-                [self.livenessDetector doLivenessDetection];
+                
             } else {
                 [self startIdentificationProcess];
             }
@@ -381,19 +544,14 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     if(!self.lookingIntoCam){
         return;
     }
-    
-    if(self.doLivenessDetection){
-        [self.livenessDetector processFrame:sampleBuffer];
-    } else {
-        if(self.lookingIntoCamCounter > 5 && self.imageNotSaved){
-            // Convert to CIPixelBuffer for faceDetector
-            CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-            if (pixelBuffer == NULL) { return; }
-            
-            // Create CIImage for faceDetector
-            CIImage *image = [CIImage imageWithCVImageBuffer:pixelBuffer];
-            [self saveImageData:image];
-        }
+    if(self.lookingIntoCamCounter > 5 && self.imageNotSaved){
+        // Convert to CIPixelBuffer for faceDetector
+        CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+        if (pixelBuffer == NULL) { return; }
+        
+        // Create CIImage for faceDetector
+        CIImage *image = [CIImage imageWithCVImageBuffer:pixelBuffer];
+        [self saveImageData:image];
     }
 }
 
@@ -407,73 +565,68 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     [self stopRecording];
     [self showLoading];
     [self.myVoiceIt videoIdentification:self.groupToIdentifyGroupId contentLanguage: self.contentLanguage imageData:self.finalCapturedPhotoData audioPath:self.audioPath phrase:self.thePhrase callback:^(NSString * jsonResponse){
-            [Utilities deleteFile:self.audioPath];
-            self.imageNotSaved = YES;
-            [self removeLoading];
-            NSLog(@"Video Identification JSON Response : %@", jsonResponse);
-            NSDictionary *jsonObj = [Utilities getJSONObject:jsonResponse];
-            NSString * responseCode = [jsonObj objectForKey:@"responseCode"];
+        [Utilities deleteFile:self.audioPath];
+        self.imageNotSaved = YES;
+        [self removeLoading];
+        NSLog(@"Video Identification JSON Response : %@", jsonResponse);
+        NSDictionary *jsonObj = [Utilities getJSONObject:jsonResponse];
+        NSString * responseCode = [jsonObj objectForKey:@"responseCode"];
         
-            if([responseCode isEqualToString:@"SUCC"]){
-                [self setMessage:[ResponseManager getMessage:@"SUCCESS_IDENTIFIED"]];
-                float faceConfidence = [[jsonObj objectForKey:@"faceConfidence"] floatValue];
-                float voiceConfidence = [[jsonObj objectForKey:@"voiceConfidence"] floatValue];
-                NSString * foundUserId = [jsonObj objectForKey:@"userId"];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        if([responseCode isEqualToString:@"SUCC"]){
+            [self setMessage:[ResponseManager getMessage:@"SUCCESS_IDENTIFIED"]];
+            float faceConfidence = [[jsonObj objectForKey:@"faceConfidence"] floatValue];
+            float voiceConfidence = [[jsonObj objectForKey:@"voiceConfidence"] floatValue];
+            NSString * foundUserId = [jsonObj objectForKey:@"userId"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [self dismissViewControllerAnimated: YES completion:^{
+                    [self userIdentificationSuccessful](faceConfidence, voiceConfidence, foundUserId, jsonResponse);
+                }];
+            });
+        }
+        
+        else if([responseCode isEqualToString:@"FNFD"]){
+            [self setMessage:[ResponseManager getMessage: responseCode]];
+            [self startDelayedRecording:3.0];
+            
+        } else {
+            self.failCounter += 1;
+            
+            if([Utilities isBadResponseCode:responseCode]){
+                [self setMessage:[ResponseManager getMessage: @"CONTACT_DEVELOPER" variable: responseCode]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                     [self dismissViewControllerAnimated: YES completion:^{
-                        [self userIdentificationSuccessful](faceConfidence, voiceConfidence, foundUserId, jsonResponse);
+                        [self userIdentificationFailed](0.0, 0.0, jsonResponse);
                     }];
                 });
             }
-        
-            else if([responseCode isEqualToString:@"FNFD"]){
-                [self setMessage:[ResponseManager getMessage: responseCode]];
-                if(self.doLivenessDetection){
-                    [self.livenessDetector resetVariables];
-                    [self startDelayedLiveness:3.0];
-                } else {
+            else if(self.failCounter < self.failsAllowed){
+                if([responseCode isEqualToString:@"STTF"] || [responseCode isEqualToString:@"PDNM"]){
+                    [self setMessage:[ResponseManager getMessage: responseCode variable:self.thePhrase]];
                     [self startDelayedRecording:3.0];
                 }
-                
-            } else {
-                self.failCounter += 1;
-                
-                if([Utilities isBadResponseCode:responseCode]){
-                    [self setMessage:[ResponseManager getMessage: @"CONTACT_DEVELOPER" variable: responseCode]];
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                else if ([responseCode isEqualToString:@"PNTE"]){
+                    [self setMessage:[ResponseManager getMessage: @"PNTE_IDENTIFICATION"]];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                         [self dismissViewControllerAnimated: YES completion:^{
                             [self userIdentificationFailed](0.0, 0.0, jsonResponse);
                         }];
                     });
+                }else{
+                    [self setMessage:[ResponseManager getMessage: responseCode]];
+                    [self startDelayedRecording:3.0];
                 }
-                else if(self.failCounter < self.failsAllowed){
-                    if([responseCode isEqualToString:@"STTF"] || [responseCode isEqualToString:@"PDNM"]){
-                        [self setMessage:[ResponseManager getMessage: responseCode variable:self.thePhrase]];
-                        [self startDelayedRecording:3.0];
-                    }
-                    else if ([responseCode isEqualToString:@"PNTE"]){
-                        [self setMessage:[ResponseManager getMessage: @"PNTE_IDENTIFICATION"]];
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                            [self dismissViewControllerAnimated: YES completion:^{
-                                [self userIdentificationFailed](0.0, 0.0, jsonResponse);
-                            }];
-                        });
-                    }else{
-                        [self setMessage:[ResponseManager getMessage: responseCode]];
-                        [self startDelayedRecording:3.0];
-                    }
-                } else {
-                    [self setMessage:[ResponseManager getMessage: @"TOO_MANY_ATTEMPTS"]];
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                        float faceConfidence = [responseCode isEqualToString:@"FAIL"] ? [[jsonObj objectForKey:@"faceConfidence"] floatValue] : 0.0;
-                        float voiceConfidence = [responseCode isEqualToString:@"FAIL"] ? [[jsonObj objectForKey:@"voiceConfidence"] floatValue] : 0.0;
-                        [self dismissViewControllerAnimated: YES completion:^{
-                            [self userIdentificationFailed](faceConfidence, voiceConfidence, jsonResponse);
-                        }];
-                    });
-                }
+            } else {
+                [self setMessage:[ResponseManager getMessage: @"TOO_MANY_ATTEMPTS"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                    float faceConfidence = [responseCode isEqualToString:@"FAIL"] ? [[jsonObj objectForKey:@"faceConfidence"] floatValue] : 0.0;
+                    float voiceConfidence = [responseCode isEqualToString:@"FAIL"] ? [[jsonObj objectForKey:@"voiceConfidence"] floatValue] : 0.0;
+                    [self dismissViewControllerAnimated: YES completion:^{
+                        [self userIdentificationFailed](faceConfidence, voiceConfidence, jsonResponse);
+                    }];
+                });
             }
-        }];
+        }
+    }];
 }
 
 -(void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error
@@ -501,10 +654,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     [self setAudioSessionInactive];
     [self cleanupCaptureSession];
     self.continueRunning = NO;
-    if(self.doLivenessDetection){
-        self.livenessDetector.continueRunning = NO;
-        self.livenessDetector = nil;
-    }
+    
 }
 
 @end

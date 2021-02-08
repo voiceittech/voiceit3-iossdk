@@ -12,13 +12,14 @@
 #import "ResponseManager.h"
 #import "VoiceItAPITwo.h"
 
-@interface VideoIdentificationViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate,AVCaptureVideoDataOutputSampleBufferDelegate,AVAudioRecorderDelegate>
+@interface VideoIdentificationViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate,AVCaptureVideoDataOutputSampleBufferDelegate,AVAudioRecorderDelegate,AVCaptureFileOutputRecordingDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 #pragma mark - Audio Recording Stuff
 @property (nonatomic, strong) AVAudioRecorder * audioRecorder;
 @property (nonatomic, strong) NSString *audioPath;
 @property(nonatomic, strong) AVAudioSession *audioSession;
+@property (nonatomic,strong) AVAudioPlayer *player;
 
 #pragma mark -  Graphics/UI/Constraints/Animations
 @property CGFloat originalMessageLeftConstraintContstant;
@@ -38,6 +39,7 @@
 @property(nonatomic, strong) dispatch_queue_t videoDataOutputQueue;
 @property(nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
 @property (nonatomic, strong) NSData *finalCapturedPhotoData;
+@property AVCaptureMovieFileOutput *movieFileOutput;
 
 #pragma mark -  Boolean Switches
 @property BOOL lookingIntoCam;
@@ -59,6 +61,7 @@
 @property (strong, nonatomic)  NSString * thePhrase;
 @property (strong, nonatomic)  NSString * contentLanguage;
 @property (strong, nonatomic)  NSObject * voiceItMaster;
+@property (strong, nonatomic)  NSString * userToVerifyUserId;
 
 #pragma mark - callbacks
 @property (nonatomic, copy) void (^userIdentificationCancelled)(void);

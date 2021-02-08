@@ -225,6 +225,7 @@
                                         </constraints>
                                         <state key="normal" title="Button" image="clear" catalog="system"/>
                                         <connections>
+                                            <action selector="cancelClicked:" destination="UIB-wa-y4x" eventType="touchUpInside" id="4UY-2T-jZa"/>
                                             <action selector="stopVideoVerification:" destination="y9g-az-7MI" eventType="touchUpInside" id="K9h-fY-WwB"/>
                                         </connections>
                                     </button>
@@ -262,6 +263,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MxS-2a-a7L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="UIB-wa-y4x" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1159" y="923"/>
         </scene>
@@ -296,6 +298,17 @@
                                             <action selector="cancelClicked:" destination="RRx-hG-Anp" eventType="touchUpInside" id="R7s-au-Nay"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSd-XT-Ygv">
+                                        <rect key="frame" x="10" y="10" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="JNZ-8k-4QP"/>
+                                            <constraint firstAttribute="height" constant="40" id="h3F-cy-882"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="clear" catalog="system"/>
+                                        <connections>
+                                            <action selector="closeButtonClicked:" destination="RRx-hG-Anp" eventType="touchUpInside" id="XPg-cv-Mr0"/>
+                                        </connections>
+                                    </button>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nzx-31-Jgs" customClass="SpinningView">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -311,9 +324,11 @@
                                     <constraint firstAttribute="trailing" secondItem="aN4-6g-cNf" secondAttribute="trailing" id="gwQ-Zs-951"/>
                                     <constraint firstAttribute="bottom" secondItem="Nzx-31-Jgs" secondAttribute="bottom" id="igy-6v-e9P"/>
                                     <constraint firstAttribute="bottom" secondItem="aN4-6g-cNf" secondAttribute="bottom" id="inT-6t-Xnd"/>
+                                    <constraint firstItem="xSd-XT-Ygv" firstAttribute="top" secondItem="faF-vI-YbO" secondAttribute="top" constant="10" id="k8d-0a-KHV"/>
                                     <constraint firstAttribute="trailing" secondItem="Nzx-31-Jgs" secondAttribute="trailing" id="n5a-Iy-n47"/>
                                     <constraint firstItem="aN4-6g-cNf" firstAttribute="leading" secondItem="faF-vI-YbO" secondAttribute="leading" id="nx9-y6-OaL"/>
                                     <constraint firstItem="aN4-6g-cNf" firstAttribute="top" secondItem="t2m-6e-UGw" secondAttribute="bottom" constant="8" id="ogD-uQ-CZl"/>
+                                    <constraint firstItem="xSd-XT-Ygv" firstAttribute="leading" secondItem="faF-vI-YbO" secondAttribute="leading" constant="10" id="pPQ-T4-e9u"/>
                                     <constraint firstAttribute="width" constant="300" id="vqF-13-m8o"/>
                                 </constraints>
                             </view>
