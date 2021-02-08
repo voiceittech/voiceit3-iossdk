@@ -8,7 +8,6 @@
 
 #import "FaceVerificationViewController.h"
 #import "Styles.h"
-#import "Liveness.h"
 
 @interface FaceVerificationViewController ()
 @property(nonatomic, strong)  VoiceItAPITwo * myVoiceIt;
@@ -31,7 +30,6 @@
 @property NSString *livenessInstruction;
 @property NSString *audioPromptType;
 @property BOOL isProcessing;
-@property Liveness *livenessDetector;
 @property BOOL success;
 
 @end
@@ -748,8 +746,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     [self cleanupCaptureSession];
     self.continueRunning = NO;
     if(self.doLivenessDetection){
-        self.livenessDetector.continueRunning = NO;
-        self.livenessDetector = nil;
         [self.player stop];
         self.player = nil;
     }

@@ -8,7 +8,6 @@
 
 #import "VideoVerificationViewController.h"
 #import "Styles.h"
-#import "Liveness.h"
 
 @interface VideoVerificationViewController ()
 @property(nonatomic, strong)  VoiceItAPITwo *myVoiceIt;
@@ -31,7 +30,6 @@
 @property NSString *savedVideoPath;
 @property BOOL hasSessionEnded;
 @property BOOL success;
-@property Liveness *livenessDetector;
 @property NSString *result;
 @end
 
@@ -762,8 +760,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     [self cleanupCaptureSession];
     self.continueRunning = NO;
     if(self.doLivenessDetection){
-        self.livenessDetector.continueRunning = NO;
-        self.livenessDetector = nil;
         [self.player stop];
         self.player = nil;
     }

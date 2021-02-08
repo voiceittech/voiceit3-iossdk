@@ -7,7 +7,6 @@
 //
 
 #import "VideoEnrollmentViewController.h"
-#import "Liveness.h"
 #import "Utilities.h"
 @interface VideoEnrollmentViewController ()
 @end

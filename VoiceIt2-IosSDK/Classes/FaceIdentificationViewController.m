@@ -9,7 +9,6 @@
 #import "FaceIdentificationViewController.h"
 #import "Styles.h"
 #import "NSMutableArray+Shuffle.h"
-#import "Liveness.h"
 
 @interface FaceIdentificationViewController ()
 @property(nonatomic, strong)  VoiceItAPITwo * myVoiceIt;
