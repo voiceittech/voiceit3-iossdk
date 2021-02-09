@@ -134,17 +134,17 @@
                     contentLanguage:(NSString*)contentLanguage
                    voicePrintPhrase:(NSString*)voicePrintPhrase
            userEnrollmentsCancelled:(void (^)(void))userEnrollmentsCancelled
-              userEnrollmentsPassed:(void (^)(void))userEnrollmentsPassed;
+              userEnrollmentsPassed:(void (^)(NSString *))userEnrollmentsPassed;
 
 - (void)encapsulatedFaceEnrollUser:(NSString *)userId
           userEnrollmentsCancelled:(void (^)(void))userEnrollmentsCancelled
-             userEnrollmentsPassed:(void (^)(void))userEnrollmentsPassed;
+             userEnrollmentsPassed:(void (^)(NSString *))userEnrollmentsPassed;
 
 - (void)encapsulatedVideoEnrollUser:(NSString *)userId
                     contentLanguage:(NSString*)contentLanguage
                    voicePrintPhrase:(NSString*)voicePrintPhrase
            userEnrollmentsCancelled:(void (^)(void))userEnrollmentsCancelled
-              userEnrollmentsPassed:(void (^)(void))userEnrollmentsPassed;
+              userEnrollmentsPassed:(void (^)(NSString *))userEnrollmentsPassed;
 
 #pragma mark - Encapsulated Verification Methods
 

@@ -749,7 +749,7 @@ NSString * const platformId = @"41";
                     contentLanguage:(NSString*)contentLanguage
                    voicePrintPhrase:(NSString*)voicePrintPhrase
            userEnrollmentsCancelled:(void (^)(void))userEnrollmentsCancelled
-              userEnrollmentsPassed:(void (^)(void))userEnrollmentsPassed{
+              userEnrollmentsPassed:(void (^)(NSString *))userEnrollmentsPassed{
     
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
         @throw [NSException exceptionWithName:@"Cannot Create Voice Enrollment"
@@ -771,7 +771,7 @@ NSString * const platformId = @"41";
 
 - (void)encapsulatedFaceEnrollUser:(NSString *)userId
           userEnrollmentsCancelled:(void (^)(void))userEnrollmentsCancelled
-             userEnrollmentsPassed:(void (^)(void))userEnrollmentsPassed
+             userEnrollmentsPassed:(void (^)(NSString *))userEnrollmentsPassed
 {
     
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
@@ -794,7 +794,7 @@ NSString * const platformId = @"41";
                     contentLanguage:(NSString*)contentLanguage
                    voicePrintPhrase:(NSString*)voicePrintPhrase
            userEnrollmentsCancelled:(void (^)(void))userEnrollmentsCancelled
-              userEnrollmentsPassed:(void (^)(void))userEnrollmentsPassed
+              userEnrollmentsPassed:(void (^)(NSString *))userEnrollmentsPassed
 {
     
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){

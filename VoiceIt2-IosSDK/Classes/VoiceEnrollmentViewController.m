@@ -168,10 +168,11 @@
     });
 }
 
--(void)takeToFinishedView{
+-(void)takeToFinishedView: (NSString *) response {
     NSLog(@"Take to finished view");
     dispatch_async(dispatch_get_main_queue(), ^{
         EnrollFinishViewController * enrollVC = [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"enrollFinishedVC"];
+        enrollVC.response = response;
         [[self navigationController] pushViewController:enrollVC animated: YES];
     });
 }
@@ -213,7 +214,8 @@
                 [self setNavigationTitle:self.enrollmentDoneCounter + 1];
                 [self startDelayedRecording:1];
             } else {
-                [self takeToFinishedView];
+                [[self myNavController] userEnrollmentsPassed](jsonResponse);
+                [self takeToFinishedView: jsonResponse];
             }
         } else {
             if([Utilities isBadResponseCode:responseCode]){

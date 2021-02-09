@@ -221,10 +221,11 @@
     });
 }
 
--(void)takeToFinishedView{
+-(void)takeToFinishedView:(NSString *)response{
     NSLog(@"Take to finished view");
     dispatch_async(dispatch_get_main_queue(), ^{
         EnrollFinishViewController * enrollVC = [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"enrollFinishedVC"];
+        enrollVC.response = response;
         [[self navigationController] pushViewController:enrollVC animated: YES];
     });
 }
@@ -273,7 +274,7 @@
             NSLog(@"Response Code is %@ and message is : %@", [jsonObj objectForKey:@"responseCode"], [jsonObj objectForKey:@"message"]);
             NSString * responseCode = [jsonObj objectForKey:@"responseCode"];
             if([responseCode isEqualToString:@"SUCC"]){
-             [self takeToFinishedView];
+                [self takeToFinishedView:jsonResponse];
             } else {
                 if([Utilities isBadResponseCode:responseCode]){
                     [self makeLabelFlyIn:[ResponseManager getMessage: @"CONTACT_DEVELOPER" variable: responseCode]];

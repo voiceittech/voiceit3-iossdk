@@ -43,24 +43,24 @@
 - (IBAction)voiceEnrollmentClicked:(id)sender {
     [self.myVoiceIt encapsulatedVoiceEnrollUser: self.TEST_USER_ID contentLanguage:self.TEST_CONTENT_LANGUAGE voicePrintPhrase:self.TEST_PHRASE userEnrollmentsCancelled:^{
         NSLog(@"User Voice Enrollments Cancelled");
-    } userEnrollmentsPassed:^{
-        NSLog(@"User Voice Enrollments Completed");
+    } userEnrollmentsPassed:^(NSString * response){
+        NSLog(@"User Voice Enrollments Completed with response: %@",response);
     }];
 }
 
 - (IBAction)faceEnrollmentClicked:(id)sender {
     [self.myVoiceIt encapsulatedFaceEnrollUser: self.TEST_USER_ID userEnrollmentsCancelled:^{
         NSLog(@"User Face Enrollments Cancelled");
-    } userEnrollmentsPassed:^{
-        NSLog(@"User Face Enrollments Completed");
+    } userEnrollmentsPassed:^(NSString * response){
+        NSLog(@"User Face Enrollments Completed with response: %@",response);
     }];
 }
 
 - (IBAction)videoEnrollmentClicked:(id)sender {
     [self.myVoiceIt encapsulatedVideoEnrollUser: self.TEST_USER_ID contentLanguage:self.TEST_CONTENT_LANGUAGE voicePrintPhrase:self.TEST_PHRASE userEnrollmentsCancelled:^{
         NSLog(@"User Video Enrollments Cancelled");
-    } userEnrollmentsPassed:^{
-        NSLog(@"User Video Enrollments Completed");
+    } userEnrollmentsPassed:^(NSString * response){
+        NSLog(@"User Video Enrollments Completed with response: %@",response);
     }];
 }
 

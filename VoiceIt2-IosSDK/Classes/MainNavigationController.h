@@ -17,7 +17,7 @@ typedef enum { face, video, voice } EnrollmentType;
 @property NSString* contentLanguage;
 @property NSString* voicePrintPhrase;
 @property (nonatomic, copy) void (^userEnrollmentsCancelled)(void);
-@property (nonatomic, copy) void (^userEnrollmentsPassed)(void);
+@property (nonatomic, copy) void (^userEnrollmentsPassed)(NSString*);
 @property EnrollmentType enrollmentType;
 @end
 
