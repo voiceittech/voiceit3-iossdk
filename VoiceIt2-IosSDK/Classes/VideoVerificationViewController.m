@@ -153,6 +153,10 @@
         });
     } onFailed:^(NSError * error) {
         NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.messageLabel setText: @"Liveness service failed. Please Try again Later."];
+            [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+        });
     } pageCateory:@"verification"];
 }
 
