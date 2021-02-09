@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
@@ -13,11 +13,11 @@
             <objects>
                 <viewController storyboardIdentifier="videoEnrollVC" id="r6Q-v3-siJ" customClass="VideoEnrollmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X4f-7c-Dsh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8L-k1-TcO">
-                                <rect key="frame" x="16" y="582" width="382" height="200"/>
+                                <rect key="frame" x="16" y="456" width="382" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="nWA-ZF-J4d"/>
                                 </constraints>
@@ -27,7 +27,7 @@
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhZ-O2-jro" customClass="SpinningView">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -58,11 +58,11 @@
             <objects>
                 <viewController storyboardIdentifier="faceEnrollVC" id="o3F-GO-Kdw" customClass="FaceEnrollmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fwD-B4-1Ky">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGK-nt-1W0">
-                                <rect key="frame" x="16" y="582" width="382" height="200"/>
+                                <rect key="frame" x="16" y="456" width="382" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="14i-fc-UFR"/>
                                 </constraints>
@@ -72,7 +72,7 @@
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjt-gK-8Lo" customClass="SpinningView">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -103,17 +103,17 @@
             <objects>
                 <viewController storyboardIdentifier="enrollFinishedVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oTb-bx-Zgo" customClass="EnrollFinishViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N0n-yp-OWn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="oXm-JX-qIG">
-                                <rect key="frame" x="16" y="606" width="382" height="0.0"/>
+                                <rect key="frame" x="16" y="286.66666666666669" width="382" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTd-aK-eTP">
-                                <rect key="frame" x="32" y="754" width="350" height="44"/>
+                                <rect key="frame" x="32" y="628" width="350" height="44"/>
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="9SZ-ik-Ppq"/>
@@ -129,10 +129,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zsn-8a-Xqw">
-                                <rect key="frame" x="0.0" y="44" width="414" height="276"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="276"/>
                                 <subviews>
                                     <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="tca-f1-pN8" customClass="VoiceItLogo">
-                                        <rect key="frame" x="121.5" y="40" width="171" height="196"/>
+                                        <rect key="frame" x="121.66666666666669" y="40" width="171" height="196"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="171" id="Gf3-ao-SmZ"/>
@@ -148,7 +148,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="IQI-Ph-E5u">
-                                <rect key="frame" x="16" y="614" width="382" height="0.0"/>
+                                <rect key="frame" x="16" y="332.66666666666669" width="382" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -159,16 +159,16 @@
                         <constraints>
                             <constraint firstItem="IQI-Ph-E5u" firstAttribute="leading" secondItem="Rcx-b7-KD7" secondAttribute="leading" constant="16" id="3gE-7Q-krB"/>
                             <constraint firstItem="Zsn-8a-Xqw" firstAttribute="leading" secondItem="Rcx-b7-KD7" secondAttribute="leading" id="91P-DW-myX"/>
-                            <constraint firstItem="bTd-aK-eTP" firstAttribute="top" secondItem="IQI-Ph-E5u" secondAttribute="bottom" constant="140" id="9Ct-Vj-fo3"/>
+                            <constraint firstItem="oXm-JX-qIG" firstAttribute="top" secondItem="Zsn-8a-Xqw" secondAttribute="bottom" constant="10.5" id="DfM-Xe-0U3"/>
+                            <constraint firstItem="IQI-Ph-E5u" firstAttribute="top" secondItem="oXm-JX-qIG" secondAttribute="bottom" constant="10" id="GQc-9G-NUg"/>
                             <constraint firstItem="bTd-aK-eTP" firstAttribute="leading" secondItem="Rcx-b7-KD7" secondAttribute="leading" constant="32" id="Kp1-uR-qSr"/>
-                            <constraint firstItem="IQI-Ph-E5u" firstAttribute="top" secondItem="oXm-JX-qIG" secondAttribute="bottom" constant="8" id="OG9-a5-4Nm"/>
                             <constraint firstItem="oXm-JX-qIG" firstAttribute="leading" secondItem="N0n-yp-OWn" secondAttribute="leading" constant="16" id="Osv-br-iaM"/>
                             <constraint firstItem="Rcx-b7-KD7" firstAttribute="bottom" secondItem="bTd-aK-eTP" secondAttribute="bottom" constant="64" id="Qnb-mb-B5p"/>
                             <constraint firstItem="Zsn-8a-Xqw" firstAttribute="top" secondItem="Rcx-b7-KD7" secondAttribute="top" id="QsR-nA-o29"/>
-                            <constraint firstItem="IQI-Ph-E5u" firstAttribute="top" secondItem="oXm-JX-qIG" secondAttribute="bottom" constant="8" id="YR6-lB-Pb6"/>
                             <constraint firstItem="Zsn-8a-Xqw" firstAttribute="trailing" secondItem="Rcx-b7-KD7" secondAttribute="trailing" id="c5P-5X-y0f"/>
                             <constraint firstItem="Rcx-b7-KD7" firstAttribute="trailing" secondItem="bTd-aK-eTP" secondAttribute="trailing" constant="32" id="fOh-do-7t3"/>
                             <constraint firstItem="Rcx-b7-KD7" firstAttribute="trailing" secondItem="IQI-Ph-E5u" secondAttribute="trailing" constant="16" id="fXt-bj-hL6"/>
+                            <constraint firstItem="IQI-Ph-E5u" firstAttribute="top" secondItem="Zsn-8a-Xqw" secondAttribute="bottom" constant="56.5" id="t9c-X8-MyB"/>
                             <constraint firstAttribute="trailing" secondItem="oXm-JX-qIG" secondAttribute="trailing" constant="16" id="x2K-r2-EYn"/>
                         </constraints>
                     </view>
@@ -187,11 +187,11 @@
             <objects>
                 <viewController storyboardIdentifier="videoVerifyVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y9g-az-7MI" customClass="VideoVerificationViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="f2i-kH-OmX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T5J-kr-Ypr">
-                                <rect key="frame" x="57" y="248" width="300" height="400"/>
+                                <rect key="frame" x="57" y="168" width="300" height="400"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhL-DN-mNc">
                                         <rect key="frame" x="8" y="228" width="284" height="120"/>
@@ -272,11 +272,11 @@
             <objects>
                 <viewController storyboardIdentifier="videoIdentifyVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RRx-hG-Anp" customClass="VideoIdentificationViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="qUW-3h-ZVD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="faF-vI-YbO">
-                                <rect key="frame" x="57" y="248" width="300" height="400"/>
+                                <rect key="frame" x="57" y="168" width="300" height="400"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2m-6e-UGw">
                                         <rect key="frame" x="8" y="228" width="284" height="120"/>
@@ -355,11 +355,11 @@
             <objects>
                 <viewController storyboardIdentifier="verifyVoiceVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uKr-Sz-7dH" customClass="VoiceVerificationViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="4hA-ci-qeO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="He1-Mt-Xv0">
-                                <rect key="frame" x="57" y="248" width="300" height="400"/>
+                                <rect key="frame" x="57" y="168" width="300" height="400"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6N-uC-cFM" customClass="SCSiriWaveformView">
                                         <rect key="frame" x="16" y="8" width="268" height="212"/>
@@ -456,17 +456,17 @@
             <objects>
                 <viewController storyboardIdentifier="enrollSetupVC" id="3Ya-cA-d4v" customClass="EnrollSetupViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gqC-GO-zJ1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="pDU-zF-w7c">
-                                <rect key="frame" x="16" y="372" width="382" height="0.0"/>
+                                <rect key="frame" x="16" y="328" width="382" height="0.0"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLS-Cd-kCr">
-                                <rect key="frame" x="32" y="754" width="350" height="44"/>
+                                <rect key="frame" x="32" y="628" width="350" height="44"/>
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="zsF-jS-oYb"/>
@@ -481,16 +481,16 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="grO-3t-kIf">
-                                <rect key="frame" x="16" y="380" width="382" height="0.0"/>
+                                <rect key="frame" x="16" y="336" width="382" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="mTZ-X6-z8e">
-                                <rect key="frame" x="0.0" y="88" width="414" height="276"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="276"/>
                                 <subviews>
                                     <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="2lQ-UG-Q9g" customClass="VoiceItLogo">
-                                        <rect key="frame" x="121.5" y="40" width="171" height="196"/>
+                                        <rect key="frame" x="121.66666666666669" y="40" width="171" height="196"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="171" id="F13-ha-D3K"/>
@@ -547,7 +547,7 @@
             <objects>
                 <navigationController storyboardIdentifier="mainNavController" id="WoX-37-BTa" customClass="MainNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7MD-Pr-LDA">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
@@ -566,11 +566,11 @@
             <objects>
                 <viewController storyboardIdentifier="faceVerificationVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mcQ-T2-swO" customClass="FaceVerificationViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="GgZ-S2-wTE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N60-0d-Z5L">
-                                <rect key="frame" x="57" y="248" width="300" height="400"/>
+                                <rect key="frame" x="57" y="168" width="300" height="400"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPv-gV-dSx">
                                         <rect key="frame" x="8" y="228" width="284" height="120"/>
@@ -652,11 +652,11 @@
             <objects>
                 <viewController storyboardIdentifier="faceIdentificationVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wx7-VI-IVh" customClass="FaceIdentificationViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="mWj-W4-O9r">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvx-tY-wsS">
-                                <rect key="frame" x="57" y="248" width="300" height="400"/>
+                                <rect key="frame" x="57" y="168" width="300" height="400"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cg6-Lg-Ssl">
                                         <rect key="frame" x="10" y="10" width="40" height="40"/>
@@ -732,19 +732,19 @@
             <objects>
                 <viewController storyboardIdentifier="voiceEnrollVC" id="pPK-kV-Gpf" customClass="VoiceEnrollmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zBH-7U-kBd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WE5-Sx-X7B" customClass="SpinningView">
-                                <rect key="frame" x="0.0" y="10" width="414" height="842"/>
+                                <rect key="frame" x="0.0" y="10" width="414" height="716"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="avF-MD-mta" customClass="SCSiriWaveformView">
-                                <rect key="frame" x="16" y="60" width="382" height="502"/>
+                                <rect key="frame" x="16" y="16" width="382" height="420"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gSB-Z2-JOK">
-                                <rect key="frame" x="16" y="582" width="382" height="200"/>
+                                <rect key="frame" x="16" y="456" width="382" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="3p0-01-MBQ"/>
                                 </constraints>
@@ -787,11 +787,11 @@
             <objects>
                 <viewController storyboardIdentifier="identifyVoiceVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FAL-eh-3eB" customClass="VoiceIdentificationViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="EEu-wy-3Ta">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jT-gp-u0n">
-                                <rect key="frame" x="57" y="248" width="300" height="400"/>
+                                <rect key="frame" x="57" y="168" width="300" height="400"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cB1-fG-dAz" customClass="SCSiriWaveformView">
                                         <rect key="frame" x="16" y="8" width="268" height="212"/>
