@@ -88,6 +88,16 @@ Also add the following permission keys to your <b>info.plist</b> file like shown
 
 <img src="Graphics/Screenshot2.png" alt="API Key and Token" width="400px" style="margin:auto;display:block"/>
 
+## Requirements 
+
+#### Billing 
+
+In order to use en-US or other content languages you need to have a developer account that has funds. In order to add funds to your account please login at: https://voiceit.io/login and navigate to: https://voiceit.io/billing and add funds.
+
+#### Voicprint Phrases
+
+Make sure you review your Voiceprint Phrases by navigating to: https://voiceit.io/phraseManagement in order to know what to pass for voicePrintPhrase parameter
+
 ## Strings and Prompts
 
 All strings utilized in the encapsulated views for the SDK and the prompts provided to the user can be modified by editing the strings in the Prompts.strings file located at
