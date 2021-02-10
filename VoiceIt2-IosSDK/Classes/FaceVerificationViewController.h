@@ -45,6 +45,7 @@
 @property BOOL doAudioPrompts;
 @property BOOL verificationStarted;
 @property BOOL isReadyToWrite;
+@property BOOL imageNotSaved;
 
 #pragma mark -  Counters to keep track of stuff
 @property int lookingIntoCamCounter;

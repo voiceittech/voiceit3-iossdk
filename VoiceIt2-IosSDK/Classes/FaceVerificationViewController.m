@@ -468,7 +468,7 @@
     }
 }
 
--(void)sendPhoto{
+-(void)sendVideo{
     [self showLoading];
     if(!self.continueRunning){
         return;
@@ -480,6 +480,16 @@
     } lcoId: self.lcoId pageCategory:@"verification"];
 }
 
+-(void)sendPhoto{
+    [self showLoading];
+    if(!self.continueRunning){
+        return;
+    }
+    [self.myVoiceIt faceVerification:self.userToVerifyUserId imageData:self.finalCapturedPhotoData callback:^(NSString * jsonResponse){
+        [self finishVerification:jsonResponse];
+    }];
+}
+
 -(void)stopWritingToVideoFile {
     self.isReadyToWrite = NO;
     [self.assetWriterMyData finishWritingWithCompletionHandler:^{
@@ -488,13 +498,10 @@
             return;
         }
         if(self.doLivenessDetection){
-            [self sendPhoto];
+            [self sendVideo];
         }
         else{
-            [self.myVoiceIt faceVerification:self.userToVerifyUserId videoPath:self.videoPath callback:^(NSString * jsonResponse){
-                [Utilities deleteFile:self.videoPath];
-                [self finishVerification:jsonResponse];
-            }];
+            [self sendPhoto];
         }
     }];
 }
@@ -726,6 +733,31 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 frameNumber++;
             }
         }
+        if(!self.doLivenessDetection){
+            CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+            if (pixelBuffer == NULL) { return; }
+            
+            // Create CIImage for faceDetector
+            CIImage *image = [CIImage imageWithCVImageBuffer:pixelBuffer];
+            [self saveImageData:image];
+        }
+    }
+}
+
+#pragma mark - image capture methods
+- (UIImage *)imageFromCIImage:(CIImage *)ciImage{
+    CIContext *ciContext = [CIContext contextWithOptions:nil];
+    CGImageRef cgImage = [ciContext createCGImage:ciImage fromRect:[ciImage extent]];
+    UIImage *image = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    return image;
+}
+
+-(void)saveImageData:(CIImage *)image{
+    if ( image != nil){
+        UIImage *uiimage = [self imageFromCIImage:image];
+        self.finalCapturedPhotoData  = UIImageJPEGRepresentation(uiimage, 0.4);
+        self.imageNotSaved = NO;
     }
 }
 

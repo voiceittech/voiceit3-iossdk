@@ -205,6 +205,54 @@
     [Utilities setBottomCornersForCancelButton:self.cancelButton];
 }
 
+-(void)setupCameraCircle{
+    self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession: self.captureSession];
+    [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    // Setup code to capture face meta data
+    AVCaptureMetadataOutput *metadataOutput = [[AVCaptureMetadataOutput alloc] init];
+    // Have to add the output before setting metadata types
+    [self.captureSession addOutput: metadataOutput];
+    // We're only interested in faces
+    [metadataOutput setMetadataObjectTypes:@[AVMetadataObjectTypeFace]];
+    // This VC is the delegate. Please call us on the main queue
+    [metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    // Setup Little Camera Circle and Positions
+    self.rootLayer = [[self verificationBox] layer];
+    self.backgroundWidthHeight = (CGFloat) [self verificationBox].frame.size.height  * 0.50;
+    CGFloat cameraViewWidthHeight = (CGFloat) [self verificationBox].frame.size.height  * 0.48;
+    self.circleWidth = (self.backgroundWidthHeight - cameraViewWidthHeight) / 2;
+    CGFloat backgroundViewX = ([self verificationBox].frame.size.width - self.backgroundWidthHeight)/2;
+    CGFloat cameraViewX = ([self verificationBox].frame.size.width - cameraViewWidthHeight)/2;
+    CGFloat backgroundViewY = VERIFICATION_BACKGROUND_VIEW_Y;
+    CGFloat cameraViewY = backgroundViewY + self.circleWidth;
+    self.cameraBorderLayer = [[CALayer alloc] init];
+    self.progressCircle = [CAShapeLayer layer];
+    [self.cameraBorderLayer setFrame:CGRectMake(backgroundViewX, backgroundViewY, self.backgroundWidthHeight, self.backgroundWidthHeight)];
+    [self.previewLayer setFrame:CGRectMake(cameraViewX, cameraViewY, cameraViewWidthHeight, cameraViewWidthHeight)];
+    [self.previewLayer setCornerRadius: cameraViewWidthHeight / 2];
+    self.cameraCenterPoint = CGPointMake(self.cameraBorderLayer.frame.origin.x + (self.backgroundWidthHeight/2), self.cameraBorderLayer.frame.origin.y + (self.backgroundWidthHeight/2) );
+    if ([self.videoDevice isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+        CGPoint autofocusPoint = self.cameraCenterPoint;
+        [self.videoDevice setFocusPointOfInterest:autofocusPoint];
+        [self.videoDevice setFocusMode:AVCaptureFocusModeLocked];
+    }
+    // Setup Progress Circle
+    self.progressCircle .path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle:-M_PI_2 endAngle:2 * M_PI - M_PI_2 clockwise:YES].CGPath;
+    self.progressCircle.fillColor = [UIColor clearColor].CGColor;
+    self.progressCircle.strokeColor = [UIColor clearColor].CGColor;
+    self.progressCircle.lineWidth = self.circleWidth + 8.0;
+    [self.cameraBorderLayer setBackgroundColor: [UIColor clearColor].CGColor];
+    self.cameraBorderLayer.cornerRadius = self.backgroundWidthHeight / 2;
+    // Setup Rectangle Around Face
+    [Utilities setupFaceRectangle:self.faceRectangleLayer];
+    [self.rootLayer addSublayer:self.cameraBorderLayer];
+    [self.rootLayer addSublayer:self.progressCircle];
+    [self.rootLayer addSublayer:self.previewLayer];
+    [self.previewLayer addSublayer:self.faceRectangleLayer];
+    [self.captureSession commitConfiguration];
+    [self.captureSession startRunning];
+}
+
 - (void)setupVideoProcessing{
     self.videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
     NSDictionary *rgbOutputSettings = @{
@@ -270,66 +318,6 @@
     [self.movieFileOutput stopRecording];
 }
 
-
-#pragma mark - DID FINISH RECORDING TO OUTPUT FILE AT URL method
-- (void)captureOutput:(AVCaptureFileOutput *)captureOutput
-didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
-      fromConnections:(NSArray *)connections
-                error:(NSError *)error
-{
-    [self.myVoiceIt videoVerificationWithLiveness:self.lcoId userId: self.userToVerifyUserId contentLanguage:self.contentLanguage videoPath:[outputFileURL path] phrase:self.thePhrase pageCategory:@"verification" callback:^(NSString * result) {
-        [self handleLivenessResponse: result];
-    }];
-    
-}
-
--(void)setupCameraCircle{
-    self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession: self.captureSession];
-    [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-    // Setup code to capture face meta data
-    AVCaptureMetadataOutput *metadataOutput = [[AVCaptureMetadataOutput alloc] init];
-    // Have to add the output before setting metadata types
-    [self.captureSession addOutput: metadataOutput];
-    // We're only interested in faces
-    [metadataOutput setMetadataObjectTypes:@[AVMetadataObjectTypeFace]];
-    // This VC is the delegate. Please call us on the main queue
-    [metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-    // Setup Little Camera Circle and Positions
-    self.rootLayer = [[self verificationBox] layer];
-    self.backgroundWidthHeight = (CGFloat) [self verificationBox].frame.size.height  * 0.50;
-    CGFloat cameraViewWidthHeight = (CGFloat) [self verificationBox].frame.size.height  * 0.48;
-    self.circleWidth = (self.backgroundWidthHeight - cameraViewWidthHeight) / 2;
-    CGFloat backgroundViewX = ([self verificationBox].frame.size.width - self.backgroundWidthHeight)/2;
-    CGFloat cameraViewX = ([self verificationBox].frame.size.width - cameraViewWidthHeight)/2;
-    CGFloat backgroundViewY = VERIFICATION_BACKGROUND_VIEW_Y;
-    CGFloat cameraViewY = backgroundViewY + self.circleWidth;
-    self.cameraBorderLayer = [[CALayer alloc] init];
-    self.progressCircle = [CAShapeLayer layer];
-    [self.cameraBorderLayer setFrame:CGRectMake(backgroundViewX, backgroundViewY, self.backgroundWidthHeight, self.backgroundWidthHeight)];
-    [self.previewLayer setFrame:CGRectMake(cameraViewX, cameraViewY, cameraViewWidthHeight, cameraViewWidthHeight)];
-    [self.previewLayer setCornerRadius: cameraViewWidthHeight / 2];
-    self.cameraCenterPoint = CGPointMake(self.cameraBorderLayer.frame.origin.x + (self.backgroundWidthHeight/2), self.cameraBorderLayer.frame.origin.y + (self.backgroundWidthHeight/2) );
-    if ([self.videoDevice isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
-        CGPoint autofocusPoint = self.cameraCenterPoint;
-        [self.videoDevice setFocusPointOfInterest:autofocusPoint];
-        [self.videoDevice setFocusMode:AVCaptureFocusModeLocked];
-    }
-    // Setup Progress Circle
-    self.progressCircle .path = [UIBezierPath bezierPathWithArcCenter: self.cameraCenterPoint radius:(self.backgroundWidthHeight / 2) startAngle:-M_PI_2 endAngle:2 * M_PI - M_PI_2 clockwise:YES].CGPath;
-    self.progressCircle.fillColor = [UIColor clearColor].CGColor;
-    self.progressCircle.strokeColor = [UIColor clearColor].CGColor;
-    self.progressCircle.lineWidth = self.circleWidth + 8.0;
-    [self.cameraBorderLayer setBackgroundColor: [UIColor clearColor].CGColor];
-    self.cameraBorderLayer.cornerRadius = self.backgroundWidthHeight / 2;
-    // Setup Rectangle Around Face
-    [Utilities setupFaceRectangle:self.faceRectangleLayer];
-    [self.rootLayer addSublayer:self.cameraBorderLayer];
-    [self.rootLayer addSublayer:self.progressCircle];
-    [self.rootLayer addSublayer:self.previewLayer];
-    [self.previewLayer addSublayer:self.faceRectangleLayer];
-    [self.captureSession commitConfiguration];
-    [self.captureSession startRunning];
-}
 
 #pragma mark - Action Methods
 -(void) playSound:(NSString*) lco{
@@ -612,6 +600,17 @@ didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects
         self.lookingIntoCamCounter = 0;
         [self.faceRectangleLayer setHidden:YES];
     }
+}
+
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput
+didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
+      fromConnections:(NSArray *)connections
+                error:(NSError *)error
+{
+    [self.myVoiceIt videoVerificationWithLiveness:self.lcoId userId: self.userToVerifyUserId contentLanguage:self.contentLanguage videoPath:[outputFileURL path] phrase:self.thePhrase pageCategory:@"verification" callback:^(NSString * result) {
+        [self handleLivenessResponse: result];
+    }];
+    
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput
