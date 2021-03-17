@@ -11,7 +11,7 @@
 
 NSString * const host = @"https://api.voiceit.io/";
 NSString * const livenessHost = @"https://liveness.voiceit.io/v1/";
-NSString * const platformVersion = @"2.2.3";
+NSString * const platformVersion = @"2.2.4";
 NSString * const platformId = @"41";
 @implementation VoiceItAPITwo
 
@@ -51,7 +51,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"getPhrases : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"getPhrases : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -81,7 +81,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"getAllUsers : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"getAllUsers : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -117,7 +117,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"checkUserExists : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"checkUserExists : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -154,7 +154,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"getGroupsForUser : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"getGroupsForUser : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -180,7 +180,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"createUser : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"createUser : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -214,7 +214,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"deleteUser : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"deleteUser : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -245,7 +245,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"getAllGroups : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"getAllGroups : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -282,7 +282,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"getGroup : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"getGroup : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -319,7 +319,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"groupExists : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"groupExists : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -354,7 +354,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"createGroup : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"createGroup : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -401,7 +401,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"addUserToGroup : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"addUserToGroup : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -447,7 +447,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"removeUserFromGroup : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"removeUserFromGroup : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -481,7 +481,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"deleteGroup : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"deleteGroup : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -516,7 +516,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"getAllVoiceEnrollments : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"getAllVoiceEnrollments : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -550,7 +550,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"getAllFaceEnrollments : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"getAllFaceEnrollments : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -584,7 +584,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"getAllVideoEnrollments : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"getAllVideoEnrollments : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -617,7 +617,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"createVoiceEnrollment : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"createVoiceEnrollment : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -663,7 +663,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"createVoiceEnrollment : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"createVoiceEnrollment : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -706,7 +706,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"createFaceEnrollment : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"createFaceEnrollment : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -752,7 +752,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"createVideoEnrollment : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"createVideoEnrollment : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -800,7 +800,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"createVideoEnrollment : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"createVideoEnrollment : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1122,7 +1122,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"voiceVerification : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"voiceVerification : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1165,7 +1165,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"faceVerification : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"faceVerification : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1208,7 +1208,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"faceVerification : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"faceVerification : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1253,7 +1253,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"faceVerificationWithLiveness : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"faceVerificationWithLiveness : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1301,7 +1301,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"videoVerification : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"videoVerification : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1347,7 +1347,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"videoVerification : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"videoVerification : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1388,7 +1388,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"videoVerificationWithLiveness : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"videoVerificationWithLiveness : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1435,7 +1435,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"voiceIdentification : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"voiceIdentification : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1478,7 +1478,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"faceIdentification : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"faceIdentification : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1521,7 +1521,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"faceIdentification : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"faceIdentification : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1566,7 +1566,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"videoIdentification : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"videoIdentification : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1614,7 +1614,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"videoIdentification : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"videoIdentification : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1764,7 +1764,7 @@ NSString * const platformId = @"41";
         // display HTTP errors here
         NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSLog(@"getLivenessID : dataTaskWithRequest HTTP status code: %ld", statusCode);
+//            NSLog(@"getLivenessID : dataTaskWithRequest HTTP status code: %ld", statusCode);
         }
         if(error){
             onFailed(error);

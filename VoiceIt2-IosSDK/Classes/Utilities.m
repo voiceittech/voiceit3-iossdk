@@ -137,21 +137,16 @@
 }
 
 +(void) showFaceRectangle:(CALayer *)faceRectangleLayer face:(AVMetadataObject *)face {
-    __block CALayer * faceRectangleLayerToUse  = faceRectangleLayer;
-    __block AVMetadataObject * faceToUse  = face;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"show Face Rectangle");
-        [faceRectangleLayerToUse setHidden:NO];
-        faceRectangleLayerToUse.hidden = NO;
-        faceRectangleLayerToUse.zPosition = 1;
-        CGFloat xPadding = 2.5;
-        CGFloat yPadding = -10.0;
-        CGFloat heightPadding = 20.0;
-        CGRect faceRectangle = CGRectMake(faceToUse.bounds.origin.x + xPadding, faceToUse.bounds.origin.y + yPadding, faceToUse.bounds.size.width, faceToUse.bounds.size.height + heightPadding);
-        faceRectangleLayerToUse.frame = faceRectangle;
-        faceRectangleLayerToUse.drawsAsynchronously = YES;
-        faceRectangleLayerToUse.cornerRadius = 10.0;
-    });
+    [faceRectangleLayer setHidden:NO];
+    faceRectangleLayer.hidden = NO;
+    faceRectangleLayer.zPosition = 1;
+    CGFloat xPadding = 2.5;
+    CGFloat yPadding = -10.0;
+    CGFloat heightPadding = 20.0;
+    CGRect faceRectangle = CGRectMake(face.bounds.origin.x + xPadding, face.bounds.origin.y + yPadding, face.bounds.size.width, face.bounds.size.height + heightPadding);
+    faceRectangleLayer.frame = faceRectangle;
+    faceRectangleLayer.drawsAsynchronously = YES;
+    faceRectangleLayer.cornerRadius = 10.0;
 }
 
 +(void)setBottomCornersForCancelButton:(UIButton *)cancelButton{
