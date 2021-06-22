@@ -10,7 +10,7 @@
 #import "Styles.h"
 #import "Reachability.h"
 
-NSString * const host = @"https://staging-api.voiceit.io/";
+NSString * const host = @"https://api.voiceit.io/";
 NSString * const livenessHost = @"https://liveness.voiceit.io/v1/";
 NSString * const platformVersion = @"2.2.7";
 NSString * const platformId = @"41";
@@ -30,7 +30,7 @@ NSString * notificationURL = @"";
     self.masterViewController = masterViewController;
 #pragma mark - Save Styles Passed to Styles Class
     [Styles set:styles];
-    
+
     return self;
 }
 
@@ -54,7 +54,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -78,7 +78,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -98,7 +98,7 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@/%@%@",[self buildURL:@"users"], userId, notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -108,7 +108,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -121,14 +121,14 @@ NSString * notificationURL = @"";
 
 - (void)getGroupsForUser:(NSString *)userId
                 callback:(void (^)(NSString *))callback{
-    
+
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
         @throw [NSException exceptionWithName:@"Cannot Call Get Groups for User"
                                        reason:@"Invalid userId passed"
                                      userInfo:nil];
         return;
     }
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@/%@/%@%@",[self buildURL:@"users"], userId, @"groups", notificationURL]]
                                     ];
@@ -139,7 +139,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -159,7 +159,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -179,7 +179,7 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@/%@%@",[self buildURL:@"users"], userId,notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -187,7 +187,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -212,7 +212,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -232,10 +232,10 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@/%@%@",[self buildURL:@"groups"], groupId,notificationURL]]];
-    
+
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"GET"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -243,7 +243,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -263,10 +263,10 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@/%@/exists%@",[self buildURL:@"groups"], groupId, notificationURL]]];
-    
+
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"GET"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -274,7 +274,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -291,18 +291,18 @@ NSString * notificationURL = @"";
 
 - (void)createGroup:(NSString *)description
            callback:(void (^)(NSString *))callback{
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"groups"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"description" : description};
     NSData *body = [self createBodyWithBoundary:self.boundary parameters:params paths:nil fieldName:nil];
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -325,25 +325,25 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
+
     if([groupId isEqualToString:@""] || ![[self getFirst:groupId numChars:4] isEqualToString:@"grp_"]){
         @throw [NSException exceptionWithName:@"Cannot Call Add User from Group"
                                        reason:@"Invalid groupId passed"
                                      userInfo:nil];
         return;
     }
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[ [NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"groups/addUser"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"PUT"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"userId" : userId, @"groupId": groupId};
     NSData *body = [self createBodyWithBoundary:self.boundary parameters:params paths:nil fieldName:nil];
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -366,25 +366,25 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
+
     if([groupId isEqualToString:@""] || ![[self getFirst:groupId numChars:4] isEqualToString:@"grp_"]){
         @throw [NSException exceptionWithName:@"Cannot Call Remove User from Group"
                                        reason:@"Invalid groupId passed"
                                      userInfo:nil];
         return;
     }
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"groups/removeUser"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"PUT"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"userId" : userId, @"groupId": groupId};
     NSData *body = [self createBodyWithBoundary:self.boundary parameters:params paths:nil fieldName:nil];
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -406,8 +406,8 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
-    
+
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@/%@%@",[self buildURL:@"groups"], groupId,notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -415,7 +415,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -436,8 +436,8 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
-    
+
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@/%@%@",[self buildURL:@"enrollments/voice"], userId, notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -445,7 +445,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -465,8 +465,8 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
-    
+
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@/%@%@",[self buildURL:@"enrollments/face"], userId,notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -474,7 +474,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -494,8 +494,8 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
-    
+
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@/%@%@",[self buildURL:@"enrollments/video"], userId,notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -503,7 +503,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -516,14 +516,14 @@ NSString * notificationURL = @"";
 
 - (void)deleteAllEnrollments: (NSString *)userId
                     callback:(void (^)(NSString *))callback{
-    
+
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
         @throw [NSException exceptionWithName:@"Cannot Call Delete All Enrollments"
                                        reason:@"Invalid userId passed"
                                      userInfo:nil];
         return;
     }
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@/%@/all%@",[self buildURL:@"enrollments"], userId,notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -531,7 +531,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -554,26 +554,26 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
-    
+
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"enrollments/voice"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"contentLanguage" : contentLanguage, @"userId": userId, @"phrase" : phrase };
     NSMutableData *body = [NSMutableData data];
-    
+
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath:audioPath fieldName:@"recording"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -587,31 +587,31 @@ NSString * notificationURL = @"";
 - (void)createFaceEnrollment:(NSString *)userId
                    videoPath:(NSString*)videoPath
                     callback:(void (^)(NSString *))callback {
-    
+
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
         @throw [NSException exceptionWithName:@"Cannot Call Face Enrollment"
                                        reason:@"Invalid userId passed"
                                      userInfo:nil];
         return;
     }
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"enrollments/face"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"userId": userId};
     NSMutableData *body = [NSMutableData data];
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath: videoPath fieldName:@"video"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -634,25 +634,25 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"enrollments/video"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"contentLanguage" : contentLanguage, @"userId": userId, @"phrase" : phrase };
     NSMutableData *body = [NSMutableData data];
-    
+
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath:videoPath fieldName:@"video"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -676,26 +676,26 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"enrollments/video"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"contentLanguage" : contentLanguage, @"userId": userId, @"phrase" : phrase };
     NSMutableData *body = [NSMutableData data];
-    
+
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath:audioPath fieldName:@"audio"];
     [self addImageToBody:body imageData:imageData fieldName:@"photo"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -711,7 +711,7 @@ NSString * notificationURL = @"";
                    voicePrintPhrase:(NSString*)voicePrintPhrase
            userEnrollmentsCancelled:(void (^)(void))userEnrollmentsCancelled
               userEnrollmentsPassed:(void (^)(NSString *))userEnrollmentsPassed{
-    
+
     MainNavigationController * controller = (MainNavigationController *) [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"mainNavController"];
     controller.enrollmentType = voice;
     controller.uniqueId = userId;
@@ -727,7 +727,7 @@ NSString * notificationURL = @"";
           userEnrollmentsCancelled:(void (^)(void))userEnrollmentsCancelled
              userEnrollmentsPassed:(void (^)(NSString *))userEnrollmentsPassed
 {
-    
+
     MainNavigationController * controller = (MainNavigationController *) [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"mainNavController"];
     controller.enrollmentType = face;
     controller.uniqueId = userId;
@@ -743,7 +743,7 @@ NSString * notificationURL = @"";
            userEnrollmentsCancelled:(void (^)(void))userEnrollmentsCancelled
               userEnrollmentsPassed:(void (^)(NSString *))userEnrollmentsPassed
 {
-    
+
     MainNavigationController * controller = (MainNavigationController *) [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"mainNavController"];
     controller.enrollmentType = video;
     controller.uniqueId = userId;
@@ -780,7 +780,7 @@ NSString * notificationURL = @"";
            userVerificationSuccessful:(void (^)(float, NSString *))userVerificationSuccessful
                userVerificationFailed:(void (^)(float, NSString *))userVerificationFailed
 {
-    
+
     VoiceVerificationViewController *verifyVoice = [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"verifyVoiceVC"];
     verifyVoice.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     verifyVoice.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -824,7 +824,7 @@ NSString * notificationURL = @"";
           userVerificationSuccessful:(void (^)(float, NSString *))userVerificationSuccessful
               userVerificationFailed:(void (^)(float, NSString *))userVerificationFailed
 {
-    
+
     FaceVerificationViewController *faceVerificationVC = [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"faceVerificationVC"];
     faceVerificationVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     faceVerificationVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -873,8 +873,8 @@ NSString * notificationURL = @"";
            userVerificationSuccessful:(void (^)(float, float, NSString *))userVerificationSuccessful
                userVerificationFailed:(void (^)(float, float, NSString *))userVerificationFailed
 {
-    
-    
+
+
     VideoVerificationViewController *verifyVC = [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"videoVerifyVC"];
     verifyVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     verifyVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -917,7 +917,7 @@ NSString * notificationURL = @"";
            userIdentificationSuccessful:(void (^)(float, NSString *, NSString *))userIdentificationSuccessful
                userIdentificationFailed:(void (^)(float, NSString *))userIdentificationFailed
 {
-    
+
     VoiceIdentificationViewController *identifyVC = [[Utilities getVoiceItStoryBoard] instantiateViewControllerWithIdentifier:@"identifyVoiceVC"];
     identifyVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     identifyVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -939,32 +939,32 @@ NSString * notificationURL = @"";
                 audioPath:(NSString*)audioPath
                    phrase:(NSString*)phrase
                  callback:(void (^)(NSString *))callback {
-    
+
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
         @throw [NSException exceptionWithName:@"Cannot Call Video Verification"
                                        reason:@"Invalid userId passed"
                                      userInfo:nil];
         return;
     }
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"verification/voice"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"contentLanguage" : contentLanguage, @"userId": userId, @"phrase" : phrase };
     NSMutableData *body = [NSMutableData data];
-    
+
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath:audioPath fieldName:@"recording"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -978,31 +978,31 @@ NSString * notificationURL = @"";
 - (void)faceVerification:(NSString *)userId
                videoPath:(NSString*)videoPath
                 callback:(void (^)(NSString *))callback {
-    
+
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
         @throw [NSException exceptionWithName:@"Cannot Call Face Verification"
                                        reason:@"Invalid userId passed"
                                      userInfo:nil];
         return;
     }
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"verification/face"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"userId": userId};
     NSMutableData *body = [NSMutableData data];
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath: videoPath fieldName:@"video"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1016,31 +1016,31 @@ NSString * notificationURL = @"";
 - (void)faceVerification:(NSString *)userId
                imageData:(NSData*)imageData
                 callback:(void (^)(NSString *))callback {
-    
+
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
         @throw [NSException exceptionWithName:@"Cannot Call Face Verification"
                                        reason:@"Invalid userId passed"
                                      userInfo:nil];
         return;
     }
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"verification/face"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"userId": userId};
     NSMutableData *body = [NSMutableData data];
     [self addParamsToBody:body parameters:params];
     [self addImageToBody:body imageData:imageData fieldName:@"photo"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1062,24 +1062,24 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildLivenessURL:@"face" pageCategory:pageCategory], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"userId": userId, @"lcoId": lcoId};
     NSMutableData *body = [NSMutableData data];
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath: videoPath fieldName:@"file"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1096,7 +1096,7 @@ NSString * notificationURL = @"";
                 audioPath:(NSString*)audioPath
                    phrase:(NSString*)phrase
                  callback:(void (^)(NSString *))callback {
-    
+
     if([userId isEqualToString:@""] || ![[self getFirst:userId numChars:4] isEqualToString:@"usr_"]){
         @throw [NSException exceptionWithName:@"Cannot Call Video Verification"
                                        reason:@"Invalid userId passed"
@@ -1109,20 +1109,20 @@ NSString * notificationURL = @"";
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"verification/video"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"contentLanguage" : contentLanguage, @"userId": userId, @"phrase" : phrase };
     NSMutableData *body = [NSMutableData data];
-    
+
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath:audioPath fieldName:@"audio"];
     [self addImageToBody:body imageData:imageData fieldName:@"photo"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1145,25 +1145,25 @@ NSString * notificationURL = @"";
                                      userInfo:nil];
         return;
     }
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"verification/video"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"contentLanguage" : contentLanguage, @"userId": userId, @"phrase" : phrase };
     NSMutableData *body = [NSMutableData data];
-    
+
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath:videoPath fieldName:@"video"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1181,26 +1181,26 @@ NSString * notificationURL = @"";
                                phrase:(NSString *)phrase
                          pageCategory:(NSString *) pageCategory
                              callback:(void (^)(NSString *))callback {
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildLivenessURL:@"video" pageCategory:pageCategory], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"contentLanguage" : contentLanguage, @"lcoId": lcoId, @"phrase" : phrase, @"userId":userId };
     NSMutableData *body = [NSMutableData data];
-    
+
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath: videoPath fieldName:@"file"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1218,26 +1218,26 @@ NSString * notificationURL = @"";
                   audioPath:(NSString*)audioPath
                      phrase:(NSString*)phrase
                    callback:(void (^)(NSString *))callback {
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"identification/voice"], notificationURL]]];
-    
+
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"contentLanguage" : contentLanguage, @"groupId": groupId, @"phrase" : phrase };
     NSMutableData *body = [NSMutableData data];
-    
+
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath:audioPath fieldName:@"recording"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1251,25 +1251,25 @@ NSString * notificationURL = @"";
 - (void)faceIdentification:(NSString *)groupId
                  imageData:(NSData*)imageData
                   callback:(void (^)(NSString *))callback {
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"identification/face"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"groupId": groupId};
     NSMutableData *body = [NSMutableData data];
     [self addParamsToBody:body parameters:params];
     [self addImageToBody:body imageData:imageData fieldName:@"photo"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1283,7 +1283,7 @@ NSString * notificationURL = @"";
 - (void)faceIdentification:(NSString *)groupId
                  videoPath:(NSString*)videoPath
                   callback:(void (^)(NSString *))callback {
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"identification/voice"], notificationURL]]];
@@ -1293,14 +1293,14 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"groupId": groupId};
     NSMutableData *body = [NSMutableData data];
-    
+
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath:videoPath fieldName:@"video"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1316,7 +1316,7 @@ NSString * notificationURL = @"";
                   videoPath:(NSString*)videoPath
                      phrase:(NSString*)phrase
                    callback:(void (^)(NSString *))callback {
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"identification/video"], notificationURL]]];
@@ -1326,14 +1326,14 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"contentLanguage" : contentLanguage, @"groupId": groupId, @"phrase" : phrase };
     NSMutableData *body = [NSMutableData data];
-    
+
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath:videoPath fieldName:@"video"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1350,26 +1350,26 @@ NSString * notificationURL = @"";
                   audioPath:(NSString*)audioPath
                      phrase:(NSString*)phrase
                    callback:(void (^)(NSString *))callback {
-    
+
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"identification/video"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
     [request setHTTPMethod:@"POST"];
-    
+
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSDictionary *params = @{@"contentLanguage" : contentLanguage, @"groupId": groupId, @"phrase" : phrase };
     NSMutableData *body = [NSMutableData data];
-    
+
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath:audioPath fieldName:@"audio"];
     [self addImageToBody:body imageData:imageData fieldName:@"photo"];
     [self endBody:body];
-    
+
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         // Send Result
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1409,7 +1409,7 @@ NSString * notificationURL = @"";
                       dataUsingEncoding:NSUTF8StringEncoding];
     // Get NSString from NSData object in Base64
     NSString *base64Encoded = [nsdata base64EncodedStringWithOptions:0];
-    
+
     return [NSString stringWithFormat:@"Basic %@", base64Encoded];
 }
 
@@ -1431,7 +1431,7 @@ NSString * notificationURL = @"";
     NSString *filename  = [filePath lastPathComponent];
     NSData   *data      = [NSData dataWithContentsOfFile:filePath];
     NSString *mimetype  = [self mimeTypeForPath:filePath];
-    
+
     [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", self.boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", fieldName, filename] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimetype] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -1459,31 +1459,31 @@ NSString * notificationURL = @"";
                          fieldName:(NSString *)fieldName
 {
     NSMutableData *httpBody = [NSMutableData data];
-    
+
     // add params (all params are strings)
-    
+
     [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *parameterKey, NSString *parameterValue, BOOL *stop) {
         [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", parameterValue] dataUsingEncoding:NSUTF8StringEncoding]];
     }];
-    
+
     // add audio data
-    
+
     for (NSString *path in paths) {
         NSString *filename  = [path lastPathComponent];
         NSData   *data      = [NSData dataWithContentsOfFile:path];
         NSString *mimetype  = [self mimeTypeForPath:path];
-        
+
         [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", fieldName, filename] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimetype] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:data];
         [httpBody appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     }
-    
+
     [httpBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
+
     return httpBody;
 }
 
@@ -1504,9 +1504,9 @@ NSString * notificationURL = @"";
              callback:(void (^)(NSString *))callback
              onFailed:(void(^)(NSError *))onFailed
           pageCateory: (NSString *) pageCategory {
-    
-    
-    
+
+
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL: [[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildLivenessURLForCountry:countryCode withUserID:userId pageCategory:pageCategory], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -1516,7 +1516,7 @@ NSString * notificationURL = @"";
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
     [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
     [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if(error){
             onFailed(error);
