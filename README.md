@@ -1,6 +1,7 @@
 <img src="https://raw.githubusercontent.com/voiceittech/VoiceIt2-IosSDK/master/Graphics/ios.png" width="100%" style="width:100%">
 
-# VoiceIt2 iOS SDK [![Version](https://img.shields.io/cocoapods/v/VoiceIt2-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt2-IosSDK) [![Build Status](https://travis-ci.com/voiceittech/VoiceIt2-IosSDK.svg?branch=master)](https://travis-ci.com/voiceittech/VoiceIt2-IosSDK) ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg) [![Platform](https://img.shields.io/cocoapods/p/VoiceIt2-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt2-IosSDK)
+# VoiceIt2 iOS SDK
+[![Build Status](https://travis-ci.com/voiceittech/VoiceIt2-IosSDK.svg?branch=master)](https://travis-ci.com/voiceittech/VoiceIt2-IosSDK) [![version](https://img.shields.io/cocoapods/v/VoiceIt2-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt2-IosSDK) [![name](https://img.shields.io/cocoapods/p/VoiceIt2-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt2-IosSDK) ![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
 
 A fully comprehensive SDK that gives you access to VoiceIt's API 2.0 featuring Voice + Face Verification and Identification with built in user interfaces and liveness detection.
 
