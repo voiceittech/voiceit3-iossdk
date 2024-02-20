@@ -63,7 +63,7 @@ The following gifs show the UI for Voice Verification, Face Verification (With l
 
 ## Getting Started
 
-Sign up for a free Developer Account at <a href="https://voiceit.io/signup" target="_blank">VoiceIt.io</a> and view your API Key and Token in the settings page (as shown below). You can also review the HTTP Documentation at <a href="https://api.voiceit.io" target="_blank">api.voiceit.io</a>.
+Contact us at <a href="mailto:support@voiceit.io" target="_blank">support@voiceit.io</a> to get started with an account to use API 2.0.
 
 <img src="./Graphics/getcredentials.png" alt="API Key and Token" width="400px" />
 
@@ -101,13 +101,13 @@ To run the SDK locally in your porject, please clone this repository, and specif
 #### Deployment Target (IOS Version)
 Please make sure that the minimum Deployment Target for your project is IOS 11
 
-#### Billing 
+#### API Key and Token 
 
-In order to use en-US or other content languages you need to have a developer account that has funds. In order to add funds to your account please login at: https://voiceit.io/login and navigate to: https://voiceit.io/billing and add funds.
+Contact us at <a href="mailto:support@voiceit.io" target="_blank">support@voiceit.io</a> to get started with an account to use API 2.0.
 
 #### Voicprint Phrases
 
-Make sure you review your Voiceprint Phrases by navigating to: https://voiceit.io/phraseManagement in order to know what to pass for voicePrintPhrase parameter
+Make sure you review your Voiceprint Phrases by navigating to: https://dashboard.voiceit.io/phrase_manager/request_new_phrase in order to know what to pass for voicePrintPhrase parameter
 
 ## Strings and Prompts
 
@@ -866,7 +866,7 @@ myVoiceIt?.videoIdentification("GROUP_ID_HERE", contentLanguage: "CONTENT_LANGUA
 
 ## Author
 
-VoiceIt Technologies, support@voiceit.io
+VoiceIt Technologies, <a href="mailto:support@voiceit.io" target="_blank">support@voiceit.io</a>
 
 ## License
 
