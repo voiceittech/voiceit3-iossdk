@@ -8,14 +8,14 @@
 
 #import "VoiceVerificationViewController.h"
 #import "Styles.h"
-#import "VoiceItAPITwo.h"
+#import "VoiceItAPIThree.h"
 #import "ResponseManager.h"
 #import "SCSiriWaveformView.h"
 #import "Utilities.h"
 
 @interface VoiceVerificationViewController ()
 @property (weak, nonatomic) IBOutlet SCSiriWaveformView *waveformView;
-@property(nonatomic, strong) VoiceItAPITwo * myVoiceIt;
+@property(nonatomic, strong) VoiceItAPIThree * myVoiceIt;
 @end
 
 float initialBrightnessVoiceV = 0.0;
@@ -28,7 +28,7 @@ float initialBrightnessVoiceV = 0.0;
     initialBrightnessVoiceV = [UIScreen mainScreen].brightness;
     [[UIScreen mainScreen] setBrightness: 1.0];
     [super viewDidLoad];
-    self.myVoiceIt = (VoiceItAPITwo *) [self voiceItMaster];
+    self.myVoiceIt = (VoiceItAPIThree *) [self voiceItMaster];
     // Initialize Booleans and counters
     self.continueRunning = YES;
     self.failCounter = 0;

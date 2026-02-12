@@ -26,7 +26,7 @@ float initialBrightnessVoiceE = 0.0;
     self.messageLabel.textColor  = [Utilities uiColorFromHexString:@"#FFFFFF"];
     [self.navigationItem setHidesBackButton: YES];
     self.myNavController = (MainNavigationController*) [self navigationController];
-    self.myVoiceIt = (VoiceItAPITwo *) self.myNavController.myVoiceIt;
+    self.myVoiceIt = (VoiceItAPIThree *) self.myNavController.myVoiceIt;
     self.thePhrase =  self.myNavController.voicePrintPhrase;
     self.contentLanguage =  self.myNavController.contentLanguage;
     self.userToEnrollUserId = self.myNavController.uniqueId;

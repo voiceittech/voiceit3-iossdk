@@ -10,7 +10,7 @@
 #import "SpinningView.h"
 #import "Utilities.h"
 #import "ResponseManager.h"
-#import "VoiceItAPITwo.h"
+#import "VoiceItAPIThree.h"
 
 @interface VideoVerificationViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate,AVCaptureVideoDataOutputSampleBufferDelegate,AVAudioRecorderDelegate>
 

@@ -1,61 +1,56 @@
 //
-//  FaceVerificationViewController.h
+//  FaceEnrollmentViewController.h
 //  VoiceIt3-IosSDK
 //
 //  Created by VoiceIt Technologies, LLC
 //  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "SpinningView.h"
 #import "Utilities.h"
+#import "VoiceItAPIThree.h"
 #import "ResponseManager.h"
-#import "VoiceItAPITwo.h"
+#import "SpinningView.h"
+#import "EnrollFinishViewController.h"
+#import "MainNavigationController.h"
+#import "Styles.h"
 
-@interface FaceVerificationViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>
-
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@interface FaceEnrollmentViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>
 
 #pragma mark -  Graphics/UI/Constraints/Animations
 @property CGFloat originalMessageLeftConstraintContstant;
-@property (weak, nonatomic) IBOutlet UIView * verificationBox;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint * messageleftConstraint;
 @property (weak, nonatomic) IBOutlet UILabel * messageLabel;
 @property (weak, nonatomic) IBOutlet SpinningView * progressView;
-@property CGPoint cameraCenterPoint;
+@property  CGPoint cameraCenterPoint;
 @property CAShapeLayer * progressCircle;
 @property CALayer * cameraBorderLayer;
 @property CALayer * faceRectangleLayer;
-@property CALayer * rootLayer;
 
 #pragma mark -  Camera Related Stuff
 @property AVCaptureSession * captureSession;
 @property AVCaptureDevice * videoDevice;
+@property AVCaptureVideoPreviewLayer * previewLayer;
+@property (nonatomic, strong) NSData * finalCapturedPhotoData;
 @property(nonatomic, strong) AVCaptureVideoDataOutput * videoDataOutput;
 @property(nonatomic, strong) dispatch_queue_t videoDataOutputQueue;
-@property(nonatomic, strong) AVCaptureVideoPreviewLayer * previewLayer;
-@property (nonatomic, strong) NSData * finalCapturedPhotoData;
 
 #pragma mark -  Boolean Switches
 @property BOOL lookingIntoCam;
+@property BOOL enrollmentStarted;
 @property BOOL isRecording;
 @property BOOL continueRunning;
-@property BOOL verificationStarted;
+@property BOOL enoughRecordingTimePassed;
+@property BOOL enrollmentComplete;
 @property BOOL isReadyToWrite;
-@property BOOL imageIsSaved;
 
 #pragma mark -  Counters to keep track of stuff
+
 @property int lookingIntoCamCounter;
-@property int failCounter;
-@property int failsAllowed;
-@property int error;
 
 #pragma mark -  Developer Passed Options
-@property (strong, nonatomic) NSString * userToVerifyUserId;
-@property (strong, nonatomic) NSObject * voiceItMaster;
-@property (strong, nonatomic) NSString * contentLanguage;
-
-#pragma mark - callbacks
-@property (nonatomic, copy) void (^userVerificationCancelled)(void);
-@property (nonatomic, copy) void (^userVerificationSuccessful)( float, NSString *);
-@property (nonatomic, copy) void (^userVerificationFailed)( float, NSString *);
+@property (strong, nonatomic)  NSString * userToEnrollUserId;
+@property (strong, nonatomic)  VoiceItAPIThree * myVoiceIt;
+@property (strong, nonatomic)  MainNavigationController * myNavController;
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "VoiceItViewController.h"
-#import "VoiceItAPITwo.h"
+#import "VoiceItAPIThree.h"
 @interface VoiceItViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *userPickerView;
 @end
@@ -30,7 +30,7 @@
     NSMutableDictionary * styles = [[NSMutableDictionary alloc] init];
     [styles setObject:@"#FBC132" forKey:@"kThemeColor"];
     [styles setObject:@"default" forKey:@"kIconStyle"];
-    self.myVoiceIt  = [[VoiceItAPITwo alloc] init:self apiKey: self.API_KEY apiToken: self.API_TOKEN styles:styles];
+    self.myVoiceIt  = [[VoiceItAPIThree alloc] init:self apiKey: self.API_KEY apiToken: self.API_TOKEN styles:styles];
     self.userPickerView.delegate = self;
     self.userPickerView.dataSource = self;
 }

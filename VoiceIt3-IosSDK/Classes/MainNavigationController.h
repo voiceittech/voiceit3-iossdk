@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Utilities.h"
-#import "VoiceItAPITwo.h"
+#import "VoiceItAPIThree.h"
 
 @interface MainNavigationController : UINavigationController
 typedef enum { face, video, voice } EnrollmentType;

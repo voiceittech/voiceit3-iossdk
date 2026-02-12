@@ -7,10 +7,10 @@
 //
 
 import XCTest
-@testable import VoiceIt2_IosSDK
+@testable import VoiceIt3_IosSDK
 
 class VoiceItTest : XCTestCase {
-    var myVoiceIt:VoiceItAPITwo?
+    var myVoiceIt:VoiceItAPIThree?
     var viewController: UIViewController!
     var VI_API_KEY: String?
     var VI_API_TOKEN: String?
@@ -34,7 +34,7 @@ class VoiceItTest : XCTestCase {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateInitialViewController()
-        self.myVoiceIt  = VoiceItAPITwo(viewController, apiKey: VI_API_KEY, apiToken: VI_API_TOKEN)
+        self.myVoiceIt  = VoiceItAPIThree(viewController, apiKey: VI_API_KEY, apiToken: VI_API_TOKEN)
     }
     
     func setupVoiceEnrollment(userId: String, fileName : String, callback : @escaping (String) -> Void){

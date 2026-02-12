@@ -1,12 +1,12 @@
 //
-//  VoiceItAPITwo.m
+//  VoiceItAPIThree.m
 //  VoiceIt3-IosSDK
 //
 //  Created by VoiceIt Technologies, LLC
 //  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.
 //
 
-#import "VoiceItAPITwo.h"
+#import "VoiceItAPIThree.h"
 #import "Styles.h"
 #import "Reachability.h"
 
@@ -14,7 +14,7 @@ NSString * const host = @"https://api.voiceit.io/";
 NSString * const platformVersion = @"2.2.7";
 NSString * const platformId = @"41";
 NSString * notificationURL = @"";
-@implementation VoiceItAPITwo
+@implementation VoiceItAPIThree
 
 #pragma mark - Constructor
 - (id)init:(UIViewController *)masterViewController apiKey:(NSString *)apiKey apiToken:(NSString *) apiToken {

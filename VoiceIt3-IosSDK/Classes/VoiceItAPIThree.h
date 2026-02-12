@@ -1,5 +1,5 @@
 //
-//  VoiceItAPITwo.h
+//  VoiceItAPIThree.h
 //  VoiceIt3-IosSDK
 //
 //  Created by VoiceIt Technologies, LLC
@@ -19,7 +19,7 @@
 
 @import MobileCoreServices;
 
-@interface VoiceItAPITwo : NSObject
+@interface VoiceItAPIThree : NSObject
 // Properties
 @property (nonatomic, strong) NSString *apiKey;
 @property (nonatomic, strong) NSString *apiToken;

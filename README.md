@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/voiceittech/VoiceIt3-IosSDK/master/Graphics/ios.png" width="100%" style="width:100%">
 
-# VoiceIt2 iOS SDK [![Build Status](https://travis-ci.com/voiceittech/VoiceIt3-IosSDK.svg?branch=master)](https://travis-ci.com/voiceittech/VoiceIt3-IosSDK) [![version](https://img.shields.io/cocoapods/v/VoiceIt3-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt3-IosSDK) [![name](https://img.shields.io/cocoapods/p/VoiceIt3-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt3-IosSDK) ![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
+# VoiceIt3 iOS SDK [![Build Status](https://travis-ci.com/voiceittech/VoiceIt3-IosSDK.svg?branch=master)](https://travis-ci.com/voiceittech/VoiceIt3-IosSDK) [![version](https://img.shields.io/cocoapods/v/VoiceIt3-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt3-IosSDK) [![name](https://img.shields.io/cocoapods/p/VoiceIt3-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt3-IosSDK) ![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
 
 A fully comprehensive SDK that gives you access to VoiceIt's API 3.0 featuring Voice + Face Verification and Identification with built in user interfaces and liveness detection.
 
@@ -124,32 +124,32 @@ You might have to unlock the Cocoapod to edit the file.
 
 #### *Swift*
 
-First import *VoiceIt2IosSDK* in your Swift file then initialize a reference to the SDK inside a ViewController, passing in a reference to the ViewController as the first argument, then the API Credentials, and finally a styles dictionary ( *kThemeColor* can be any hexadecimal color code and *kIconStyle* can be "default" or "monochrome").
+First import *VoiceIt3IosSDK* in your Swift file then initialize a reference to the SDK inside a ViewController, passing in a reference to the ViewController as the first argument, then the API Credentials, and finally a styles dictionary ( *kThemeColor* can be any hexadecimal color code and *kIconStyle* can be "default" or "monochrome").
 
 ```swift
-import VoiceIt2IosSDK
+import VoiceIt3IosSDK
 
 class ViewController: UIViewController {
-    var myVoiceIt:VoiceItAPITwo?
+    var myVoiceIt:VoiceItAPIThree?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         /* Reference to ViewController , API Credentials and styles dictionary*/
         let styles = NSMutableDictionary(dictionary: ["kThemeColor":"#FBC132","kIconStyle":"default"])
-        self.myVoiceIt = VoiceItAPITwo(self, apiKey: "API_KEY_HERE", apiToken: "API_TOKEN_HERE", styles: styles)
+        self.myVoiceIt = VoiceItAPIThree(self, apiKey: "API_KEY_HERE", apiToken: "API_TOKEN_HERE", styles: styles)
     }
 }
 ```
 #### *Objective-C*
 
-First import *VoiceItAPITwo.h* into your Objective-C file, then initialize a reference to the SDK inside a ViewController, passing in a reference to the ViewController as the first argument.
+First import *VoiceItAPIThree.h* into your Objective-C file, then initialize a reference to the SDK inside a ViewController, passing in a reference to the ViewController as the first argument.
 
 ```objc
 #import "ViewController.h"
-#import "VoiceItAPITwo.h"
+#import "VoiceItAPIThree.h"
 
 @interface ViewController ()
-    @property VoiceItAPITwo * myVoiceIt;
+    @property VoiceItAPIThree * myVoiceIt;
 @end
 
 @implementation ViewController
@@ -160,7 +160,7 @@ First import *VoiceItAPITwo.h* into your Objective-C file, then initialize a ref
     NSMutableDictionary * styles = [[NSMutableDictionary alloc] init];
     [styles setObject:@"#FBC132" forKey:@"kThemeColor"];
     [styles setObject:@"default" forKey:@"kIconStyle"];
-    self.myVoiceIt = [[VoiceItAPITwo alloc] init:self apiKey:@"API_KEY_HERE" apiToken:@"API_TOKEN_HERE" styles: styles];
+    self.myVoiceIt = [[VoiceItAPIThree alloc] init:self apiKey:@"API_KEY_HERE" apiToken:@"API_TOKEN_HERE" styles: styles];
 }
 ```
 ### Encapsulated Methods

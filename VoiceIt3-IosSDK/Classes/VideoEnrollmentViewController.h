@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "Utilities.h"
-#import "VoiceItAPITwo.h"
+#import "VoiceItAPIThree.h"
 #import "ResponseManager.h"
 #import "SpinningView.h"
 #import "EnrollFinishViewController.h"
@@ -51,7 +51,7 @@
 @property (strong, nonatomic)  NSString * userToEnrollUserId;
 @property (strong, nonatomic)  NSString * thePhrase;
 @property (strong, nonatomic)  NSString * contentLanguage;
-@property (strong, nonatomic)  VoiceItAPITwo * myVoiceIt;
+@property (strong, nonatomic)  VoiceItAPIThree * myVoiceIt;
 @property (strong, nonatomic)  MainNavigationController * myNavController;
 
 #pragma mark - Audio Recording Stuff

@@ -1,5 +1,5 @@
 //
-//  VoiceIt2IosSDK.h
+//  VoiceIt3IosSDK.h
 //  Pods
 //
 //  Created by VoiceIt Technologies, LLC
@@ -9,6 +9,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VoiceIt2IosSDK : NSObject
+@interface VoiceIt3IosSDK : NSObject
 
 @end

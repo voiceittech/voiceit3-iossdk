@@ -7,10 +7,10 @@
 //
 
 @import UIKit;
-#import "VoiceItAPITwo.h"
+#import "VoiceItAPIThree.h"
 
 @interface VoiceItViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
-@property VoiceItAPITwo * myVoiceIt;
+@property VoiceItAPIThree * myVoiceIt;
 @property (weak, nonatomic) IBOutlet UISwitch *livenessToggle;
 @property (weak, nonatomic) IBOutlet UISwitch *audioPromptsToggle;
 @property NSString * API_KEY;
