@@ -1,6 +1,6 @@
 //
 //  TestHelper.swift
-//  VoiceIt2-IosSDK_Test
+//  VoiceIt3-IosSDK_Test
 //
 //  Created by VoiceIt Technologies, LLC
 //  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.

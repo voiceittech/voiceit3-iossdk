@@ -1,6 +1,6 @@
-<img src="https://raw.githubusercontent.com/voiceittech/VoiceIt2-IosSDK/master/Graphics/ios.png" width="100%" style="width:100%">
+<img src="https://raw.githubusercontent.com/voiceittech/VoiceIt3-IosSDK/master/Graphics/ios.png" width="100%" style="width:100%">
 
-# VoiceIt2 iOS SDK [![Build Status](https://travis-ci.com/voiceittech/VoiceIt2-IosSDK.svg?branch=master)](https://travis-ci.com/voiceittech/VoiceIt2-IosSDK) [![version](https://img.shields.io/cocoapods/v/VoiceIt2-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt2-IosSDK) [![name](https://img.shields.io/cocoapods/p/VoiceIt2-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt2-IosSDK) ![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
+# VoiceIt2 iOS SDK [![Build Status](https://travis-ci.com/voiceittech/VoiceIt3-IosSDK.svg?branch=master)](https://travis-ci.com/voiceittech/VoiceIt3-IosSDK) [![version](https://img.shields.io/cocoapods/v/VoiceIt3-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt3-IosSDK) [![name](https://img.shields.io/cocoapods/p/VoiceIt3-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt3-IosSDK) ![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
 
 A fully comprehensive SDK that gives you access to VoiceIt's API 2.0 featuring Voice + Face Verification and Identification with built in user interfaces and liveness detection.
 
@@ -69,11 +69,11 @@ Contact us at <a href="mailto:support@voiceit.io" target="_blank">support@voicei
 
 ## Installation
 
-VoiceIt2-IosSDK is available through [CocoaPods](http://cocoapods.org). To install
+VoiceIt3-IosSDK is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "VoiceIt2-IosSDK"
+pod "VoiceIt3-IosSDK"
 ```
 
 and then run pod install in your terminal
@@ -92,7 +92,7 @@ Also add the following permission keys to your <b>info.plist</b> file like shown
 ## Local Installation
 To run the SDK locally in your porject, please clone this repository, and specifiy the path in your podfile. For instance: 
 ```
-  pod "VoiceIt2-IosSDK", :path => './VoiceIt2-IosSDK'
+  pod "VoiceIt3-IosSDK", :path => './VoiceIt3-IosSDK'
 ```
 
 
@@ -114,7 +114,7 @@ Make sure you review your Voiceprint Phrases by navigating to <a href="https://d
 All strings utilized in the encapsulated views for the SDK and the prompts provided to the user can be modified by editing the strings in the Prompts.strings file located at
 
 ```
-Pods/VoiceIt2-IosSDK/Resources/Prompts.strings
+Pods/VoiceIt3-IosSDK/Resources/Prompts.strings
 ```
 You might have to unlock the Cocoapod to edit the file.
 
@@ -870,4 +870,4 @@ VoiceIt Technologies, <a href="mailto:support@voiceit.io" target="_blank">suppor
 
 ## License
 
-VoiceIt2-IosSDK is available under the MIT license. See the LICENSE file for more info.
+VoiceIt3-IosSDK is available under the MIT license. See the LICENSE file for more info.

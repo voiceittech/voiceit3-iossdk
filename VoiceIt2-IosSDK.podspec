@@ -2,7 +2,7 @@
 #  Created by VoiceIt Technologies, LLC
 #  Copyright © 2020 VoiceIt Technologies LLC. All rights reserved.
 #
-# Be sure to run `pod lib lint VoiceIt2-IosSDK.podspec' to ensure this is a
+# Be sure to run `pod lib lint VoiceIt3-IosSDK.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -10,7 +10,7 @@
 #
 
 Pod::Spec.new do |s|
-s.name             = 'VoiceIt2-IosSDK'
+s.name             = 'VoiceIt3-IosSDK'
 s.version          = '2.2.7'
 s.summary          = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt.'
 
@@ -21,17 +21,17 @@ s.summary          = 'A pod that lets you add voice and face verification and id
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
 s.description      = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt. Now also with basic liveness detection challenges. Please visit https://voiceit.io to learn more and sign up for an account.'
-s.homepage         = 'https://github.com/voiceittech/VoiceIt2-IosSDK'
+s.homepage         = 'https://github.com/voiceittech/VoiceIt3-IosSDK'
 s.license          = { :type => 'MIT', :file => 'LICENSE' }
 s.author           = { 'voiceit' => 'support@voiceit.io' }
-s.source           = { :git => 'https://github.com/voiceittech/VoiceIt2-IosSDK.git', :tag => s.version.to_s }
+s.source           = { :git => 'https://github.com/voiceittech/VoiceIt3-IosSDK.git', :tag => s.version.to_s }
 
 s.ios.deployment_target = '11.0'
 s.static_framework = true
-s.source_files = 'VoiceIt2-IosSDK/Classes/**/*.{h,m}','VoiceIt2-IosSDK/Assets/**/*.{wav}'
+s.source_files = 'VoiceIt3-IosSDK/Classes/**/*.{h,m}','VoiceIt3-IosSDK/Assets/**/*.{wav}'
 
 s.resource_bundles = {
-  'VoiceIt2-IosSDK' => ['VoiceIt2-IosSDK/Classes/**/*.{lproj,storyboard,xib,xcassets,strings}','VoiceIt2-IosSDK/Assets/**/*.{wav}']
+  'VoiceIt3-IosSDK' => ['VoiceIt3-IosSDK/Classes/**/*.{lproj,storyboard,xib,xcassets,strings}','VoiceIt3-IosSDK/Assets/**/*.{wav}']
 }
 
 s.frameworks = 'UIKit', 'AVFoundation'

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:VoiceIt2-IosSDK.xcodeproj">
+      location = "self:VoiceIt3-IosSDK.xcodeproj">
    </FileRef>
 </Workspace>

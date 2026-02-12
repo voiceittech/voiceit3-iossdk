@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6003F589195388D20070C39A"
-               BuildableName = "VoiceIt2-IosSDK_Example.app"
-               BlueprintName = "VoiceIt2-IosSDK_Example"
-               ReferencedContainer = "container:VoiceIt2-IosSDK.xcodeproj">
+               BuildableName = "VoiceIt3-IosSDK_Example.app"
+               BlueprintName = "VoiceIt3-IosSDK_Example"
+               ReferencedContainer = "container:VoiceIt3-IosSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,9 +31,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "VoiceIt2-IosSDK_Example.app"
-            BlueprintName = "VoiceIt2-IosSDK_Example"
-            ReferencedContainer = "container:VoiceIt2-IosSDK.xcodeproj">
+            BuildableName = "VoiceIt3-IosSDK_Example.app"
+            BlueprintName = "VoiceIt3-IosSDK_Example"
+            ReferencedContainer = "container:VoiceIt3-IosSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -42,9 +42,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2192DFF12133306E0078D2C9"
-               BuildableName = "VoiceIt2-IosSDK_Test.xctest"
-               BlueprintName = "VoiceIt2-IosSDK_Test"
-               ReferencedContainer = "container:VoiceIt2-IosSDK.xcodeproj">
+               BuildableName = "VoiceIt3-IosSDK_Test.xctest"
+               BlueprintName = "VoiceIt3-IosSDK_Test"
+               ReferencedContainer = "container:VoiceIt3-IosSDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "VoiceIt2-IosSDK_Example.app"
-            BlueprintName = "VoiceIt2-IosSDK_Example"
-            ReferencedContainer = "container:VoiceIt2-IosSDK.xcodeproj">
+            BuildableName = "VoiceIt3-IosSDK_Example.app"
+            BlueprintName = "VoiceIt3-IosSDK_Example"
+            ReferencedContainer = "container:VoiceIt3-IosSDK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -93,9 +93,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "VoiceIt2-IosSDK_Example.app"
-            BlueprintName = "VoiceIt2-IosSDK_Example"
-            ReferencedContainer = "container:VoiceIt2-IosSDK.xcodeproj">
+            BuildableName = "VoiceIt3-IosSDK_Example.app"
+            BlueprintName = "VoiceIt3-IosSDK_Example"
+            ReferencedContainer = "container:VoiceIt3-IosSDK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

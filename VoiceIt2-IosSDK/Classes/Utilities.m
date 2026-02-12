@@ -1,6 +1,6 @@
 //
 //  Utilities.m
-//  VoiceIt2-IosSDK
+//  VoiceIt3-IosSDK
 //
 //  Created by VoiceIt Technologies, LLC
 //  Copyright (c) 2020 VoiceIt Technologies, LLC. All rights reserved.
@@ -57,7 +57,7 @@
 
 +(UIStoryboard *)getVoiceItStoryBoard{
     NSBundle * podBundle = [NSBundle bundleForClass: self.classForCoder];
-    NSURL * bundleURL = [[podBundle resourceURL] URLByAppendingPathComponent:@"VoiceIt2-IosSDK.bundle"];
+    NSURL * bundleURL = [[podBundle resourceURL] URLByAppendingPathComponent:@"VoiceIt3-IosSDK.bundle"];
     NSBundle  * bundle = [[NSBundle alloc] initWithURL:bundleURL];
     UIStoryboard *voiceItStoryboard = [UIStoryboard storyboardWithName:@"VoiceIt" bundle: bundle];
     return voiceItStoryboard;
