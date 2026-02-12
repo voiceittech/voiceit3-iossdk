@@ -11,7 +11,6 @@
 #import "Reachability.h"
 
 NSString * const host = @"https://api.voiceit.io/";
-NSString * const livenessHost = @"https://liveness.voiceit.io/v1/";
 NSString * const platformVersion = @"2.2.7";
 NSString * const platformId = @"41";
 NSString * notificationURL = @"";
@@ -796,30 +795,23 @@ NSString * notificationURL = @"";
 }
 
 - (void)encapsulatedFaceVerification:(NSString *)userId
-                 doLivenessDetection:(bool)doLivenessDetection
-                      doAudioPrompts:(bool)doAudioPrompts
-                     contentLanguage:(NSString *) contentLanguage
+                     contentLanguage:(NSString *)contentLanguage
            userVerificationCancelled:(void (^)(void))userVerificationCancelled
           userVerificationSuccessful:(void (^)(float, NSString *))userVerificationSuccessful
               userVerificationFailed:(void (^)(float, NSString *))userVerificationFailed
 {
     [self encapsulatedFaceVerification:userId
-                   doLivenessDetection:(bool)doLivenessDetection
-                        doAudioPrompts:(bool)doAudioPrompts
                        numFailsAllowed:3
                        contentLanguage:contentLanguage
-         livenessChallengeFailsAllowed:0
              userVerificationCancelled:userVerificationCancelled
-            userVerificationSuccessful:userVerificationSuccessful userVerificationFailed:userVerificationFailed
+            userVerificationSuccessful:userVerificationSuccessful
+                userVerificationFailed:userVerificationFailed
      ];
 }
 
 - (void)encapsulatedFaceVerification:(NSString *)userId
-                 doLivenessDetection:(bool)doLivenessDetection
-                      doAudioPrompts:(bool)doAudioPrompts
                      numFailsAllowed:(int)numFailsAllowed
                      contentLanguage:(NSString *)contentLanguage
-       livenessChallengeFailsAllowed:(int)livenessChallengeFailsAllowed
            userVerificationCancelled:(void (^)(void))userVerificationCancelled
           userVerificationSuccessful:(void (^)(float, NSString *))userVerificationSuccessful
               userVerificationFailed:(void (^)(float, NSString *))userVerificationFailed
@@ -834,10 +826,7 @@ NSString * notificationURL = @"";
     faceVerificationVC.userVerificationSuccessful = userVerificationSuccessful;
     faceVerificationVC.userVerificationFailed = userVerificationFailed;
     faceVerificationVC.voiceItMaster = self;
-    faceVerificationVC.doLivenessDetection = doLivenessDetection;
-    faceVerificationVC.doAudioPrompts = doAudioPrompts;
     faceVerificationVC.failsAllowed = numFailsAllowed;
-    faceVerificationVC.numberOfLivenessFailsAllowed = livenessChallengeFailsAllowed;
     [[self masterViewController] presentViewController: faceVerificationVC animated:YES completion:nil];
 }
 
@@ -845,8 +834,6 @@ NSString * notificationURL = @"";
 - (void)encapsulatedVideoVerification:(NSString *)userId
                       contentLanguage:(NSString*)contentLanguage
                      voicePrintPhrase:(NSString*)voicePrintPhrase
-                  doLivenessDetection:(bool)doLivenessDetection
-                       doAudioPrompts:(bool)doAudioPrompts
             userVerificationCancelled:(void (^)(void))userVerificationCancelled
            userVerificationSuccessful:(void (^)(float, float, NSString *))userVerificationSuccessful
                userVerificationFailed:(void (^)(float, float, NSString *))userVerificationFailed
@@ -854,21 +841,17 @@ NSString * notificationURL = @"";
     [self encapsulatedVideoVerification:userId
                         contentLanguage:contentLanguage
                        voicePrintPhrase:voicePrintPhrase
-                    doLivenessDetection:doLivenessDetection
-                         doAudioPrompts:(bool)doAudioPrompts
                         numFailsAllowed:3
-          livenessChallengeFailsAllowed:0 userVerificationCancelled:userVerificationCancelled
-             userVerificationSuccessful:userVerificationSuccessful userVerificationFailed:userVerificationFailed
+              userVerificationCancelled:userVerificationCancelled
+             userVerificationSuccessful:userVerificationSuccessful
+                 userVerificationFailed:userVerificationFailed
      ];
 }
 
 - (void)encapsulatedVideoVerification:(NSString *)userId
                       contentLanguage:(NSString*)contentLanguage
                      voicePrintPhrase:(NSString*)voicePrintPhrase
-                  doLivenessDetection:(bool)doLivenessDetection
-                       doAudioPrompts:(bool)doAudioPrompts
                       numFailsAllowed:(int)numFailsAllowed
-        livenessChallengeFailsAllowed:(int)livenessChallengeFailsAllowed
             userVerificationCancelled:(void (^)(void))userVerificationCancelled
            userVerificationSuccessful:(void (^)(float, float, NSString *))userVerificationSuccessful
                userVerificationFailed:(void (^)(float, float, NSString *))userVerificationFailed
@@ -884,10 +867,7 @@ NSString * notificationURL = @"";
     verifyVC.userVerificationCancelled = userVerificationCancelled;
     verifyVC.userVerificationSuccessful = userVerificationSuccessful;
     verifyVC.userVerificationFailed = userVerificationFailed;
-    verifyVC.doLivenessDetection = doLivenessDetection;
-    verifyVC.doAudioPrompts = doAudioPrompts;
     verifyVC.failsAllowed = numFailsAllowed;
-    verifyVC.numberOfLivenessFailsAllowed = livenessChallengeFailsAllowed;
     verifyVC.voiceItMaster = self;
     [[self masterViewController] presentViewController: verifyVC animated:YES completion:nil];
 }
@@ -1051,45 +1031,6 @@ NSString * notificationURL = @"";
     [task resume];
 }
 
-- (void)faceVerificationWithLiveness:(NSString *)userId
-                           videoPath:(NSString*)videoPath
-                            callback:(void (^)(NSString *))callback
-                               lcoId:(NSString *) lcoId
-                        pageCategory:(NSString *) pageCategory {
-    if (lcoId == nil) {
-        @throw [NSException exceptionWithName:@"Cannot Call Face Verification"
-                                       reason:@"LCO  id is nil, please contact support"
-                                     userInfo:nil];
-        return;
-    }
-
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
-                                    initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildLivenessURL:@"face" pageCategory:pageCategory], notificationURL]]];
-    NSURLSession *session = [NSURLSession sharedSession];
-    [request setHTTPMethod:@"POST"];
-
-    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
-    [request addValue:platformId forHTTPHeaderField:@"platformId"];
-    [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
-    [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-
-    NSDictionary *params = @{@"userId": userId, @"lcoId": lcoId};
-    NSMutableData *body = [NSMutableData data];
-    [self addParamsToBody:body parameters:params];
-    [self addFileToBody:body filePath: videoPath fieldName:@"file"];
-    [self endBody:body];
-
-    NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
-        // Send Result
-        NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        if(callback){
-            callback(result);
-        }
-    }];
-    [task resume];
-}
-
 - (void)videoVerification:(NSString *)userId
           contentLanguage:(NSString*)contentLanguage
                 imageData:(NSData*)imageData
@@ -1162,43 +1103,6 @@ NSString * notificationURL = @"";
 
     [self addParamsToBody:body parameters:params];
     [self addFileToBody:body filePath:videoPath fieldName:@"video"];
-    [self endBody:body];
-
-    NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
-        // Send Result
-        NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        if(callback){
-            callback(result);
-        }
-    }];
-    [task resume];
-}
-
-- (void)videoVerificationWithLiveness:(NSString *)lcoId
-                               userId:(NSString *)userId
-                      contentLanguage:(NSString *)contentLanguage
-                            videoPath:(NSString *)videoPath
-                               phrase:(NSString *)phrase
-                         pageCategory:(NSString *) pageCategory
-                             callback:(void (^)(NSString *))callback {
-
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@", self.boundary];
-
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
-                                    initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildLivenessURL:@"video" pageCategory:pageCategory], notificationURL]]];
-    NSURLSession *session = [NSURLSession sharedSession];
-    [request setHTTPMethod:@"POST"];
-
-    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
-    [request addValue:platformId forHTTPHeaderField:@"platformId"];
-    [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
-    [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-
-    NSDictionary *params = @{@"contentLanguage" : contentLanguage, @"lcoId": lcoId, @"phrase" : phrase, @"userId":userId };
-    NSMutableData *body = [NSMutableData data];
-
-    [self addParamsToBody:body parameters:params];
-    [self addFileToBody:body filePath: videoPath fieldName:@"file"];
     [self endBody:body];
 
     NSURLSessionDataTask *task =  [session uploadTaskWithRequest:request fromData:body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
@@ -1390,18 +1294,6 @@ NSString * notificationURL = @"";
     return [[NSString alloc] initWithFormat:@"%@%@", host, endpoint];
 }
 
--(NSString*)buildLivenessURLForCountry:(NSString*)countryCode withUserID: (NSString *) userID pageCategory: (NSString*)pageCategory
-{
-    NSString* url =  [[NSString alloc] initWithFormat:@"%@%@/%@/%@",livenessHost, pageCategory, userID, countryCode];
-    return url;
-}
-
--(NSString*)buildLivenessURL: (NSString*)type pageCategory: (NSString*)pageCategory
-{
-    NSString* url =  [[NSString alloc] initWithFormat:@"%@%@/%@", livenessHost, pageCategory, type];
-    return url;
-}
-
 -(NSString*)createAuthHeader
 {
     // Create NSData object
@@ -1496,35 +1388,6 @@ NSString * notificationURL = @"";
     assert(mimetype != NULL);
     CFRelease(UTI);
     return mimetype;
-}
-
-#pragma mark - Liveness API calls
-- (void)getLivenessID:(NSString *)userId
-          countryCode: (NSString *) countryCode
-             callback:(void (^)(NSString *))callback
-             onFailed:(void(^)(NSError *))onFailed
-          pageCateory: (NSString *) pageCategory {
-
-
-
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
-                                    initWithURL: [[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildLivenessURLForCountry:countryCode withUserID:userId pageCategory:pageCategory], notificationURL]]];
-    NSURLSession *session = [NSURLSession sharedSession];
-    [request setHTTPMethod:@"GET"];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request addValue:platformId forHTTPHeaderField:@"platformId"];
-    [request addValue:platformVersion forHTTPHeaderField:@"platformVersion"];
-    [request addValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if(error){
-            onFailed(error);
-        } else {
-        NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        callback(result);
-        }}];
-    [task resume];
 }
 
 @end

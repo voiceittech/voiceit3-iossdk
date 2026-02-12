@@ -74,14 +74,6 @@
 "GERR"= "Sorry, something went wrong.\nPlease try again.";
 "CONTACT_DEVELOPER" = "Error:\n Please contact app developer with response code \"%@\".";
 
-/* Liveness Prompts */
-"SMILE" = "Please smile into the camera";
-"BLINK" = "Please blink three times";
-"FACE_LEFT" = "Please turn your face to the left and back";
-"FACE_RIGHT" = "Please turn your face to the right and back";
-"LIVENESS_SUCCESS" = "Challenge passed!";
-"LIVENESS_TRY_AGAIN" = "Failed liveness! Please try again";
-
 /* Error Handling */
 "NETWORK_ERROR" = "Please make sure you are connected to the internet";
 "CREDENTIAL_ERROR" = "Please make sure your userId and credentials are correct";

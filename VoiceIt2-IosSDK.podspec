@@ -20,7 +20,7 @@ s.summary          = 'A pod that lets you add voice and face verification and id
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-s.description      = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt. Now also with basic liveness detection challenges. Please visit https://voiceit.io to learn more and sign up for an account.'
+s.description      = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt. Please visit https://voiceit.io to learn more and sign up for an account.'
 s.homepage         = 'https://github.com/voiceittech/VoiceIt3-IosSDK'
 s.license          = { :type => 'MIT', :file => 'LICENSE' }
 s.author           = { 'voiceit' => 'support@voiceit.io' }

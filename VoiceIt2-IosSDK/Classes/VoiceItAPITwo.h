@@ -96,12 +96,6 @@
                imageData:(NSData *)imageData
                 callback:(void (^)(NSString *))callback;
 
-- (void)faceVerificationWithLiveness:(NSString *)userId
-                           videoPath:(NSString *)videoPath
-                            callback:(void (^)(NSString *))callback
-                               lcoId:(NSString *) lcoId
-                        pageCategory:(NSString *) pageCategory;
-
 - (void)videoVerification:(NSString *)userId
           contentLanguage:(NSString *)contentLanguage
                 videoPath:(NSString *)videoPath
@@ -115,14 +109,6 @@
                 audioPath:(NSString *)audioPath
                    phrase:(NSString *)phrase
                  callback:(void (^)(NSString *))callback;
-
-- (void)videoVerificationWithLiveness:(NSString *)lcoId
-                               userId:(NSString *)userId
-                      contentLanguage:(NSString *)contentLanguage
-                            videoPath:(NSString *)videoPath
-                               phrase:(NSString *)phrase
-                         pageCategory:(NSString *) pageCategory
-                             callback:(void (^)(NSString *))callback;
 
 
 #pragma mark - Identification API Calls
@@ -169,19 +155,14 @@
                userVerificationFailed:(void (^)(float, NSString *))userVerificationFailed;
 
 - (void)encapsulatedFaceVerification:(NSString *)userId
-                 doLivenessDetection:(bool)doLivenessDetection
-                      doAudioPrompts:(bool)doAudioPrompts
-                      contentLanguage:(NSString *)contentLanguage
+                     contentLanguage:(NSString *)contentLanguage
            userVerificationCancelled:(void (^)(void))userVerificationCancelled
           userVerificationSuccessful:(void (^)(float, NSString *))userVerificationSuccessful
               userVerificationFailed:(void (^)(float, NSString *))userVerificationFailed;
 
 - (void)encapsulatedFaceVerification:(NSString *)userId
-                 doLivenessDetection:(bool)doLivenessDetection
-                      doAudioPrompts:(bool)doAudioPrompts
                      numFailsAllowed:(int)numFailsAllowed
                      contentLanguage:(NSString *)contentLanguage
-       livenessChallengeFailsAllowed:(int)livenessChallengeFailsAllowed
            userVerificationCancelled:(void (^)(void))userVerificationCancelled
           userVerificationSuccessful:(void (^)(float, NSString *))userVerificationSuccessful
               userVerificationFailed:(void (^)(float, NSString *))userVerificationFailed;
@@ -189,8 +170,6 @@
 - (void)encapsulatedVideoVerification:(NSString *)userId
                       contentLanguage:(NSString *)contentLanguage
                      voicePrintPhrase:(NSString *)voicePrintPhrase
-                  doLivenessDetection:(bool)doLivenessDetection
-                       doAudioPrompts:(bool)doAudioPrompts
             userVerificationCancelled:(void (^)(void))userVerificationCancelled
            userVerificationSuccessful:(void (^)(float, float, NSString *))userVerificationSuccessful
                userVerificationFailed:(void (^)(float, float, NSString *))userVerificationFailed;
@@ -198,10 +177,7 @@
 - (void)encapsulatedVideoVerification:(NSString *)userId
                       contentLanguage:(NSString *)contentLanguage
                      voicePrintPhrase:(NSString *)voicePrintPhrase
-                  doLivenessDetection:(bool)doLivenessDetection
-                       doAudioPrompts:(bool)doAudioPrompts
                       numFailsAllowed:(int)numFailsAllowed
-         livenessChallengeFailsAllowed:(int)livenessChallengeFailsAllowed
             userVerificationCancelled:(void (^)(void))userVerificationCancelled
            userVerificationSuccessful:(void (^)(float, float, NSString *))userVerificationSuccessful
                userVerificationFailed:(void (^)(float, float, NSString *))userVerificationFailed;
@@ -223,12 +199,5 @@
            userIdentificationSuccessful:(void (^)(float, NSString *, NSString *))userIdentificationSuccessful
                userIdentificationFailed:(void (^)(float, NSString *))userIdentificationFailed;
 
-
-#pragma mark - Liveness API Calls
-- (void)getLivenessID:(NSString *)userId
-          countryCode:(NSString *) countryCode
-             callback:(void (^)(NSString *))callback
-             onFailed:(void(^)(NSError *))onFailed
-          pageCateory:(NSString *) pageCategory;
 
 @end

@@ -12,7 +12,7 @@
 #import "ResponseManager.h"
 #import "VoiceItAPITwo.h"
 
-@interface VideoVerificationViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate,AVCaptureVideoDataOutputSampleBufferDelegate,AVAudioRecorderDelegate,AVCaptureFileOutputRecordingDelegate>
+@interface VideoVerificationViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate,AVCaptureVideoDataOutputSampleBufferDelegate,AVAudioRecorderDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
@@ -34,25 +34,19 @@
 @property (nonatomic, strong) dispatch_queue_t videoDataOutputQueue;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer * previewLayer;
 @property (nonatomic, strong) NSData * finalCapturedPhotoData;
-@property (nonatomic, strong) AVAudioPlayer * player;
-@property AVCaptureMovieFileOutput * movieFileOutput;
 
 #pragma mark -  Boolean Switches
 @property BOOL lookingIntoCam;
 @property BOOL isRecording;
 @property BOOL continueRunning;
-@property BOOL doLivenessDetection;
-@property BOOL doAudioPrompts;
 @property BOOL verificationStarted;
 @property BOOL isReadyToWrite;
 @property BOOL imageIsSaved;
-@property BOOL cancelPlayback;
 
 #pragma mark -  Counters to keep track of stuff
 @property int lookingIntoCamCounter;
 @property int failCounter;
 @property int failsAllowed;
-@property int numberOfLivenessFailsAllowed;
 
 #pragma mark -  Developer Passed Options
 @property (strong, nonatomic) NSString * userToVerifyUserId;
@@ -69,7 +63,4 @@
 @property (nonatomic, copy) void (^userVerificationCancelled)(void);
 @property (nonatomic, copy) void (^userVerificationSuccessful)(float, float, NSString *);
 @property (nonatomic, copy) void (^userVerificationFailed)(float, float, NSString *);
-
-@property (nonatomic, copy) void (^userVerificationSuccessfulWithLiveness)(NSString *);
-@property (nonatomic, copy) void (^userVerificationFailedWithLiveness)(NSString *);
 @end
