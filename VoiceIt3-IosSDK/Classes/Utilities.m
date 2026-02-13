@@ -186,7 +186,7 @@
 }
 
 +(bool)isBadResponseCode:(NSString*) responseCode {
-    NSArray* badResponseCodes = [[NSArray alloc] initWithObjects:@"MISP", @"UNFD", @"DDNE", @"IFAD", @"IFVD", @"GERR", @"DAID", @"UNAC", @"CLNE", @"ACLR", nil];
+    NSArray* badResponseCodes = [[NSArray alloc] initWithObjects:@"MISP", @"UNFD", @"DDNE", @"IFAD", @"IFVD", @"GERR", @"DAID", @"UNAC", @"CLNE", @"ACLR", @"FALI", nil];
     if([badResponseCodes containsObject:responseCode]){
         return YES;
     }
