@@ -377,7 +377,7 @@ NSString * notificationURL = @"";
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[[NSURL alloc] initWithString:[[NSString alloc] initWithFormat:@"%@%@",[self buildURL:@"groups/removeUser"], notificationURL]]];
     NSURLSession *session = [NSURLSession sharedSession];
-    [request setHTTPMethod:@"PUT"];
+    [request setHTTPMethod:@"DELETE"];
 
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:platformId forHTTPHeaderField:@"platformId"];
