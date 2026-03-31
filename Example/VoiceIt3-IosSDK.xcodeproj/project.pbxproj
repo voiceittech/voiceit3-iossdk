@@ -19,9 +19,7 @@
 		6003F5A7195388D20070C39A /* VoiceItViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* VoiceItViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
-		729B60AA58D3D2634075349A /* Pods_VoiceIt3_IosSDK_Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214EA546A31FA665667E4CC3 /* Pods_VoiceIt3_IosSDK_Test.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		AA22F60BA9522D2467895141 /* Pods_VoiceIt3_IosSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C71942D4AC44BCE60D27667 /* Pods_VoiceIt3_IosSDK_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,17 +33,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		05382F011FE0AECFA30B1489 /* Pods-VoiceIt3-IosSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceIt3-IosSDK_Example.debug.xcconfig"; path = "Target Support Files/Pods-VoiceIt3-IosSDK_Example/Pods-VoiceIt3-IosSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		0C71942D4AC44BCE60D27667 /* Pods_VoiceIt3_IosSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoiceIt3_IosSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		194FA0A2125801ED5593BF89 /* Pods-VoiceIt3-IosSDK_Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceIt3-IosSDK_Test.release.xcconfig"; path = "Target Support Files/Pods-VoiceIt3-IosSDK_Test/Pods-VoiceIt3-IosSDK_Test.release.xcconfig"; sourceTree = "<group>"; };
-		214EA546A31FA665667E4CC3 /* Pods_VoiceIt3_IosSDK_Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoiceIt3_IosSDK_Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		217DA1FE1E89A1EC00C918C5 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		2192DFF22133306E0078D2C9 /* VoiceIt3-IosSDK_Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VoiceIt3-IosSDK_Test.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2192DFF42133306E0078D2C9 /* VoiceIt3_IosSDK_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceIt3_IosSDK_Test.swift; sourceTree = "<group>"; };
 		2192DFF62133306E0078D2C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2192DFFC213371C40078D2C9 /* VoiceItTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceItTestCase.swift; sourceTree = "<group>"; };
 		2192DFFE213372210078D2C9 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
-		39388264B1597DFC0CCDB71E /* VoiceIt3-IosSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "VoiceIt3-IosSDK.podspec"; path = "../VoiceIt3-IosSDK.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		49AA541CEE76F944758932B5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* VoiceIt3-IosSDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VoiceIt3-IosSDK_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,8 +56,6 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		854AE9EBAE4291439F1B6F9B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CD54CD3D92F7737FD4C005BA /* Pods-VoiceIt3-IosSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceIt3-IosSDK_Example.release.xcconfig"; path = "Target Support Files/Pods-VoiceIt3-IosSDK_Example/Pods-VoiceIt3-IosSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
-		F42361D4AF75BAAE56BA315C /* Pods-VoiceIt3-IosSDK_Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceIt3-IosSDK_Test.debug.xcconfig"; path = "Target Support Files/Pods-VoiceIt3-IosSDK_Test/Pods-VoiceIt3-IosSDK_Test.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +63,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				729B60AA58D3D2634075349A /* Pods_VoiceIt3_IosSDK_Test.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,24 +73,12 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				AA22F60BA9522D2467895141 /* Pods_VoiceIt3_IosSDK_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		19A19428432DB4AF7F21D463 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				05382F011FE0AECFA30B1489 /* Pods-VoiceIt3-IosSDK_Example.debug.xcconfig */,
-				CD54CD3D92F7737FD4C005BA /* Pods-VoiceIt3-IosSDK_Example.release.xcconfig */,
-				F42361D4AF75BAAE56BA315C /* Pods-VoiceIt3-IosSDK_Test.debug.xcconfig */,
-				194FA0A2125801ED5593BF89 /* Pods-VoiceIt3-IosSDK_Test.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		2192DFF32133306E0078D2C9 /* VoiceIt3-IosSDK_Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,12 +93,10 @@
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
-				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for VoiceIt3-IosSDK */,
 				2192DFF32133306E0078D2C9 /* VoiceIt3-IosSDK_Test */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				19A19428432DB4AF7F21D463 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,8 +116,6 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				0C71942D4AC44BCE60D27667 /* Pods_VoiceIt3_IosSDK_Example.framework */,
-				214EA546A31FA665667E4CC3 /* Pods_VoiceIt3_IosSDK_Test.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,16 +147,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
-			isa = PBXGroup;
-			children = (
-				39388264B1597DFC0CCDB71E /* VoiceIt3-IosSDK.podspec */,
-				49AA541CEE76F944758932B5 /* README.md */,
-				854AE9EBAE4291439F1B6F9B /* LICENSE */,
-			);
-			name = "Podspec Metadata";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -190,11 +154,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2192DFF92133306E0078D2C9 /* Build configuration list for PBXNativeTarget "VoiceIt3-IosSDK_Test" */;
 			buildPhases = (
-				848020C274595A7D929647F7 /* [CP] Check Pods Manifest.lock */,
 				2192DFEE2133306E0078D2C9 /* Sources */,
 				2192DFEF2133306E0078D2C9 /* Frameworks */,
 				2192DFF02133306E0078D2C9 /* Resources */,
-				67CF9F2D65A52FC508B8EC62 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -210,11 +172,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "VoiceIt3-IosSDK_Example" */;
 			buildPhases = (
-				A6F8CFC638668B80488A1A1C /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				902F688A5EBD52EA7E14082E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -289,86 +249,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		67CF9F2D65A52FC508B8EC62 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VoiceIt3-IosSDK_Test/Pods-VoiceIt3-IosSDK_Test-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VoiceIt3-IosSDK/VoiceIt3-IosSDK.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VoiceIt3-IosSDK.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VoiceIt3-IosSDK_Test/Pods-VoiceIt3-IosSDK_Test-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		848020C274595A7D929647F7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-VoiceIt3-IosSDK_Test-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		902F688A5EBD52EA7E14082E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VoiceIt3-IosSDK_Example/Pods-VoiceIt3-IosSDK_Example-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VoiceIt3-IosSDK/VoiceIt3-IosSDK.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VoiceIt3-IosSDK.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VoiceIt3-IosSDK_Example/Pods-VoiceIt3-IosSDK_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A6F8CFC638668B80488A1A1C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-VoiceIt3-IosSDK_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -416,8 +296,7 @@
 /* Begin XCBuildConfiguration section */
 		2192DFFA2133306E0078D2C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F42361D4AF75BAAE56BA315C /* Pods-VoiceIt3-IosSDK_Test.debug.xcconfig */;
-			buildSettings = {
+buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -433,7 +312,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "VoiceIt3-IosSDK_Test/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.voiceit.VoiceIt3-IosSDK-Test";
@@ -448,8 +327,7 @@
 		};
 		2192DFFB2133306E0078D2C9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 194FA0A2125801ED5593BF89 /* Pods-VoiceIt3-IosSDK_Test.release.xcconfig */;
-			buildSettings = {
+buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -466,7 +344,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "VoiceIt3-IosSDK_Test/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.voiceit.VoiceIt3-IosSDK-Test";
@@ -526,7 +404,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -574,7 +452,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -584,8 +462,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05382F011FE0AECFA30B1489 /* Pods-VoiceIt3-IosSDK_Example.debug.xcconfig */;
-			buildSettings = {
+buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -595,7 +472,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VoiceIt3-IosSDK/VoiceIt3-IosSDK-Prefix.pch";
 				INFOPLIST_FILE = "VoiceIt3-IosSDK/VoiceIt3-IosSDK-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.2.7;
 				MODULE_NAME = ExampleApp;
 				OTHER_LDFLAGS = (
@@ -617,8 +494,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD54CD3D92F7737FD4C005BA /* Pods-VoiceIt3-IosSDK_Example.release.xcconfig */;
-			buildSettings = {
+buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -628,7 +504,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VoiceIt3-IosSDK/VoiceIt3-IosSDK-Prefix.pch";
 				INFOPLIST_FILE = "VoiceIt3-IosSDK/VoiceIt3-IosSDK-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.2.7;
 				MODULE_NAME = ExampleApp;
 				OTHER_LDFLAGS = (
