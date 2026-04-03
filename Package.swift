@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "VoiceIt3-IosSDK",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v13)
     ],
