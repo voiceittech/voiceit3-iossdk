@@ -15,9 +15,9 @@ import UIKit
 
     @objc public var apiKey: String
     @objc public var apiToken: String
-    @objc public var notificationURL: String = ""
+    private var notificationParam: String = ""
 
-    private let authHeader: String
+    let authHeader: String
     private let session = URLSession.shared
 
     // MARK: - Init
@@ -31,7 +31,7 @@ import UIKit
     }
 
     @objc public func setNotificationURL(_ url: String) {
-        notificationURL = url.isEmpty ? "" : "?notificationURL=\(url)"
+        notificationParam = url.isEmpty ? "" : "?notificationURL=\(url)"
     }
 
     // MARK: - Generic Request
@@ -43,7 +43,7 @@ import UIKit
         contentType: String = "application/json",
         callback: @escaping (String) -> Void
     ) {
-        let urlString = Self.defaultHost + endpoint + notificationURL
+        let urlString = Self.defaultHost + endpoint + notificationParam
         guard let url = URL(string: urlString) else {
             callback("{\"responseCode\":\"GERR\",\"message\":\"Invalid URL\"}")
             return
