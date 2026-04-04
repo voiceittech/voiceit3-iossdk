@@ -8,7 +8,6 @@
 
 #import "Utilities.h"
 #import "Styles.h"
-#import "Reachability.h"
 
 @implementation Utilities
 
@@ -26,12 +25,8 @@
 }
 
 +(BOOL) checkNetwork {
-    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
-    if (networkStatus == NotReachable) {
-        return false;
-    }
-    return true;
+    // Network monitoring is now handled by VoiceItUtilities (Swift)
+    return YES;
 }
 
 +(BOOL) checkUserId: (NSString *) userId {

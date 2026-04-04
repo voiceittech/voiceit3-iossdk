@@ -8,7 +8,6 @@
 
 #import "VoiceItAPIThree.h"
 #import "Styles.h"
-#import "Reachability.h"
 
 NSString * const host = @"https://api.voiceit.io/";
 NSString * const platformVersion = @"2.2.7";
