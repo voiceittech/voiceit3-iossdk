@@ -11,6 +11,7 @@
 		A1000001 /* VoiceIt3DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001 /* VoiceIt3DemoApp.swift */; };
 		A1000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000002 /* ContentView.swift */; };
 		A1000003 /* VoiceItViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000003 /* VoiceItViewModel.swift */; };
+		A1000004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2000005 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +127,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1000004 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,8 +331,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/voiceittech/VoiceIt3-IosSDK.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.2;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
