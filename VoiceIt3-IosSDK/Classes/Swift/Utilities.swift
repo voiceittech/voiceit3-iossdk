@@ -70,7 +70,11 @@ import Network
         if decibels < -60.0 || decibels == 0.0 {
             return 0.0
         }
-        return pow((pow(10.0, 0.05 * decibels) - pow(10.0, 0.05 * -60.0)) * (1.0 / (1.0 - pow(10.0, 0.05 * -60.0))), 1.0 / 2.0)
+        let minDB: Float = -60.0
+        let level = pow(10.0, 0.05 * decibels)
+        let minLevel = pow(10.0, 0.05 * minDB)
+        let normalized = (level - minLevel) / (1.0 - minLevel)
+        return CGFloat(pow(normalized, 0.5))
     }
 
     // MARK: - Video / Image
