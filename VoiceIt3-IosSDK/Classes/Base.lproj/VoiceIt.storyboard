@@ -11,7 +11,7 @@
         <!--Video Enrollment View Controller-->
         <scene sceneID="apu-7t-KKW">
             <objects>
-                <viewController storyboardIdentifier="videoEnrollVC" id="r6Q-v3-siJ" customClass="VideoEnrollmentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="videoEnrollVC" id="r6Q-v3-siJ" customClass="VIVideoEnrollmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X4f-7c-Dsh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,7 +56,7 @@
         <!--Face Enrollment View Controller-->
         <scene sceneID="bLR-rn-oAL">
             <objects>
-                <viewController storyboardIdentifier="faceEnrollVC" id="o3F-GO-Kdw" customClass="FaceEnrollmentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="faceEnrollVC" id="o3F-GO-Kdw" customClass="VIFaceEnrollmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fwD-B4-1Ky">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,7 +101,7 @@
         <!--Enroll Finish View Controller-->
         <scene sceneID="BIp-NM-TPr">
             <objects>
-                <viewController storyboardIdentifier="enrollFinishedVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oTb-bx-Zgo" customClass="EnrollFinishViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="enrollFinishedVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oTb-bx-Zgo" customClass="VIEnrollFinishViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N0n-yp-OWn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -185,7 +185,7 @@
         <!--Video Verification View Controller-->
         <scene sceneID="zdd-GL-NWj">
             <objects>
-                <viewController storyboardIdentifier="videoVerifyVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y9g-az-7MI" customClass="VideoVerificationViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="videoVerifyVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y9g-az-7MI" customClass="VIVideoVerificationViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="f2i-kH-OmX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -256,7 +256,7 @@
         <!--Voice Verification View Controller-->
         <scene sceneID="jl6-7a-nNL">
             <objects>
-                <viewController storyboardIdentifier="verifyVoiceVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uKr-Sz-7dH" customClass="VoiceVerificationViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="verifyVoiceVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uKr-Sz-7dH" customClass="VIVoiceVerificationViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="4hA-ci-qeO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -357,7 +357,7 @@
         <!--Enroll Setup View Controller-->
         <scene sceneID="OPs-PN-ukF">
             <objects>
-                <viewController storyboardIdentifier="enrollSetupVC" id="3Ya-cA-d4v" customClass="EnrollSetupViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="enrollSetupVC" id="3Ya-cA-d4v" customClass="VIEnrollSetupViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gqC-GO-zJ1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -448,7 +448,7 @@
         <!--Main Navigation Controller-->
         <scene sceneID="Syq-4V-hah">
             <objects>
-                <navigationController storyboardIdentifier="mainNavController" id="WoX-37-BTa" customClass="MainNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mainNavController" id="WoX-37-BTa" customClass="VIMainNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7MD-Pr-LDA">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -467,7 +467,7 @@
         <!--Face Verification View Controller-->
         <scene sceneID="Ty5-ug-gO1">
             <objects>
-                <viewController storyboardIdentifier="faceVerificationVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mcQ-T2-swO" customClass="FaceVerificationViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="faceVerificationVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mcQ-T2-swO" customClass="VIFaceVerificationViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="GgZ-S2-wTE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -537,7 +537,7 @@
         <!--Voice Enrollment View Controller-->
         <scene sceneID="uQI-Sf-BVf">
             <objects>
-                <viewController storyboardIdentifier="voiceEnrollVC" id="pPK-kV-Gpf" customClass="VoiceEnrollmentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="voiceEnrollVC" id="pPK-kV-Gpf" customClass="VIVoiceEnrollmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zBH-7U-kBd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -592,7 +592,7 @@
         <!--Voice Identification View Controller-->
         <scene sceneID="Yiq-1z-Vc6">
             <objects>
-                <viewController storyboardIdentifier="identifyVoiceVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FAL-eh-3eB" customClass="VoiceIdentificationViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="identifyVoiceVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FAL-eh-3eB" customClass="VIVoiceIdentificationViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="EEu-wy-3Ta">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

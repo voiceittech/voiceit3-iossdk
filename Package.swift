@@ -1,11 +1,11 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
     name: "VoiceIt3-IosSDK",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v15)
     ],
     products: [
         .library(
@@ -19,8 +19,7 @@ let package = Package(
             path: "VoiceIt3-IosSDK",
             resources: [
                 .process("Classes/Base.lproj"),
-            ],
-            publicHeadersPath: "Classes"
+            ]
         ),
     ]
 )
