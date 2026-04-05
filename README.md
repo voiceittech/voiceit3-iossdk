@@ -1,6 +1,7 @@
 <img src="https://raw.githubusercontent.com/voiceittech/VoiceIt3-IosSDK/main/Graphics/ios.png" width="100%" style="width:100%">
 
 
+[![Build](https://github.com/voiceittech/VoiceIt3-IosSDK/actions/workflows/test.yml/badge.svg)](https://github.com/voiceittech/VoiceIt3-IosSDK/actions/workflows/test.yml)
 [![Version](https://img.shields.io/badge/version-2.2.7-blue)](https://github.com/voiceittech/VoiceIt3-IosSDK)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/voiceittech/VoiceIt3-IosSDK/blob/main/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-iOS%2013%2B-lightgrey)](https://github.com/voiceittech/VoiceIt3-IosSDK)

@@ -1,0 +1,14 @@
+name: Build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build SDK
+        run: xcodebuild -scheme VoiceIt3-IosSDK -destination 'platform=iOS Simulator,name=iPhone 16' build
+      - name: Build Example
+        run: |
+          cd Example
+          xcodebuild -project VoiceIt3Demo.xcodeproj -scheme VoiceIt3Demo -destination 'platform=iOS Simulator,name=iPhone 16' -resolvePackageDependencies
+          xcodebuild -project VoiceIt3Demo.xcodeproj -scheme VoiceIt3Demo -destination 'platform=iOS Simulator,name=iPhone 16' build
