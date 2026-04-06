@@ -800,6 +800,11 @@ myVoiceIt?.videoIdentification("GROUP_ID_HERE", contentLanguage: "CONTENT_LANGUA
 ```
 
 
+
+## Documentation
+
+For detailed API documentation, visit [voiceit.io/documentation](https://voiceit.io/documentation).
+
 ## Support
 
 If you find this SDK useful, please consider giving it a star on GitHub — it helps others discover the project!
