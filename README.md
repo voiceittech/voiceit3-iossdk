@@ -1,4 +1,4 @@
-<img src="./Graphics/ios.png" width="100%" style="width:100%">
+<img src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/ios.png" width="100%" style="width:100%">
 
 
 [![Build](https://github.com/voiceittech/voiceit3-iossdk/actions/workflows/test.yml/badge.svg)](https://github.com/voiceittech/voiceit3-iossdk/actions/workflows/test.yml)
@@ -63,14 +63,14 @@ A fully comprehensive SDK that gives you access to VoiceIt's API 3.0 featuring V
 The built-in biometric capture UI works with both Swift and Objective-C. The following show Voice Verification, Face Verification, and Video Verification.
 
 <div style="background: #000 !important;">
-  <img width="290px" src="./Graphics/voiceVerification.png?v=2" style="display: inline-block !important"/><img width="290px" src="./Graphics/faceVerification.png?v=2" style="display: inline-block !important;"/><img width="290px" src="./Graphics/videoVerification.png?v=2" style="display: inline-block !important;"/>
+  <img width="290px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/voiceVerification.png?v=2" style="display: inline-block !important"/><img width="290px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/faceVerification.png?v=2" style="display: inline-block !important;"/><img width="290px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/videoVerification.png?v=2" style="display: inline-block !important;"/>
 </div>
 
 ## Getting Started
 
 Sign up at [voiceit.io/pricing](https://voiceit.io/pricing) to get your API Key and Token, then log in to the [Dashboard](https://dashboard.voiceit.io) to manage your account.
 
-<img src="./Graphics/getcredentials.png" alt="API Key and Token" width="400px" />
+<img src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/getcredentials.png" alt="API Key and Token" width="400px" />
 
 ## Installation
 
