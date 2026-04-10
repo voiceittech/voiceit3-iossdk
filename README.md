@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/ios.png" width="100%" style="width:100%">
+<img src="./Graphics/ios.png" width="100%" style="width:100%">
 
 
 [![Build](https://github.com/voiceittech/voiceit3-iossdk/actions/workflows/test.yml/badge.svg)](https://github.com/voiceittech/voiceit3-iossdk/actions/workflows/test.yml)
@@ -99,14 +99,14 @@ Please make sure that the minimum Deployment Target for your project is iOS 13.
 
 #### Voiceprint Phrases
 
-Make sure you review your Voiceprint Phrases by navigating to <a href="https://dashboard.voiceit.io/phrase_manager/phrase_list" target="_blank">Dashboard</a> in order to know what to pass for voicePrintPhrase parameter.
+Make sure you review your Voiceprint Phrases by navigating to <a href="https://dashboard.voiceit.io/phraseManagement" target="_blank">Dashboard</a> in order to know what to pass for voicePrintPhrase parameter.
 
 ## Strings and Prompts
 
 All strings utilized in the encapsulated views for the SDK and the prompts provided to the user can be modified by editing the strings in the Prompts.strings file located at
 
 ```
-VoiceIt3-IosSDK/Classes/Base.lproj/Prompts.strings
+voiceit3-iossdk/Classes/Base.lproj/Prompts.strings
 ```
 
 ## API Calls
@@ -812,10 +812,6 @@ If you find this SDK useful, please consider giving it a star on GitHub — it h
 
 [![GitHub stars](https://img.shields.io/github/stars/voiceittech/voiceit3-iossdk?style=social)](https://github.com/voiceittech/voiceit3-iossdk/stargazers)
 
-## Author
-
-VoiceIt Technologies, <a href="mailto:support@voiceit.tech" target="_blank">support@voiceit.tech</a>
-
 ## License
 
-VoiceIt3-IosSDK is available under the MIT license. See the LICENSE file for more info.
+voiceit3-iossdk is available under the MIT license. See the LICENSE file for more info.
