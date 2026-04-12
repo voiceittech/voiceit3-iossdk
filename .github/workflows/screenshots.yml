@@ -82,8 +82,12 @@ jobs:
           xcrun simctl terminate "$DEVICE_ID" io.voiceit.VoiceIt3Demo
           sleep 2
 
-      - name: Get Window Coordinates
+      - name: Pre-grant Permissions and Get Window Coordinates
         run: |
+          # Pre-grant camera and microphone permissions to skip dialogs
+          xcrun simctl privacy "$DEVICE_ID" grant microphone io.voiceit.VoiceIt3Demo
+          xcrun simctl privacy "$DEVICE_ID" grant camera io.voiceit.VoiceIt3Demo
+
           open -a Simulator
           sleep 2
           WINDOW_INFO=$(osascript -e 'tell application "System Events" to get {position, size} of front window of process "Simulator"')
@@ -97,10 +101,7 @@ jobs:
           echo "WIN_H=$WIN_H" >> $GITHUB_ENV
           CENTER_X=$((WIN_X + WIN_W / 2))
           echo "CENTER_X=$CENTER_X" >> $GITHUB_ENV
-          # Continue button is near the bottom of the screen
-          CONTINUE_Y=$((WIN_Y + WIN_H * 92 / 100))
-          echo "CONTINUE_Y=$CONTINUE_Y" >> $GITHUB_ENV
-          echo "Window: $WIN_X,$WIN_Y $WIN_W x $WIN_H center=$CENTER_X continue=$CONTINUE_Y"
+          echo "Window: $WIN_X,$WIN_Y ${WIN_W}x${WIN_H} center=$CENTER_X"
 
       - name: Capture Voice Enrollment Screenshot
         run: |
@@ -117,9 +118,16 @@ jobs:
           cliclick "c:$CENTER_X,$VOICE_BTN_Y"
           sleep 3
 
-          # Tap Continue button on setup screen
+          # Screenshot the setup screen to debug button position
+          xcrun simctl io "$DEVICE_ID" screenshot /tmp/voice_setup_debug.png
+
+          # Tap Continue button - it's 64pt from bottom in a 350x44pt button centered horizontally
+          # On iPhone 16 (852pt height), that's about 788pt from top = ~85% of device height
+          # But window has title bar, so adjust: ~88% of window height
+          CONTINUE_Y=$((WIN_Y + WIN_H * 88 / 100))
+          echo "Tapping Continue at $CENTER_X,$CONTINUE_Y"
           cliclick "c:$CENTER_X,$CONTINUE_Y"
-          sleep 3
+          sleep 4
 
           # Now on actual recording screen - capture it
           xcrun simctl io "$DEVICE_ID" screenshot /tmp/voice_full.png
@@ -139,16 +147,14 @@ jobs:
           open -a Simulator
           sleep 1
 
-          # Tap Face Enrollment button
           FACE_BTN_Y=$((WIN_Y + WIN_H * 71 / 100))
           cliclick "c:$CENTER_X,$FACE_BTN_Y"
           sleep 3
 
-          # Tap Continue button on setup screen
+          CONTINUE_Y=$((WIN_Y + WIN_H * 88 / 100))
           cliclick "c:$CENTER_X,$CONTINUE_Y"
-          sleep 4
+          sleep 5
 
-          # Now on actual camera recording screen - capture it
           xcrun simctl io "$DEVICE_ID" screenshot /tmp/face_full.png
           sips -Z 800 /tmp/face_full.png --out Graphics/faceVerification.png
 
@@ -165,16 +171,14 @@ jobs:
           open -a Simulator
           sleep 1
 
-          # Tap Video Enrollment button
           VIDEO_BTN_Y=$((WIN_Y + WIN_H * 77 / 100))
           cliclick "c:$CENTER_X,$VIDEO_BTN_Y"
           sleep 3
 
-          # Tap Continue button on setup screen
+          CONTINUE_Y=$((WIN_Y + WIN_H * 88 / 100))
           cliclick "c:$CENTER_X,$CONTINUE_Y"
-          sleep 4
+          sleep 5
 
-          # Now on actual camera+voice recording screen - capture it
           xcrun simctl io "$DEVICE_ID" screenshot /tmp/video_full.png
           sips -Z 800 /tmp/video_full.png --out Graphics/videoVerification.png
 
@@ -209,4 +213,5 @@ jobs:
             Graphics/voiceVerification.png
             Graphics/faceVerification.png
             Graphics/videoVerification.png
+            /tmp/voice_setup_debug.png
           retention-days: 30
