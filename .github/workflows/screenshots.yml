@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Install cliclick
+        run: brew install cliclick
+
       - name: Boot Simulator and Clean Status Bar
         run: |
           DEVICE_ID=$(xcrun simctl list devices available | grep "iPhone 16" | head -1 | grep -oE '[A-F0-9-]{36}')
@@ -35,89 +38,189 @@ jobs:
           APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "VoiceIt3Demo.app" -path "*/Build/Products/Debug-iphonesimulator/*" | head -1)
           xcrun simctl install "$DEVICE_ID" "$APP_PATH"
 
-      - name: Launch App and Capture Top Screenshot
+      - name: Capture Top Screenshot
         run: |
           mkdir -p Graphics
           xcrun simctl launch "$DEVICE_ID" io.voiceit.VoiceIt3Demo
           sleep 4
           xcrun simctl io "$DEVICE_ID" screenshot /tmp/demo_top_full.png
           sips -Z 800 /tmp/demo_top_full.png --out Graphics/demo_top.png
-          echo "Top screenshot captured"
 
       - name: Scroll Down and Capture Bottom Screenshot
         run: |
-          # Use Xcode's simctl to simulate swipe via accessibility
-          # Activate simulator and use AppleScript keyboard shortcut
+          # Activate simulator window
           open -a Simulator
           sleep 2
 
-          # Simulate swipe by clicking and dragging in simulator window
-          python3 << 'EOF'
-          import subprocess, time
+          # Get simulator window position and size
+          WINDOW_INFO=$(osascript -e 'tell application "System Events" to get {position, size} of front window of process "Simulator"')
+          echo "Window info: $WINDOW_INFO"
 
-          # Get simulator window position
-          result = subprocess.run(
-              ["osascript", "-e", 'tell application "System Events" to get {position, size} of front window of process "Simulator"'],
-              capture_output=True, text=True
-          )
-          print(f"Window info: {result.stdout.strip()}")
+          # Parse window coordinates
+          WIN_X=$(echo $WINDOW_INFO | cut -d',' -f1 | tr -d ' ')
+          WIN_Y=$(echo $WINDOW_INFO | cut -d',' -f2 | tr -d ' ')
+          WIN_W=$(echo $WINDOW_INFO | cut -d',' -f3 | tr -d ' ')
+          WIN_H=$(echo $WINDOW_INFO | cut -d',' -f4 | tr -d ' ')
 
-          # Use cliclick if available, otherwise use osascript mouse events
-          # Simulate a drag from bottom to top of the simulator screen
-          script = '''
-          tell application "Simulator" to activate
-          delay 0.5
-          tell application "System Events"
-              set frontWindow to front window of process "Simulator"
-              set {winX, winY} to position of frontWindow
-              set {winW, winH} to size of frontWindow
-              set centerX to winX + (winW / 2)
-              set startY to winY + (winH * 0.8)
-              set endY to winY + (winH * 0.2)
+          CENTER_X=$((WIN_X + WIN_W / 2))
+          START_Y=$((WIN_Y + WIN_H * 75 / 100))
+          END_Y=$((WIN_Y + WIN_H * 25 / 100))
 
-              -- Mouse down at bottom
-              click at {centerX, startY}
-              delay 0.1
-          end tell
-          '''
-          subprocess.run(["osascript", "-e", script], capture_output=True, text=True)
-          time.sleep(1)
-          EOF
+          echo "Dragging from ($CENTER_X, $START_Y) to ($CENTER_X, $END_Y)"
 
-          # Try keyboard Page Down as fallback
-          osascript << 'APPLESCRIPT'
-            tell application "Simulator" to activate
-            delay 0.5
-            tell application "System Events"
-              key code 125 using {command down}
-              delay 0.3
-              key code 125 using {command down}
-              delay 0.3
-              key code 125 using {command down}
-              delay 0.3
-              key code 125 using {command down}
-              delay 0.3
-              key code 125 using {command down}
-              delay 0.3
-              key code 125 using {command down}
-              delay 0.3
-              key code 125 using {command down}
-              delay 0.3
-              key code 125 using {command down}
-            end tell
-          APPLESCRIPT
-
+          # Scroll down by dragging up
+          cliclick "dd:$CENTER_X,$START_Y" "du:$CENTER_X,$END_Y"
+          sleep 1
+          cliclick "dd:$CENTER_X,$START_Y" "du:$CENTER_X,$END_Y"
           sleep 2
+
           xcrun simctl io "$DEVICE_ID" screenshot /tmp/demo_bottom_full.png
           sips -Z 800 /tmp/demo_bottom_full.png --out Graphics/demo_bottom.png
-          echo "Bottom screenshot captured"
+
+      - name: Create Test User and Enter Credentials
+        run: |
+          # Create a test user
+          RESPONSE=$(curl -s -X POST "https://api.voiceit.io/users" \
+            -u "${{ secrets.VOICEIT_API_KEY }}:${{ secrets.VOICEIT_API_TOKEN }}")
+          USER_ID=$(echo $RESPONSE | python3 -c "import sys,json; print(json.load(sys.stdin)['userId'])")
+          echo "USER_ID=$USER_ID" >> $GITHUB_ENV
+          echo "Created user: $USER_ID"
+
+          # Scroll back to top first
+          open -a Simulator
+          sleep 1
+
+          WINDOW_INFO=$(osascript -e 'tell application "System Events" to get {position, size} of front window of process "Simulator"')
+          WIN_X=$(echo $WINDOW_INFO | cut -d',' -f1 | tr -d ' ')
+          WIN_Y=$(echo $WINDOW_INFO | cut -d',' -f2 | tr -d ' ')
+          WIN_W=$(echo $WINDOW_INFO | cut -d',' -f3 | tr -d ' ')
+          WIN_H=$(echo $WINDOW_INFO | cut -d',' -f4 | tr -d ' ')
+          CENTER_X=$((WIN_X + WIN_W / 2))
+
+          # Scroll back up
+          TOP_Y=$((WIN_Y + WIN_H * 25 / 100))
+          BOT_Y=$((WIN_Y + WIN_H * 75 / 100))
+          cliclick "dd:$CENTER_X,$TOP_Y" "du:$CENTER_X,$BOT_Y"
+          sleep 1
+          cliclick "dd:$CENTER_X,$TOP_Y" "du:$CENTER_X,$BOT_Y"
+          sleep 1
+
+          # Tap API Key field and type
+          API_KEY_Y=$((WIN_Y + WIN_H * 28 / 100))
+          cliclick "c:$CENTER_X,$API_KEY_Y"
+          sleep 0.5
+          cliclick "t:${{ secrets.VOICEIT_API_KEY }}"
+          sleep 0.3
+
+          # Tap API Token field and type
+          API_TOKEN_Y=$((WIN_Y + WIN_H * 34 / 100))
+          cliclick "c:$CENTER_X,$API_TOKEN_Y"
+          sleep 0.5
+          cliclick "t:${{ secrets.VOICEIT_API_TOKEN }}"
+          sleep 0.3
+
+          # Tap User ID field and type
+          USER_ID_Y=$((WIN_Y + WIN_H * 40 / 100))
+          cliclick "c:$CENTER_X,$USER_ID_Y"
+          sleep 0.5
+          cliclick "t:$USER_ID"
+          sleep 0.3
+
+          # Dismiss keyboard
+          osascript -e 'tell application "System Events" to key code 36'
+          sleep 1
+
+      - name: Capture Voice Enrollment Screenshot
+        run: |
+          open -a Simulator
+          sleep 1
+
+          WINDOW_INFO=$(osascript -e 'tell application "System Events" to get {position, size} of front window of process "Simulator"')
+          WIN_X=$(echo $WINDOW_INFO | cut -d',' -f1 | tr -d ' ')
+          WIN_Y=$(echo $WINDOW_INFO | cut -d',' -f2 | tr -d ' ')
+          WIN_W=$(echo $WINDOW_INFO | cut -d',' -f3 | tr -d ' ')
+          WIN_H=$(echo $WINDOW_INFO | cut -d',' -f4 | tr -d ' ')
+          CENTER_X=$((WIN_X + WIN_W / 2))
+
+          # Tap Voice Enrollment button (approximately 65% down the screen)
+          VOICE_BTN_Y=$((WIN_Y + WIN_H * 65 / 100))
+          cliclick "c:$CENTER_X,$VOICE_BTN_Y"
+          sleep 3
+
+          xcrun simctl io "$DEVICE_ID" screenshot /tmp/voice_full.png
+          sips -Z 800 /tmp/voice_full.png --out Graphics/voiceVerification.png
+          echo "Voice enrollment screenshot captured"
+
+          # Wait for it to finish and go back
+          sleep 6
+          # Tap back / close (top-left area)
+          BACK_X=$((WIN_X + 40))
+          BACK_Y=$((WIN_Y + 60))
+          cliclick "c:$BACK_X,$BACK_Y"
+          sleep 2
+
+      - name: Capture Face Enrollment Screenshot
+        run: |
+          open -a Simulator
+          sleep 1
+
+          WINDOW_INFO=$(osascript -e 'tell application "System Events" to get {position, size} of front window of process "Simulator"')
+          WIN_X=$(echo $WINDOW_INFO | cut -d',' -f1 | tr -d ' ')
+          WIN_Y=$(echo $WINDOW_INFO | cut -d',' -f2 | tr -d ' ')
+          WIN_W=$(echo $WINDOW_INFO | cut -d',' -f3 | tr -d ' ')
+          WIN_H=$(echo $WINDOW_INFO | cut -d',' -f4 | tr -d ' ')
+          CENTER_X=$((WIN_X + WIN_W / 2))
+
+          # Tap Face Enrollment button (approximately 71% down)
+          FACE_BTN_Y=$((WIN_Y + WIN_H * 71 / 100))
+          cliclick "c:$CENTER_X,$FACE_BTN_Y"
+          sleep 4
+
+          xcrun simctl io "$DEVICE_ID" screenshot /tmp/face_full.png
+          sips -Z 800 /tmp/face_full.png --out Graphics/faceVerification.png
+          echo "Face enrollment screenshot captured"
+
+          sleep 4
+          BACK_X=$((WIN_X + 40))
+          BACK_Y=$((WIN_Y + 60))
+          cliclick "c:$BACK_X,$BACK_Y"
+          sleep 2
+
+      - name: Capture Video Enrollment Screenshot
+        run: |
+          open -a Simulator
+          sleep 1
+
+          WINDOW_INFO=$(osascript -e 'tell application "System Events" to get {position, size} of front window of process "Simulator"')
+          WIN_X=$(echo $WINDOW_INFO | cut -d',' -f1 | tr -d ' ')
+          WIN_Y=$(echo $WINDOW_INFO | cut -d',' -f2 | tr -d ' ')
+          WIN_W=$(echo $WINDOW_INFO | cut -d',' -f3 | tr -d ' ')
+          WIN_H=$(echo $WINDOW_INFO | cut -d',' -f4 | tr -d ' ')
+          CENTER_X=$((WIN_X + WIN_W / 2))
+
+          # Tap Video Enrollment button (approximately 77% down)
+          VIDEO_BTN_Y=$((WIN_Y + WIN_H * 77 / 100))
+          cliclick "c:$CENTER_X,$VIDEO_BTN_Y"
+          sleep 4
+
+          xcrun simctl io "$DEVICE_ID" screenshot /tmp/video_full.png
+          sips -Z 800 /tmp/video_full.png --out Graphics/videoVerification.png
+          echo "Video enrollment screenshot captured"
+
+      - name: Delete Test User
+        if: always()
+        run: |
+          if [ -n "$USER_ID" ]; then
+            curl -s -X DELETE "https://api.voiceit.io/users/$USER_ID" \
+              -u "${{ secrets.VOICEIT_API_KEY }}:${{ secrets.VOICEIT_API_TOKEN }}" || true
+          fi
 
       - name: Commit Screenshots
         run: |
           git config user.name "noel-enquanta"
           git config user.email "159802846+noel-enquanta@users.noreply.github.com"
           git rm Graphics/demo_ios.png 2>/dev/null || true
-          git add Graphics/demo_top.png Graphics/demo_bottom.png
+          git add Graphics/demo_top.png Graphics/demo_bottom.png Graphics/voiceVerification.png Graphics/faceVerification.png Graphics/videoVerification.png
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
@@ -132,4 +235,7 @@ jobs:
           path: |
             Graphics/demo_top.png
             Graphics/demo_bottom.png
+            Graphics/voiceVerification.png
+            Graphics/faceVerification.png
+            Graphics/videoVerification.png
           retention-days: 30
