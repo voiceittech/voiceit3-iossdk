@@ -51,6 +51,19 @@ import UIKit
         notificationParam = "?notificationURL=\(encoded)"
     }
 
+    // Percent-encode a path segment so caller-supplied IDs containing
+    // '/' or '?' cannot change the endpoint or inject query parameters.
+    // Uses urlPathAllowed minus '/' so a slash in the value is encoded.
+    private static let pathSegmentAllowed: CharacterSet = {
+        var set = CharacterSet.urlPathAllowed
+        set.remove(charactersIn: "/")
+        return set
+    }()
+
+    private static func enc(_ s: String) -> String {
+        return s.addingPercentEncoding(withAllowedCharacters: pathSegmentAllowed) ?? s
+    }
+
     // MARK: - Generic Request
 
     private func request(
@@ -94,7 +107,7 @@ import UIKit
     // MARK: - Phrases
 
     @objc public func getPhrases(_ contentLanguage: String, callback: @escaping (String) -> Void) {
-        request(method: "GET", endpoint: "phrases/\(contentLanguage)", callback: callback)
+        request(method: "GET", endpoint: "phrases/\(Self.enc(contentLanguage))", callback: callback)
     }
 
     // MARK: - Users
@@ -108,15 +121,15 @@ import UIKit
     }
 
     @objc public func checkUserExists(_ userId: String, callback: @escaping (String) -> Void) {
-        request(method: "GET", endpoint: "users/\(userId)", callback: callback)
+        request(method: "GET", endpoint: "users/\(Self.enc(userId))", callback: callback)
     }
 
     @objc public func deleteUser(_ userId: String, callback: @escaping (String) -> Void) {
-        request(method: "DELETE", endpoint: "users/\(userId)", callback: callback)
+        request(method: "DELETE", endpoint: "users/\(Self.enc(userId))", callback: callback)
     }
 
     @objc public func getGroupsForUser(_ userId: String, callback: @escaping (String) -> Void) {
-        request(method: "GET", endpoint: "users/\(userId)/groups", callback: callback)
+        request(method: "GET", endpoint: "users/\(Self.enc(userId))/groups", callback: callback)
     }
 
     // MARK: - Groups
@@ -126,11 +139,11 @@ import UIKit
     }
 
     @objc public func getGroup(_ groupId: String, callback: @escaping (String) -> Void) {
-        request(method: "GET", endpoint: "groups/\(groupId)", callback: callback)
+        request(method: "GET", endpoint: "groups/\(Self.enc(groupId))", callback: callback)
     }
 
     @objc public func groupExists(_ groupId: String, callback: @escaping (String) -> Void) {
-        request(method: "GET", endpoint: "groups/\(groupId)/exists", callback: callback)
+        request(method: "GET", endpoint: "groups/\(Self.enc(groupId))/exists", callback: callback)
     }
 
     @objc public func createGroup(_ description: String, callback: @escaping (String) -> Void) {
@@ -146,29 +159,29 @@ import UIKit
     }
 
     @objc public func removeUserFromGroup(_ groupId: String, userId: String, callback: @escaping (String) -> Void) {
-        request(method: "DELETE", endpoint: "groups/removeUser?groupId=\(groupId)&userId=\(userId)", callback: callback)
+        request(method: "DELETE", endpoint: "groups/removeUser?groupId=\(Self.enc(groupId))&userId=\(Self.enc(userId))", callback: callback)
     }
 
     @objc public func deleteGroup(_ groupId: String, callback: @escaping (String) -> Void) {
-        request(method: "DELETE", endpoint: "groups/\(groupId)", callback: callback)
+        request(method: "DELETE", endpoint: "groups/\(Self.enc(groupId))", callback: callback)
     }
 
     // MARK: - Enrollment Listing
 
     @objc public func getAllVoiceEnrollments(_ userId: String, callback: @escaping (String) -> Void) {
-        request(method: "GET", endpoint: "enrollments/voice/\(userId)", callback: callback)
+        request(method: "GET", endpoint: "enrollments/voice/\(Self.enc(userId))", callback: callback)
     }
 
     @objc public func getAllFaceEnrollments(_ userId: String, callback: @escaping (String) -> Void) {
-        request(method: "GET", endpoint: "enrollments/face/\(userId)", callback: callback)
+        request(method: "GET", endpoint: "enrollments/face/\(Self.enc(userId))", callback: callback)
     }
 
     @objc public func getAllVideoEnrollments(_ userId: String, callback: @escaping (String) -> Void) {
-        request(method: "GET", endpoint: "enrollments/video/\(userId)", callback: callback)
+        request(method: "GET", endpoint: "enrollments/video/\(Self.enc(userId))", callback: callback)
     }
 
     @objc public func deleteAllEnrollments(_ userId: String, callback: @escaping (String) -> Void) {
-        request(method: "DELETE", endpoint: "enrollments/\(userId)/all", callback: callback)
+        request(method: "DELETE", endpoint: "enrollments/\(Self.enc(userId))/all", callback: callback)
     }
 
     // MARK: - Voice Enrollment
