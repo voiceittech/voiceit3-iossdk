@@ -38,13 +38,13 @@ jobs:
       - name: Build and Install Example App
         run: |
           cd Example
-          xcodebuild -project VoiceIt3Demo.xcodeproj -scheme VoiceIt3Demo \
+          xcodebuild -project voiceit3Demo.xcodeproj -scheme voiceit3Demo \
             -destination 'generic/platform=iOS Simulator' \
             -resolvePackageDependencies
-          xcodebuild -project VoiceIt3Demo.xcodeproj -scheme VoiceIt3Demo \
+          xcodebuild -project voiceit3Demo.xcodeproj -scheme voiceit3Demo \
             -destination 'generic/platform=iOS Simulator' \
             build
-          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "VoiceIt3Demo.app" -path "*/Build/Products/Debug-iphonesimulator/*" | head -1)
+          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "voiceit3Demo.app" -path "*/Build/Products/Debug-iphonesimulator/*" | head -1)
           xcrun simctl install "$DEVICE_ID" "$APP_PATH"
 
       - name: Create Test User
@@ -60,7 +60,7 @@ jobs:
           mkdir -p Graphics
 
           # Launch without credentials for clean demo screenshots
-          xcrun simctl launch "$DEVICE_ID" io.voiceit.VoiceIt3Demo
+          xcrun simctl launch "$DEVICE_ID" io.voiceit.voiceit3Demo
           sleep 4
 
           # Top screenshot
@@ -88,14 +88,14 @@ jobs:
           sips -Z 800 /tmp/demo_bottom_full.png --out Graphics/demo_bottom.png
 
           # Terminate app
-          xcrun simctl terminate "$DEVICE_ID" io.voiceit.VoiceIt3Demo
+          xcrun simctl terminate "$DEVICE_ID" io.voiceit.voiceit3Demo
           sleep 2
 
       - name: Pre-grant Permissions and Get Window Coordinates
         run: |
           # Pre-grant camera and microphone permissions to skip dialogs
-          xcrun simctl privacy "$DEVICE_ID" grant microphone io.voiceit.VoiceIt3Demo
-          xcrun simctl privacy "$DEVICE_ID" grant camera io.voiceit.VoiceIt3Demo
+          xcrun simctl privacy "$DEVICE_ID" grant microphone io.voiceit.voiceit3Demo
+          xcrun simctl privacy "$DEVICE_ID" grant camera io.voiceit.voiceit3Demo
 
           open -a Simulator
           sleep 2
@@ -114,7 +114,7 @@ jobs:
 
       - name: Capture Voice Enrollment Screenshot
         run: |
-          xcrun simctl launch "$DEVICE_ID" io.voiceit.VoiceIt3Demo \
+          xcrun simctl launch "$DEVICE_ID" io.voiceit.voiceit3Demo \
             --apiKey "${{ secrets.VOICEIT_API_KEY }}" \
             --apiToken "${{ secrets.VOICEIT_API_TOKEN }}" \
             --userId "$USER_ID"
@@ -143,12 +143,12 @@ jobs:
           sips -Z 800 /tmp/voice_full.png --out Graphics/voiceVerification.png
 
           sleep 6
-          xcrun simctl terminate "$DEVICE_ID" io.voiceit.VoiceIt3Demo
+          xcrun simctl terminate "$DEVICE_ID" io.voiceit.voiceit3Demo
           sleep 2
 
       - name: Capture Face Enrollment Screenshot
         run: |
-          xcrun simctl launch "$DEVICE_ID" io.voiceit.VoiceIt3Demo \
+          xcrun simctl launch "$DEVICE_ID" io.voiceit.voiceit3Demo \
             --apiKey "${{ secrets.VOICEIT_API_KEY }}" \
             --apiToken "${{ secrets.VOICEIT_API_TOKEN }}" \
             --userId "$USER_ID"
@@ -167,12 +167,12 @@ jobs:
           xcrun simctl io "$DEVICE_ID" screenshot /tmp/face_full.png
           sips -Z 800 /tmp/face_full.png --out Graphics/faceVerification.png
 
-          xcrun simctl terminate "$DEVICE_ID" io.voiceit.VoiceIt3Demo
+          xcrun simctl terminate "$DEVICE_ID" io.voiceit.voiceit3Demo
           sleep 2
 
       - name: Capture Video Enrollment Screenshot
         run: |
-          xcrun simctl launch "$DEVICE_ID" io.voiceit.VoiceIt3Demo \
+          xcrun simctl launch "$DEVICE_ID" io.voiceit.voiceit3Demo \
             --apiKey "${{ secrets.VOICEIT_API_KEY }}" \
             --apiToken "${{ secrets.VOICEIT_API_TOKEN }}" \
             --userId "$USER_ID"
