@@ -93,6 +93,18 @@ Add the following keys to your **Info.plist**:
 
 ## Requirements 
 
+#### Audio Recording
+The SDK records audio at the following specifications for optimal biometric accuracy:
+
+| Setting | Value |
+|---------|-------|
+| Sample Rate | 48 kHz |
+| Bit Depth | 16-bit |
+| Channels | Mono |
+| Format | Linear PCM (WAV) |
+
+> **Note:** Recordings below 16 kHz sample rate will significantly degrade biometric accuracy and may result in failed enrollments or verifications.
+
 #### Deployment Target (iOS Version)
 Please make sure that the minimum Deployment Target for your project is iOS 15.
 
